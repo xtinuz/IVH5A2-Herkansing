@@ -1,0 +1,16 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.avans.nl/ivh5/worked-example"
+	xmlns:lib="http://www.avans.nl/ivh5/worked-example">
+
+    <element name="accounts">
+		<complexType>
+           <sequence>
+				<element name="account">
+					<element name="salt" type="string"></element>
+					<element name="hashedPassword" type="string"></element>
+					<element name="username" type="string"></element>
+				</element>
+            </sequence>
+		</complexType>
+    </element>
+</schema>

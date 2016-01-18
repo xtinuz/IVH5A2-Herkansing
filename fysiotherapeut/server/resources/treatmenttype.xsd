@@ -1,0 +1,17 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.avans.nl/ivh5/worked-example"
+	xmlns:lib="http://www.avans.nl/ivh5/worked-example">
+
+	<element name="treatmentypes">
+		<complexType>
+			<sequence>
+				<element name="treatmenttype">
+					<element name="treatmentcode" type="int"></element>
+					<element name="name" type="string"></element>
+					<element name="price" type="string"></element>
+					<element name="description" type="string"></element>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

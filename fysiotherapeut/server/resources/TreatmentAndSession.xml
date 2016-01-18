@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><employees xmlns:lib="http://www.avans.nl/ivh5/worked-example" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.avans.nl/ivh5/worked-example employees.xsd">
+
+<treatment>
+	<treatmentid>1</treatmentid>
+	<treatmentcode>fer</treatmentcode>
+	<BSN>van disseldorp</BSN>
+	<physiotherapist>0606060606</physiotherapist>
+		<session>
+			<date></date>
+			<starttime></starttime>
+			<endtime></endtime>
+			<notes></notes>
+			<treatmentid></treatmentid>
+		</session>
+				<session>
+			<date></date>
+			<starttime></starttime>
+			<endtime></endtime>
+			<notes></notes>
+			<treatmentid></treatmentid>
+		</session>
+				<session>
+			<date></date>
+			<starttime></starttime>
+			<endtime></endtime>
+			<notes></notes>
+			<treatmentid></treatmentid>
+		</session>
+</treatment>
+
+<treatment>
+	<treatmentid>2</treatmentid>
+	<treatmentcode>Bernd</treatmentcode>
+	<BSN>van den Hoek</BSN>
+	<physiotherapist>0611111</physiotherapist>
+		<session>
+			<date></date>
+			<starttime></starttime>
+			<endtime></endtime>
+			<notes></notes>
+			<treatmentid></treatmentid>
+		</session>
+</treatment>
+	
+<employee>
+	<id>3</id>
+	<lastname>Rijvers</lastname>
+	<phoneNr>0610101010</phoneNr>
+	<firstname>Michel</firstname>
+		<session>
+			<date></date>
+			<starttime></starttime>
+			<endtime></endtime>
+			<notes></notes>
+			<treatmentid></treatmentid>
+		</session>
+				<session>
+			<date></date>
+			<starttime></starttime>
+			<endtime></endtime>
+			<notes></notes>
+			<treatmentid></treatmentid>
+		</session>
+</employee>

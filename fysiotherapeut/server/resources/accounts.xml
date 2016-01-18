@@ -1,0 +1,10 @@
+<accounts xmlns:lib="http://www.avans.nl/ivh5/worked-example" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.avans.nl/ivh5/worked-example accounts.xsd">
+
+	<account>
+		<salt>858eb0db-9565-4f76-95ba-5022f9a132b7</salt>
+		<hashedPassword>10a2a50400df43adfa03f365fd041c9d</hashedPassword>
+		<username>bernd</username>
+	</account>
+</accounts>

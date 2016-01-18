@@ -1,0 +1,18 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.avans.nl/ivh5/worked-example"
+	xmlns:lib="http://www.avans.nl/ivh5/worked-example">
+
+    <element name="">
+		<complexType>
+           <sequence>
+				<element name="employee">
+					<element name="id" type="string"></element>
+					<element name="firstname" type="string"></element>
+					<element name="lastname" type="string"></element>
+					<element name="phoneNr" type="string"></element>
+					<element name ="email" type="string"></element>
+				</element>
+            </sequence>
+		</complexType>
+    </element>
+</schema>
