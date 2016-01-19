@@ -9,14 +9,19 @@ import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.PhysioPractice;
+import edu.avans.ivh5.shared.model.domain.Schedule;
+import edu.avans.ivh5.shared.model.domain.ScheduleItem;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,6 +57,8 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         return false;
     }
 
+    
+    //Employees
     @Override
     public boolean saveEmployee(Employee employee) throws RemoteException {
         System.out.println("Create employeeDao with daofactory");
@@ -94,6 +101,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         return employeeDAO.getEmployee(name);
     }
 
+    //Treatments
     @Override
     public boolean saveTreatment(Treatment treatment) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -109,6 +117,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //Sessions
     @Override
     public boolean saveSession(Session session) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -124,6 +133,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //CLient
     @Override
     public ClientDTO getClient() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -154,6 +164,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //Company
     @Override
     public PhysioPractice getCompanyInfo() {
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
@@ -164,5 +175,16 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     public void saveCompanyInfo(PhysioPractice practice) throws RemoteException{
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
         dao.savePhysioPractice(practice);
+    }
+
+    @Override
+    public void getSceduleTableData() {
+        
+        ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        Schedule schedule = new Schedule( scheduleItems );
+        
+ 
+        
+        
     }
 }

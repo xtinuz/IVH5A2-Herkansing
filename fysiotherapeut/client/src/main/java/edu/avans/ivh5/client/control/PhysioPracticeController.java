@@ -6,7 +6,6 @@
 package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
-import edu.avans.ivh5.api.PracticeManagerClientIF;
 import edu.avans.ivh5.client.view.ui.CompanyInfoPanel;
 import edu.avans.ivh5.shared.model.domain.PhysioPractice;
 import java.awt.event.ActionEvent;

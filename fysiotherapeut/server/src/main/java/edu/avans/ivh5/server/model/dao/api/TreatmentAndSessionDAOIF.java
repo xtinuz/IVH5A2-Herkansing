@@ -9,6 +9,9 @@ package edu.avans.ivh5.server.model.dao.api;
  *
  * @author bernd_000
  */
-public interface TreatmentDAOIF {
+public interface TreatmentAndSessionDAOIF {
+
+    public void getSceduleTableData();
+    
     
 }
