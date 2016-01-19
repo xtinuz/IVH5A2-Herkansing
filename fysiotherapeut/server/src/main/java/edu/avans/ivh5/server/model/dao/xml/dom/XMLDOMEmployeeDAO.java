@@ -71,12 +71,20 @@ public class XMLDOMEmployeeDAO implements EmployeeDAOIF {
     public boolean alterEmployee(Employee employee) {
         System.out.println("XMLDOMEmployeeDAO is altering the employee");
         if (document != null) {
-            NodeList list = document.getElementsByTagName("employees"); // hier de naam van hetgene wat je zoekt
-
+            NodeList list = document.getElementsByTagName("employee"); // hier de naam van hetgene wat je zoekt
+           
+            System.out.println("ListLength: " + list.getLength());
+            
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);
                 if (node instanceof Element) {
+                    System.out.println("Node is instanceof");
                     Element child = (Element) node;
+                    
+                    System.out.println("EmployeeID: " + employee.getID());
+                    System.out.println("I: " + i);
+                    System.out.println("DTBID: " + child.getElementsByTagName("id").item(0).getTextContent());
+                    
                     if (child.getElementsByTagName("id").item(0).getTextContent().equalsIgnoreCase(employee.getID())) {
                         System.out.println("found " + employee.getLastname());
                         child.getElementsByTagName("firstname").item(0).setTextContent(employee.getFirstname());

@@ -2,7 +2,7 @@
 
 <employee>
 		<id>1</id>
-		<firstname>fer</firstname>
+		<firstname>feree</firstname>
 		<lastname>van disseldorp</lastname>
 		<phoneNr>0606060606</phoneNr>
 		<email>fersemail@email.com</email>
@@ -12,7 +12,7 @@
 		<id>2</id>
 		<firstname>Bernd</firstname>
 		<lastname>van den Hoek</lastname>
-		<phoneNr>0611111</phoneNr>
+		<phoneNr>06111112</phoneNr>
 		<email>bhoek@avans.nl</email>
 	</employee>
 	

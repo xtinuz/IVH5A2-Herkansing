@@ -110,10 +110,16 @@ public class TherapistController implements ActionListener, KeyListener, MouseLi
                 System.out.println("actioncommand confirmAlter");
                  {
                     try {
-                        manager.alterEmployee(parentScreen.getEmployee());
+                        Employee AlteredEmployee = parentScreen.getEmployee();
+                        //System.out.println("trying to alter Employee towards the manager");
+                        manager.alterEmployee(AlteredEmployee);
+                        this.parentPanel.updateTableRow(AlteredEmployee);
+                        //System.out.println("altered the employee in the manager");
                     } catch (RemoteException ex) {
+                        System.out.println("RemoteException is gedaan");
                         Logger.getLogger(TherapistController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                 }
                 parentScreen.dispose();
                 break;
@@ -122,7 +128,6 @@ public class TherapistController implements ActionListener, KeyListener, MouseLi
                 parentScreen.dispose();
                 break;
         }
-
     }
 
     @Override
