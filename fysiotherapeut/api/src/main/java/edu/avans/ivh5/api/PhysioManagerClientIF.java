@@ -61,5 +61,5 @@ public interface PhysioManagerClientIF extends Remote {
     
     public PhysioPractice getCompanyInfo() throws RemoteException;
 
-    public void getSceduleTableData();
+    //public void getSceduleTableData();
 }

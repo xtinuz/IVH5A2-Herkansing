@@ -21,20 +21,22 @@ import javax.swing.border.EmptyBorder;
 public class CompanyInfoPanel extends JPanel {
     
     private JButton saveButton;
-    private JTextField nameField, adressField, houseNoField, postcodeField, cityField, phoneField, mailField, KVKField, IBANField, BICField, bankField;
+    private JTextField nameField, addressField, postalField, cityField, phoneField, mailField, KVKField, IBANField, BICField, bankField;
     private PhysioPracticeController controller;
     
     public CompanyInfoPanel(PhysioPracticeController controller) {
         setLayout(new BorderLayout());
         this.controller =  controller;
         add(createCenterPanel(), BorderLayout.CENTER);
+        System.out.println("setting ui reference CompanyInfoPanel");
+        controller.setUIRef(this);
     }
     
     public JPanel createCenterPanel() {
         JPanel panel = new JPanel();
         
         panel.setLayout(new GridLayout(11,4,5,5));
-        panel.setBorder(new EmptyBorder(300,300,300,300));
+        panel.setBorder(new EmptyBorder(150,150,150,150));
         // row 1
         panel.add(new JLabel(""));
         panel.add(new JLabel(""));
@@ -58,8 +60,8 @@ public class CompanyInfoPanel extends JPanel {
         // row 3
         panel.add(new JLabel("Straatname + huisnummer:"));
         
-        adressField = new JTextField();
-        panel.add(adressField);
+        addressField = new JTextField();
+        panel.add(addressField);
         
         panel.add(new JLabel(""));
         panel.add(new JLabel(""));
@@ -68,8 +70,8 @@ public class CompanyInfoPanel extends JPanel {
         // row 4
         panel.add(new JLabel("Postcode:"));
         
-        postcodeField = new JTextField();
-        panel.add(postcodeField);
+        postalField = new JTextField();
+        panel.add(postalField);
         
         panel.add(new JLabel(""));
         panel.add(new JLabel(""));
@@ -155,28 +157,20 @@ public class CompanyInfoPanel extends JPanel {
         nameField.setText(name);
     }
     
-    public String getAdressField() {
-        return adressField.getText();
+    public String getAddressField() {
+        return addressField.getText();
     }
 
-    public void setAdressField(String name) {
-        adressField.setText(name);
+    public void setAddressField(String name) {
+        addressField.setText(name);
     }
     
-    public void sethouseNo(String houseNo){
-        houseNoField.setText(houseNo);
-    }
-    
-    public String getHouseNoField(){
-        return houseNoField.getText();
-    }
-    
-    public String getPostcodeField() {
-        return postcodeField.getText();
+    public String getPostalField() {
+        return postalField.getText();
     }
 
-    public void setPostcodeField(String postalcode) {
-        postcodeField.setText(postalcode);
+    public void setPostalField(String postalcode) {
+        postalField.setText(postalcode);
     }    
     
     public String getCity() {
@@ -191,8 +185,8 @@ public class CompanyInfoPanel extends JPanel {
         return phoneField.getText();
     }
 
-    public void setPhoneField(String phoneNo) {
-        phoneField.setText(phoneNo);
+    public void setPhoneField(String phone) {
+        phoneField.setText(phone);
     }
     
     public String getMailField() {

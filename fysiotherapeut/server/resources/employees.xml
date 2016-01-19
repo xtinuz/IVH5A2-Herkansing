@@ -16,4 +16,4 @@
 		<email>bhoek@avans.nl</email>
 	</employee>
 	
-<employee><id>3</id><lastname>Rijvers</lastname><phoneNr>0610101010</phoneNr><firstname>Michel</firstname><email>mrijvers@avans.nl</email></employee><employee><id>5</id><firstname>Hand</firstname><lastname>de Boer</lastname><phoneNr>061233231</phoneNr><email>hans@avans.nl</email></employee></employees>
+<employee><id>3</id><lastname>Rijvers</lastname><phoneNr>0610101010</phoneNr><firstname>Michel</firstname><email>mrijvers@avans.nl</email></employee></employees>

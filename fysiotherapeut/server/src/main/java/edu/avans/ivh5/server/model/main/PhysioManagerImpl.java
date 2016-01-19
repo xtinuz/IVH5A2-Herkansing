@@ -176,7 +176,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
         dao.savePhysioPractice(practice);
     }
-
+/*
     @Override
     public void getSceduleTableData() {
         
@@ -187,4 +187,5 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         
         
     }
+    */
 }

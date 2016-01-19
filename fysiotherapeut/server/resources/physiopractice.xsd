@@ -1,0 +1,24 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.avans.nl/ivh5/worked-example"
+	xmlns:lib="http://www.avans.nl/ivh5/worked-example">
+
+    <element name="">
+		<complexType>
+           <sequence>
+				<element name="physiopractice">
+					<element name="name" type="string"></element>
+					<element name="address" type="string"></element>
+					<element name="postal" type="string"></element>
+					<element name="city" type="string"></element>
+					<element name="phone" type="string"></element>
+					<element name="email" type="string"></element>
+					<element name="kvk" type="string"></element>
+					<element name="iban" type="string"></element>
+					<element name="bic" type="string"></element>
+					<element name="bank" type="string"></element>
+				</element>
+				
+            </sequence>
+		</complexType>
+    </element>
+</schema>
