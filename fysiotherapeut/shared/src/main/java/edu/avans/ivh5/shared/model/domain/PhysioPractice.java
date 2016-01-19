@@ -13,24 +13,22 @@ import java.util.Date;
  */
 public class PhysioPractice {
     String name;
-    String streetname;
-    String houseNo;
-    String postalcode;
+    String address;
+    String postal;
     String city;
-    String phoneNo;
+    String phone;
     String email;
     String KVK;
     String IBAN;
     String BIC;
     String bank;
     
-    public PhysioPractice(String name, String streetname, String houseNo, String postalcode, String city, String phoneNo, String email, String KVK, String IBAN, String BIC, String bank){
+    public PhysioPractice(String name, String address, String postal, String city, String phone, String email, String KVK, String IBAN, String BIC, String bank){
         this.name = name;
-        this.streetname = streetname;
-        this.houseNo = houseNo;
-        this.postalcode = postalcode;
+        this.address = address;
+        this.postal = postal;
         this.city = city;
-        this.phoneNo = phoneNo;
+        this.phone = phone;
         this.email = email;
         this.KVK = KVK;
         this.IBAN = IBAN;
@@ -46,28 +44,20 @@ public class PhysioPractice {
         this.name = name;
     }
 
-    public String getStreetname() {
-        return streetname;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreetname(String streetname) {
-        this.streetname = streetname;
+    public void setAddress(String address) {
+        this.address= address;
     }
 
-    public String getHouseNo() {
-        return houseNo;
+    public String getPostal() {
+        return postal;
     }
 
-    public void setHouseNo(String houseNo) {
-        this.houseNo = houseNo;
-    }
-
-    public String getPostalcode() {
-        return postalcode;
-    }
-
-    public void setPostalcode(String postalcode) {
-        this.postalcode = postalcode;
+    public void setPostal(String postal) {
+        this.postal = postal;
     }
 
     public String getCity() {
@@ -78,12 +68,12 @@ public class PhysioPractice {
         this.city = city;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {

@@ -53,11 +53,10 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
                     
                     //Set data
                     child.setAttribute("naam", physiopractice.getName());
-                    child.setAttribute("streetname", physiopractice.getStreetname());
-                    child.setAttribute("houseNo", physiopractice.getHouseNo());
-                    child.setAttribute("postalcode", physiopractice.getPostalcode());
+                    child.setAttribute("address", physiopractice.getAddress());
+                    child.setAttribute("postal", physiopractice.getPostal());
                     child.setAttribute("city", physiopractice.getCity());
-                    child.setAttribute("phoneNo", physiopractice.getPhoneNo());
+                    child.setAttribute("phone", physiopractice.getPhone());
                     child.setAttribute("email", physiopractice.getEmail());
                     child.setAttribute("KVK", physiopractice.getKVK());
                     child.setAttribute("IBAN", physiopractice.getIBAN());
@@ -89,18 +88,17 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
                     Element child = (Element) node;
                   
                     String name = child.getElementsByTagName("naam").item(0).getTextContent();
-                    String streetname = child.getElementsByTagName("streetname").item(0).getTextContent();
-                    String houseNo = child.getElementsByTagName("houseNo").item(0).getTextContent();
-                    String postalcode = child.getElementsByTagName("postalcode").item(0).getTextContent();
+                    String address = child.getElementsByTagName("address").item(0).getTextContent();
+                    String postal = child.getElementsByTagName("postal").item(0).getTextContent();
                     String city = child.getElementsByTagName("city").item(0).getTextContent();
-                    String phoneNo = child.getElementsByTagName("phoneNo").item(0).getTextContent();
+                    String phone = child.getElementsByTagName("phone").item(0).getTextContent();
                     String email = child.getElementsByTagName("email").item(0).getTextContent();
                     String KVK = child.getElementsByTagName("KVK").item(0).getTextContent();
                     String IBAN = child.getElementsByTagName("IBAN").item(0).getTextContent();
                     String BIC = child.getElementsByTagName("BIC").item(0).getTextContent();
                     String bank = child.getElementsByTagName("bank").item(0).getTextContent();
                     
-                    return new PhysioPractice(name, streetname, houseNo, postalcode, city, phoneNo, email, KVK, IBAN, BIC, bank);
+                    return new PhysioPractice(name, address, postal, city, phone, email, KVK, IBAN, BIC, bank);
                 }
             }
         } else {

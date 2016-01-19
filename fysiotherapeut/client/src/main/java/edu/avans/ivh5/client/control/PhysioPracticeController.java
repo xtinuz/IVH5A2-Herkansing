@@ -38,23 +38,24 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         parentScreen = screen;
     }
     
+    
     public void setInputFields(){
         parentScreen.setNameField(this.practice.getName());
-        parentScreen.setAdressField(this.practice.getStreetname());
-        parentScreen.sethouseNo(this.practice.getHouseNo());
-        parentScreen.setPostcodeField(this.practice.getPostalcode());
+        parentScreen.setAddressField(this.practice.getAddress());
+        parentScreen.setPostalField(this.practice.getPostal());
         parentScreen.setCityField(this.practice.getCity());
-        parentScreen.setPhoneField(this.practice.getPhoneNo());
+        parentScreen.setPhoneField(this.practice.getPhone());
         parentScreen.setMailField(this.practice.getEmail());
         parentScreen.setKVKField(this.practice.getKVK());
         parentScreen.setIbanField(this.practice.getIBAN());
         parentScreen.setBICField(this.practice.getBIC());
         parentScreen.setBankField(this.practice.getBank());
     }
-
+   
     @Override
     public void actionPerformed(ActionEvent e) {
         saveInputFields();
+        System.out.println("TestButton");
     }
 
     
@@ -67,11 +68,10 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
     public void saveInputFields(){
         PhysioPractice practice = new PhysioPractice();
         this.practice.setName(parentScreen.getNameField());
-        this.practice.setStreetname(parentScreen.getAdressField());
-        this.practice.setHouseNo(parentScreen.getHouseNoField());
-        this.practice.setPostalcode(parentScreen.getPostcodeField());
+        this.practice.setAddress(parentScreen.getAddressField());
+        this.practice.setPostal(parentScreen.getPostalField());
         this.practice.setCity(parentScreen.getCity());
-        this.practice.setPhoneNo(parentScreen.getPhoneField());
+        this.practice.setPhone(parentScreen.getPhoneField());
         this.practice.setEmail(parentScreen.getMailField());
         this.practice.setKVK(parentScreen.getKVKField());
         this.practice.setIBAN(parentScreen.getIbanField());
@@ -80,6 +80,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         
         try {
             manager.saveCompanyInfo(this.practice);
+            System.out.println("Test");
         } catch (RemoteException ex) {
             System.out.println("saveCompanyInfo can not be called at the server");
         }
