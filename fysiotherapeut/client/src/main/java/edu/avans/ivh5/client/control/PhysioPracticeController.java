@@ -66,7 +66,8 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
      * 
      */
     public void saveInputFields(){
-        PhysioPractice practice = new PhysioPractice();
+        //PhysioPractice practice = new PhysioPractice();
+        
         this.practice.setName(parentScreen.getNameField());
         this.practice.setAddress(parentScreen.getAddressField());
         this.practice.setPostal(parentScreen.getPostalField());
@@ -77,6 +78,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         this.practice.setIBAN(parentScreen.getIbanField());
         this.practice.setBIC(parentScreen.getBICField());
         this.practice.setBank(parentScreen.getBankField());
+
         
         try {
             manager.saveCompanyInfo(this.practice);
