@@ -188,6 +188,15 @@ public class EmployeePanel extends JPanel {
 
         return menu;
     }
+    
+    public void updateTableRow(Employee employee){
+        System.out.println(Integer.parseInt(employee.getID()));
+        
+        fysioTable.setValueAt(employee.getFirstname(), Integer.parseInt(employee.getID())-1, 1);
+        fysioTable.setValueAt(employee.getLastname(), Integer.parseInt(employee.getID())-1, 2);
+        fysioTable.setValueAt(employee.getPhoneNr(), Integer.parseInt(employee.getID())-1, 3);
+        fysioTable.setValueAt(employee.getEmail(), Integer.parseInt(employee.getID())-1, 4);
+    }
 
     public Employee getEmployee() {
         try {

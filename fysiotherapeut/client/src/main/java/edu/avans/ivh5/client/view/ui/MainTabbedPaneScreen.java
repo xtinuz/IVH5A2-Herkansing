@@ -37,7 +37,7 @@ public class MainTabbedPaneScreen extends JFrame {
     private void createTabs() {
         JTabbedPane panes = new JTabbedPane();
         JPanel SchedulePanel = new SchedulePanel(this, new TreatmentController(manager));
-        JPanel TreatmentsPanel = new TreatmentPanel(this);
+        JPanel TreatmentsPanel = new TreatmentPanel(this, new TreatmentController(manager));
         JPanel OverviewPanel = new OverviewPanel(this, new ReportingController(manager));
         JPanel EmployeePanel = new EmployeePanel(this, new TherapistController(manager));
         JPanel CompanyInfoPanel = new CompanyInfoPanel(new PhysioPracticeController(manager));
