@@ -41,7 +41,7 @@ public class OverviewPanel extends JPanel {
     public OverviewPanel(JFrame parentFrame, ReportingController controller) {
         this.parentFrame = parentFrame;
         this.controller = controller;
-        System.out.println("setting ui reference");
+        System.out.println("setting ui reference OverviewPanel");
         controller.setUIRef(this);
         setLayout(new BorderLayout());
 

@@ -28,6 +28,8 @@ public class CompanyInfoPanel extends JPanel {
         setLayout(new BorderLayout());
         this.controller =  controller;
         add(createCenterPanel(), BorderLayout.CENTER);
+        System.out.println("setting ui reference CompanyInfoPanel");
+        controller.setUIRef(this);
     }
     
     public JPanel createCenterPanel() {

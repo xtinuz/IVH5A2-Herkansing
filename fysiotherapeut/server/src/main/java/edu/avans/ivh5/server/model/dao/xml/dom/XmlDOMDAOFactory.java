@@ -8,7 +8,7 @@ import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
-import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 
 /**
@@ -41,7 +41,7 @@ public class XmlDOMDAOFactory extends DAOFactory {
     }
 
     @Override
-    public TreatmentDAOIF getTreatmentDAO() {
-        return new XMLDOMTreatmentDAO();
+    public TreatmentAndSessionDAOIF getTreatmentAndSessionDAO() {
+        return new XMLDOMTreatmentAndSessionDAO();
     }
 }

@@ -10,10 +10,10 @@
 
 <employee>
 		<id>2</id>
-		<firstname>Bernd</firstname>
-		<lastname>van den Hoek</lastname>
+		<firstname>Martijn</firstname>
+		<lastname>Raaijmakers</lastname>
 		<phoneNr>06111112</phoneNr>
-		<email>bhoek@avans.nl</email>
+		<email>rjmaij@avans.nl</email>
 	</employee>
 	
-<employee><id>3</id><lastname>Rijvers</lastname><phoneNr>0610101010</phoneNr><firstname>Michel</firstname><email>mrijvers@avans.nl</email></employee></employees>
+<employee><id>3</id><lastname>Rijvers</lastname><phoneNr>0610101010</phoneNr><firstname>Michel</firstname><email>mrijvers@avans.nl</email></employee><employee><id>5</id><firstname>John</firstname><lastname>Op 't Hof</lastname><phoneNr>06sukkel</phoneNr><email>jhof@avans.nl</email></employee></employees>
