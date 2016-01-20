@@ -13,6 +13,7 @@ import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -61,5 +62,10 @@ public interface PhysioManagerClientIF extends Remote {
     
     public PhysioPractice getCompanyInfo() throws RemoteException;
 
-    //public void getSceduleTableData();
+    public void getScheduleTableData() throws RemoteException;
+    
+    public ArrayList<Session> getsessionsByDate (Date startDate, Date endDate) throws RemoteException;
+    
+    public ArrayList<Date>getCurrentDates(Date currentdate) throws RemoteException;
+
 }

@@ -20,6 +20,8 @@ import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,6 +39,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         daoFactory = DAOFactory.getDAOFactory("edu.avans.ivh5.server.model.dao.xml.dom.XmlDOMDAOFactory");
         passwordManager = new PasswordManager();
         this.service = service;
+        System.out.println("managerImpl constructor");
     }
 
     @Override
@@ -176,16 +179,41 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
         dao.savePhysioPractice(practice);
     }
-/*
+    
+    
+
     @Override
-    public void getSceduleTableData() {
+    public void getScheduleTableData() throws RemoteException{
+        
         
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        
         Schedule schedule = new Schedule( scheduleItems );
-        
- 
-        
-        
+          
     }
-    */
+
+ 
+ 
+    @Override
+    public ArrayList<Session> getsessionsByDate(Date startDate, Date endDate) throws RemoteException {
+        System.out.println("test 1");
+        ArrayList<Session>sessionsByDate = new ArrayList<Session>();
+        System.out.println("test getsessions in manager");
+        getCurrentDates( new Date() );
+        
+        return sessionsByDate;
+    }
+
+    @Override
+    public ArrayList<Date> getCurrentDates(Date currentDate) throws RemoteException {
+        ArrayList<Date> currentDates = new ArrayList<Date>();
+        
+        Calendar c = Calendar.getInstance();
+        c.setTime( currentDate );
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        System.out.println("testing calendar");
+
+        return currentDates;
+    }
+    
 }

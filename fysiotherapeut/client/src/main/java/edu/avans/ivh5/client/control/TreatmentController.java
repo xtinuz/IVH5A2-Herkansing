@@ -9,6 +9,8 @@ import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.Date;
 
 /**
  *
@@ -18,10 +20,10 @@ public class TreatmentController implements ActionListener {
      private PhysioManagerClientIF manager;
      private SchedulePanel parentScreen;
     
-    public TreatmentController(PhysioManagerClientIF manager){
+    public TreatmentController(PhysioManagerClientIF manager) {
         this.manager = manager;
+        System.out.println("Treatmentcontroller constructor");
         getTableData();
-        
     }
 
     @Override
@@ -34,7 +36,16 @@ public class TreatmentController implements ActionListener {
     }
     
     public void getTableData(){
-        //agenda = manager.getSceduleTableData();  
+        try { 
+            System.out.println("getTablefunction in controller");
+            manager.getsessionsByDate(new Date(), new Date());
+            System.out.println("getsessionsByDate TEST");
+        
+        }
+        catch (RemoteException ex) {
+                        System.out.println("error getTableData in treatmentcontroller");
+                        System.out.println(ex.getMessage());
+                    }
     }
     
     public void setTableData(){

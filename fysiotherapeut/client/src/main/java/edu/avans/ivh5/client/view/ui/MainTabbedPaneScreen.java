@@ -10,6 +10,7 @@ import edu.avans.ivh5.client.control.PhysioPracticeController;
 import edu.avans.ivh5.client.control.ReportingController;
 import edu.avans.ivh5.client.control.TherapistController;
 import edu.avans.ivh5.client.control.TreatmentController;
+import java.rmi.RemoteException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -22,7 +23,7 @@ public class MainTabbedPaneScreen extends JFrame {
     
     private final PhysioManagerClientIF manager;
     
-    public MainTabbedPaneScreen(PhysioManagerClientIF manager) {
+    public MainTabbedPaneScreen(PhysioManagerClientIF manager) throws RemoteException {
         this.manager = manager;
         setTitle("Fysiopraktijk");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
