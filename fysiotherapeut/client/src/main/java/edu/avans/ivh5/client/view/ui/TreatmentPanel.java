@@ -5,6 +5,8 @@
  */
 package edu.avans.ivh5.client.view.ui;
 
+import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,15 +39,18 @@ public class TreatmentPanel extends JPanel {
     private JComboBox employeeBox;
     private JLabel overviewLabel;
     private JTextField searchField;
+    private final TreatmentController controller;
     private JFrame parentFrame;
     private JTable treatmentTable;
     private JMenuItem alter, delete;
+    private DefaultTableModel dtm;
 
-    public TreatmentPanel(JFrame parentFrame) {
+    public TreatmentPanel(JFrame parentFrame, TreatmentController controller) {
         this.parentFrame = parentFrame;
         setLayout(new BorderLayout());
         add(createNorthPanel(), BorderLayout.NORTH);
         add(createCenterPanel(), BorderLayout.CENTER);
+        this.controller = controller;
     }
 
     private JPanel createNorthPanel() {
@@ -76,11 +82,19 @@ public class TreatmentPanel extends JPanel {
 
         panel.add(new JLabel(""));
 
-        newButton = new JButton("Nieuwe behandeling");
+        newButton = new JButton("Toevoegen");
+        newButton.setActionCommand("newTreatment");
+        newButton.addActionListener(controller);
         panel.add(newButton);
-        changeButton = new JButton("Wijzig behandeling");
+        
+        changeButton = new JButton("Wijzig");
+        changeButton.setActionCommand("alterTreatment");
+        changeButton.addActionListener(controller);
         panel.add(changeButton);
-        deleteButton = new JButton("Verwijder behandeling");
+        
+        deleteButton = new JButton("Verwijder");
+        deleteButton.setActionCommand("deleteTreatment");
+        deleteButton.addActionListener(controller);
         panel.add(deleteButton);
         // end row 2
 
@@ -150,7 +164,12 @@ public class TreatmentPanel extends JPanel {
         return panel;
     }
 
-    private JPopupMenu createRightClickMenu(int row) {
+    public int getTreatmentID() {
+        System.out.println("Dit moet de ID ZIJN: " + (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0));
+        return Integer.parseInt( (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0));
+    }
+    
+    public JPopupMenu createRightClickMenu(int row) {
         JPopupMenu menu = new JPopupMenu();
 
         String id = "";
@@ -186,5 +205,25 @@ public class TreatmentPanel extends JPanel {
         menu.add(delete);
 
         return menu;
+    }
+    
+     public int getRowAtPoint(Point point) {
+        return treatmentTable.rowAtPoint(point);
+    }
+
+    public JTable getTable() {
+        return treatmentTable;
+    }
+
+    public void setSelectedRow(int row) {
+        treatmentTable.setRowSelectionInterval(row, row);
+    }
+
+    public void removeRow(int row) {
+        dtm.removeRow(row);
+    }
+    
+    public JFrame getParentFrame() {
+        return parentFrame;
     }
 }

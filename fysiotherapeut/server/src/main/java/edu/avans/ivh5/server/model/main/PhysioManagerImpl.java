@@ -9,7 +9,7 @@ import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
-import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
 import edu.avans.ivh5.shared.model.domain.Employee;
@@ -100,6 +100,12 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         EmployeeDAOIF employeeDAO = daoFactory.getEmployeeDAO();
         return employeeDAO.getEmployee(name);
     }
+    
+    @Override
+    public Employee getTherapistByTherapistID(int therapistID) throws RemoteException {
+        EmployeeDAOIF employeeDAO = daoFactory.getEmployeeDAO();
+        return employeeDAO.getEmployee(therapistID);
+    }
 
     //Treatments
     @Override
@@ -114,7 +120,17 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     @Override
     public boolean deleteTreatment(Treatment treatment) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
+        System.out.println("dao alter Treatment");
+        return dao.deleteTreatment(treatment);
+    }
+    
+    
+    @Override
+    public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException{
+        TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
+        System.out.println("dao alter Treatment");
+        return dao.deleteTreatmentByTreatmentID(treatmentID);
     }
 
     //Sessions
@@ -176,9 +192,9 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
         dao.savePhysioPractice(practice);
     }
-/*
+
     @Override
-    public void getSceduleTableData() {
+    public void getScheduleTableData() {
         
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
         Schedule schedule = new Schedule( scheduleItems );
@@ -187,5 +203,5 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         
         
     }
-    */
+    
 }

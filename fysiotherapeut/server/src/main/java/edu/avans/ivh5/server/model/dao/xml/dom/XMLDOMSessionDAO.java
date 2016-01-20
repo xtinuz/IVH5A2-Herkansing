@@ -6,6 +6,7 @@
 package edu.avans.ivh5.server.model.dao.xml.dom;
 
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -13,8 +14,17 @@ import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
  */
 public class XMLDOMSessionDAO implements SessionDAOIF {
 
+    private XmlDOMDocument domDocument = null;
+    private Document document = null;
+
     public XMLDOMSessionDAO() {
-        
+        this.domDocument = new XmlDOMDocument("resources\\employees.xml", "resources\\employees.xsd");
+        this.document = domDocument.getDocument();
+    }
+    
+    private void getDocument() {
+        this.domDocument = new XmlDOMDocument("resources\\employees.xml", "resources\\employees.xsd");
+        this.document = domDocument.getDocument();
     }
     
 }

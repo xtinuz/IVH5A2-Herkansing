@@ -128,6 +128,31 @@ public class XMLDOMEmployeeDAO implements EmployeeDAOIF {
         }
         return null;
     }
+    
+    
+    @Override
+    public Employee getEmployee(int therapistID) {
+        System.out.println("XMLDOMEmployeeDAO is getting the employee");
+        if (document != null) {
+            NodeList list = document.getElementsByTagName("employee");
+
+            for (int i = 0; i < list.getLength(); i++) {
+                Node node = list.item(i);
+                if (node instanceof Element) {
+                    Element child = (Element) node;
+                    if (child.getElementsByTagName("id").item(0).getTextContent().equals(therapistID)) {
+                        String id = child.getElementsByTagName("id").item(0).getTextContent();
+                        String firstname = child.getElementsByTagName("firstname").item(0).getTextContent();
+                        String lastname = child.getElementsByTagName("lastname").item(0).getTextContent();
+                        String phoneNr = child.getElementsByTagName("phoneNr").item(0).getTextContent();
+                        String email = child.getElementsByTagName("email").item(0).getTextContent();
+                        return new Employee(id, firstname, lastname, phoneNr, email);
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public boolean deleteEmployee(String employeeID) {

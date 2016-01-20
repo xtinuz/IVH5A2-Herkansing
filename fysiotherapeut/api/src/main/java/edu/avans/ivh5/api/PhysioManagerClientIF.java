@@ -13,6 +13,7 @@ import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -33,11 +34,15 @@ public interface PhysioManagerClientIF extends Remote {
     
     public Employee getTherapist(String name) throws RemoteException;
     
+    public Employee getTherapistByTherapistID(int therapistID) throws RemoteException;
+    
     public boolean saveTreatment(Treatment treatment) throws RemoteException;
     
     public boolean alterTreatment(Treatment treatment) throws RemoteException;
     
     public boolean deleteTreatment(Treatment treatment) throws RemoteException;
+    
+    public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException;
     
     public boolean saveSession(Session session) throws RemoteException;
     
@@ -62,5 +67,5 @@ public interface PhysioManagerClientIF extends Remote {
     public PhysioPractice getCompanyInfo() throws RemoteException;
 
     public void getScheduleTableData() throws RemoteException;    
-//public void getSceduleTableData();
+
 }

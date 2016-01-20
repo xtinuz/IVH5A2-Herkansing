@@ -6,7 +6,7 @@ package edu.avans.ivh5.server.model.dao;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
-import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 
 /**
@@ -66,7 +66,7 @@ public abstract class DAOFactory {
 
     public abstract SessionDAOIF getSessionDAO();
 
-    public abstract TreatmentAndSessionDAOIF getTreatmentAndSessionDAO();
+    public abstract TreatmentDAOIF getTreatmentDAO();
     
     public abstract PhysioPracticeDAOIF getPhysioPracticeDAO();
 

@@ -20,6 +20,8 @@ public interface EmployeeDAOIF {
     
     public Employee getEmployee(String name);
     
+    public Employee getEmployee(int therapistID);
+    
     public boolean deleteEmployee(String employeeID);
 
     public ArrayList<Employee> getEmployees();

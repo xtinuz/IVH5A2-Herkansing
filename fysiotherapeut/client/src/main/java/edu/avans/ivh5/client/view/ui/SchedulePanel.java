@@ -24,7 +24,7 @@ public class SchedulePanel extends javax.swing.JPanel {
         this.parentFrame = parentFrame;
         this.controller = controller;
         System.out.println("setting ui reference");
-        controller.setUIRef(this);
+        //controller.setUIRef(this);
     }
 
    
