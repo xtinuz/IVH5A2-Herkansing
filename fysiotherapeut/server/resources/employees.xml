@@ -11,7 +11,7 @@
 <employee>
 		<id>2</id>
 		<firstname>Martijn</firstname>
-		<lastname>Raaijmakers</lastname>
+		<lastname>Raijmakers</lastname>
 		<phoneNr>06111112</phoneNr>
 		<email>rjmaij@avans.nl</email>
 	</employee>
