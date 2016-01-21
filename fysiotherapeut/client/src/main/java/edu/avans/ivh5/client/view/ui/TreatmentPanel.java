@@ -46,11 +46,13 @@ public class TreatmentPanel extends JPanel {
     private DefaultTableModel dtm;
 
     public TreatmentPanel(JFrame parentFrame, TreatmentController controller) {
+        this.controller = controller;
         this.parentFrame = parentFrame;
+        System.out.println("setting ui reference TreatmentPanel");
+        controller.setUIRef(this);
         setLayout(new BorderLayout());
         add(createNorthPanel(), BorderLayout.NORTH);
         add(createCenterPanel(), BorderLayout.CENTER);
-        this.controller = controller;
     }
 
     private JPanel createNorthPanel() {
@@ -65,14 +67,8 @@ public class TreatmentPanel extends JPanel {
         panel.add(new JLabel(""));
 
         logOutButton = new JButton("Log uit");
-        logOutButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parentFrame.dispose();
-            }
-
-        });
+        logOutButton.setActionCommand("logout");
+        logOutButton.addActionListener(controller);
         panel.add(logOutButton);
         // end row 1
 

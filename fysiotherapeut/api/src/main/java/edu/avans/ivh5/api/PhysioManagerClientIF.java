@@ -34,11 +34,15 @@ public interface PhysioManagerClientIF extends Remote {
     
     public Employee getTherapist(String name) throws RemoteException;
     
+    public Employee getTherapistByTherapistID(int therapistID) throws RemoteException;
+    
     public boolean saveTreatment(Treatment treatment) throws RemoteException;
     
     public boolean alterTreatment(Treatment treatment) throws RemoteException;
     
     public boolean deleteTreatment(Treatment treatment) throws RemoteException;
+    
+    public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException;
     
     public boolean saveSession(Session session) throws RemoteException;
     
@@ -58,14 +62,10 @@ public interface PhysioManagerClientIF extends Remote {
     
     public Treatment getTreatmentByID(int treatmentID) throws RemoteException;
     
-    public boolean saveCompanyInfo(PhysioPractice practice) throws RemoteException;
+    public void saveCompanyInfo(PhysioPractice practice) throws RemoteException;
     
     public PhysioPractice getCompanyInfo() throws RemoteException;
 
-    public void getScheduleTableData() throws RemoteException;
-    
-    public ArrayList<Session> getsessionsByDate (Date startDate, Date endDate) throws RemoteException;
-    
-    public ArrayList<Date>getCurrentDates(Date currentdate) throws RemoteException;
+    public void getScheduleTableData() throws RemoteException;    
 
 }

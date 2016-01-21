@@ -9,6 +9,7 @@ import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
 import edu.avans.ivh5.shared.model.domain.Employee;
@@ -19,8 +20,6 @@ import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +37,6 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         daoFactory = DAOFactory.getDAOFactory("edu.avans.ivh5.server.model.dao.xml.dom.XmlDOMDAOFactory");
         passwordManager = new PasswordManager();
         this.service = service;
-        System.out.println("managerImpl constructor");
     }
 
     @Override
@@ -102,6 +100,12 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         EmployeeDAOIF employeeDAO = daoFactory.getEmployeeDAO();
         return employeeDAO.getEmployee(name);
     }
+    
+    @Override
+    public Employee getTherapistByTherapistID(int therapistID) throws RemoteException {
+        EmployeeDAOIF employeeDAO = daoFactory.getEmployeeDAO();
+        return employeeDAO.getEmployee(therapistID);
+    }
 
     //Treatments
     @Override
@@ -116,7 +120,17 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     @Override
     public boolean deleteTreatment(Treatment treatment) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
+        System.out.println("dao alter Treatment");
+        return dao.deleteTreatment(treatment);
+    }
+    
+    
+    @Override
+    public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException{
+        TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
+        System.out.println("dao alter Treatment");
+        return dao.deleteTreatmentByTreatmentID(treatmentID);
     }
 
     //Sessions
@@ -174,48 +188,20 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     }
 
     @Override
-    public boolean saveCompanyInfo(PhysioPractice practice) throws RemoteException{
-        System.out.println("start saveCompany");
+    public void saveCompanyInfo(PhysioPractice practice) throws RemoteException{
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
-        System.out.println("DAO initialized");
-        //dao.savePhysioPractice(practice)
-        return dao.savePhysioPractice(practice);
+        dao.savePhysioPractice(practice);
     }
-    
-    
 
     @Override
-    public void getScheduleTableData() throws RemoteException{
-        
+    public void getScheduleTableData() {
         
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
-        
         Schedule schedule = new Schedule( scheduleItems );
-          
-    }
-
- 
- 
-    @Override
-    public ArrayList<Session> getsessionsByDate(Date startDate, Date endDate) throws RemoteException {
-        System.out.println("test 1");
-        ArrayList<Session>sessionsByDate = new ArrayList<Session>();
-        System.out.println("test getsessions in manager");
-        getCurrentDates( new Date() );
         
-        return sessionsByDate;
-    }
-
-    @Override
-    public ArrayList<Date> getCurrentDates(Date currentDate) throws RemoteException {
-        ArrayList<Date> currentDates = new ArrayList<Date>();
+ 
         
-        Calendar c = Calendar.getInstance();
-        c.setTime( currentDate );
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        System.out.println("testing calendar");
-
-        return currentDates;
+        
     }
     
 }

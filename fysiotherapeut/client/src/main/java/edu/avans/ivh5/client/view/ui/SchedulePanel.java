@@ -16,7 +16,6 @@ public class SchedulePanel extends javax.swing.JPanel {
     private final JFrame parentFrame;
     private final TreatmentController controller;
 
-    
     /**
      * Creates new form ScedulePanel
      */
@@ -25,8 +24,7 @@ public class SchedulePanel extends javax.swing.JPanel {
         this.parentFrame = parentFrame;
         this.controller = controller;
         System.out.println("setting ui reference");
-        controller.setUIRef(this);
-        jTextField1.addActionListener(controller);
+        //controller.setUIRef(this);
     }
 
    
@@ -137,8 +135,6 @@ public class SchedulePanel extends javax.swing.JPanel {
     public void getTableData(){
         controller.getTableData();
     }
-    
-
 
 
 }
