@@ -92,6 +92,7 @@ public class LoginController implements ActionListener, KeyListener {
         if (loginIsValid) {
             parentScreen.dispose();
             new MainTabbedPaneScreen(manager);
+            new MainTabbedPaneScreen(this.manager);
         } else {
             parentScreen.setPasswordFieldBackground(Color.pink);
         }

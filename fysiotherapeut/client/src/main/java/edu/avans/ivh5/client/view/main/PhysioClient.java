@@ -56,7 +56,7 @@ public class PhysioClient {
             System.out.println("Locate registry on " + hostname);
             Registry registry = LocateRegistry.getRegistry(hostname);
             System.out.println("Found registry");
-            System.out.println("Connecting to remote service" + service);
+            System.out.println("Connecting to remote service " + service);
             manager = (PhysioManagerClientIF) registry.lookup(service);
             System.out.println("Connected");
         } catch (RemoteException e) {
