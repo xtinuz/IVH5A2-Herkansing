@@ -34,14 +34,14 @@ public class AddTreatmentScreen extends JFrame {
     public AddTreatmentScreen(TreatmentController controller, String buttonAction) {
         button = buttonAction;
         this.controller = controller;
-        controller.setUIRef(this);
+        //controller.setUIRef(this);
         textFields = new ArrayList<>();
         init();
     }
 
     public AddTreatmentScreen(TreatmentController controller, String buttonAction, Employee therapist, Treatment treatment) {
         this.controller = controller;
-        controller.setUIRef(this);
+        //controller.setUIRef(this);
 
         button = buttonAction;
         textFields = new ArrayList<>();
@@ -73,7 +73,7 @@ public class AddTreatmentScreen extends JFrame {
         // row 1
         ID = new JLabel("ID:");
         IDField = new JTextField();
-        IDField.addKeyListener(controller);
+        //IDField.addKeyListener(controller);
         textFields.add(IDField);
 
         if (!button.equals("newEmployee")) {
@@ -85,7 +85,7 @@ public class AddTreatmentScreen extends JFrame {
         // row 2
         treatmentCode = new JLabel("treatmentCode:");
         treatmentCodeField = new JTextField();
-        treatmentCodeField.addKeyListener(controller);
+        //treatmentCodeField.addKeyListener(controller);
         treatmentCodeField.setEditable(false);
         textFields.add(treatmentCodeField);
 
@@ -96,7 +96,7 @@ public class AddTreatmentScreen extends JFrame {
         // row 3
         BSN = new JLabel("Achternaam:");
         BSNField = new JTextField();
-        BSNField.addKeyListener(controller);
+        //BSNField.addKeyListener(controller);
         BSNField.setEditable(false);
         textFields.add(BSNField);
 
@@ -107,7 +107,7 @@ public class AddTreatmentScreen extends JFrame {
         // row 4
         Employee = new JLabel("Telefoonnummer:");
         EmployeeField = new JTextField();
-        EmployeeField.addKeyListener(controller);
+        //EmployeeField.addKeyListener(controller);
         EmployeeField.setEditable(false);
         textFields.add(EmployeeField);
 

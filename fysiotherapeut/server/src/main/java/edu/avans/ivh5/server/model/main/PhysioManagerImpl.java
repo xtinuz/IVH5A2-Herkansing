@@ -170,12 +170,12 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     @Override
     public PhysioPractice getCompanyInfo() {
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
-        return dao.getPhysioPractice();
+        return dao.getCompanyInfo();
     }
 
     @Override
     public boolean saveCompanyInfo(PhysioPractice practice) throws RemoteException{
-        System.out.println("start saveCompany");
+        System.out.println("start saveCompany"); 
         PhysioPracticeDAOIF dao = daoFactory.getPhysioPracticeDAO();
         System.out.println("DAO initialized");
         //dao.savePhysioPractice(practice)

@@ -13,6 +13,6 @@ import edu.avans.ivh5.shared.model.domain.PhysioPractice;
  */
 public interface PhysioPracticeDAOIF {
     public boolean savePhysioPractice(PhysioPractice physiopractice);   
-    public PhysioPractice getPhysioPractice();
+    public PhysioPractice getCompanyInfo();
     
 }

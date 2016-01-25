@@ -5,13 +5,14 @@
  */
 package edu.avans.ivh5.shared.model.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Sjonn
  */
-public class PhysioPractice {
+public class PhysioPractice implements Serializable{
     String name;
     String address;
     String postal;

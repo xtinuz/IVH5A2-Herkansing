@@ -60,7 +60,7 @@ public interface PhysioManagerClientIF extends Remote {
     
     public boolean saveCompanyInfo(PhysioPractice practice) throws RemoteException;
     
-    public PhysioPractice getCompanyInfo() throws RemoteException;
+    public PhysioPractice getCompanyInfo() throws RemoteException; 
 
     public void getScheduleTableData() throws RemoteException;
     
