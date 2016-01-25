@@ -80,8 +80,9 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
 
         
         try {
+            System.out.println("Test1");
             manager.saveCompanyInfo(this.practice);
-            System.out.println("Test");
+            System.out.println("Test2");
         } catch (RemoteException ex) {
             System.out.println("saveCompanyInfo can not be called at the server");
         }

@@ -9,14 +9,18 @@ import edu.avans.ivh5.client.control.TherapistController;
 import edu.avans.ivh5.client.control.TreatmentController;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Treatment;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,12 +34,15 @@ public class AddTreatmentScreen extends JFrame {
     private final ArrayList<JTextField> textFields;
     private final TreatmentController controller;
     private final String button;
+    private JTable fysioTable;
+    private DefaultTableModel dtm;
 
     public AddTreatmentScreen(TreatmentController controller, String buttonAction) {
         button = buttonAction;
         this.controller = controller;
         controller.setUIRef(this);
         textFields = new ArrayList<>();
+        dtm = new DefaultTableModel();
         init();
     }
 
@@ -59,12 +66,12 @@ public class AddTreatmentScreen extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
 
-        add(createEmployeeInfoPanel());
+        add(createTreatmentInfoPanel());
 
         setVisible(true);
     }
 
-    private JPanel createEmployeeInfoPanel() {
+    private JPanel createTreatmentInfoPanel() {
         JPanel panel = new JPanel();
 
         panel.setLayout(new GridLayout(7, 2, 5, 5));
@@ -119,8 +126,25 @@ public class AddTreatmentScreen extends JFrame {
         panel.add(new JLabel(""));
         panel.add(new JLabel(""));
         // end of row 6
+        
+        //Row 7
+        dtm.addColumn("ID");
+        dtm.addColumn("Voornaam");
+        dtm.addColumn("Achternaam");
+        dtm.addColumn("Telefoonnummer");
+        dtm.addColumn("Email");
+        fysioTable = new JTable(dtm);
+        fysioTable.setFillsViewportHeight(true);
+        fysioTable.getTableHeader().setBackground(Color.CYAN);
+        fysioTable.addMouseListener(controller);
 
-        // row 7
+        // Make the table vertically scrollable
+        JScrollPane scrollPane = new JScrollPane(fysioTable);
+
+        panel.add(scrollPane);
+        //End row 7
+
+        // row 8
         addTreatmentButton = new JButton("Bevestigen");
         switch (button) {
             case "alterEmployee":
@@ -139,10 +163,12 @@ public class AddTreatmentScreen extends JFrame {
 
         panel.add(addTreatmentButton);
         panel.add(cancelButton);
-        // end of row 7
+        // end of row 8
 
         return panel;
     }
+    
+    
 
     public void setNextFocus(JTextField source) throws IndexOutOfBoundsException {
         textFields.get(textFields.indexOf(source) + 1).requestFocus();

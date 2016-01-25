@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><employees xmlns:lib="http://www.avans.nl/ivh5/worked-example" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.avans.nl/ivh5/worked-example employees.xsd">
 
-<employee>
+	<employee>
 		<id>1</id>
 		<firstname>feree</firstname>
 		<lastname>van disseldorp</lastname>
@@ -8,7 +8,7 @@
 		<email>fersemail@email.com</email>
 	</employee>
 
-<employee>
+	<employee>
 		<id>2</id>
 		<firstname>Martijn</firstname>
 		<lastname>Raaijmakers</lastname>
@@ -16,4 +16,20 @@
 		<email>rjmaij@avans.nl</email>
 	</employee>
 	
-<employee><id>3</id><lastname>Rijvers</lastname><phoneNr>0610101010</phoneNr><firstname>Michel</firstname><email>mrijvers@avans.nl</email></employee><employee><id>5</id><firstname>John</firstname><lastname>Op 't Hof</lastname><phoneNr>06sukkel</phoneNr><email>jhof@avans.nl</email></employee></employees>
+	<employee>
+		<id>3</id>
+		<lastname>Rijvers</lastname>
+		<phoneNr>0610101010</phoneNr>
+		<firstname>Michel</firstname>
+		<email>mrijvers@avans.nl</email>
+	</employee>
+	
+	<employee>
+		<id>4</id>
+		<firstname>John</firstname>
+		<lastname>Op 't Hof</lastname>
+		<phoneNr>06kanker</phoneNr>
+		<email>jhof@avans.nl</email>
+	</employee>
+	
+</employees>

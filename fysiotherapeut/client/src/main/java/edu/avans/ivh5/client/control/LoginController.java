@@ -36,11 +36,7 @@ public class LoginController implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            login();
-        } catch (RemoteException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        login();
     }
 
     @Override
@@ -51,25 +47,13 @@ public class LoginController implements ActionListener, KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             switch (parentScreen.getFocusOwner().getName()) {
                 case "loginButton":
-            {
-                try {
                     login();
-                } catch (RemoteException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
                     break;
                 case "usernameField":
                     parentScreen.setFocus("passwordField");
                     break;
                 case "passwordField":
-            {
-                try {
                     login();
-                } catch (RemoteException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
                     break;
             }
         }
@@ -78,7 +62,7 @@ public class LoginController implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {}
 
-    private void login() throws RemoteException {
+    private void login() {
         System.out.println("trying to log in with:");
         System.out.println("username = " + parentScreen.getUsername());
         System.out.println("password = " + new String(parentScreen.getPassword()));
