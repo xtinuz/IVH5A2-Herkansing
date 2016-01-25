@@ -198,10 +198,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
         Schedule schedule = new Schedule( scheduleItems );
-        
- 
-        
-        
     }
     
+    @Override
+    public ArrayList<Employee> getTherapists() throws RemoteException {
+       EmployeeDAOIF employeeDAO = daoFactory.getEmployeeDAO();
+       System.out.println("getTherapists in managerImpl");
+       System.out.println(employeeDAO.getEmployees());
+        return employeeDAO.getEmployees();  
+    }   
 }

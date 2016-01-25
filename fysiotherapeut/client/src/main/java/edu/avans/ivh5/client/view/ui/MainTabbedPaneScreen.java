@@ -24,28 +24,27 @@ public class MainTabbedPaneScreen extends JFrame {
     
     public MainTabbedPaneScreen(PhysioManagerClientIF manager) {
         this.manager = manager;
+        createTabs();
         setTitle("Fysiopraktijk");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        createTabs();
         
         setVisible(true);
     }
     
     private void createTabs() {
         JTabbedPane panes = new JTabbedPane();
-        JPanel SchedulePanel = new SchedulePanel(this, new TreatmentController(manager));
         JPanel TreatmentsPanel = new TreatmentPanel(this, new TreatmentController(manager));
+        JPanel SchedulePanel = new SchedulePanel(this, new TreatmentController(manager));
         JPanel OverviewPanel = new OverviewPanel(this, new ReportingController(manager));
         JPanel EmployeePanel = new EmployeePanel(this, new TherapistController(manager));
         JPanel CompanyInfoPanel = new CompanyInfoPanel(new PhysioPracticeController(manager));
         
-        panes.add("Agenda", SchedulePanel);
         panes.add("Behandelingen", TreatmentsPanel);
         panes.add("Overzichten", OverviewPanel);
         panes.add("Fysiotherapeuten", EmployeePanel);
         panes.add("Praktijkgegevens", CompanyInfoPanel);
+        panes.add("Agenda", SchedulePanel);
         
         add(panes);
     }

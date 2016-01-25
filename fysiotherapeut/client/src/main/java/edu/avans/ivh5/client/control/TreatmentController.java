@@ -21,22 +21,39 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
- *
+// *
  * @author bernd_000
  */
 public class TreatmentController implements ActionListener, KeyListener, MouseListener {
     private AddTreatmentScreen parentScreen;
     private TreatmentPanel parentPanel;
     private PhysioManagerClientIF manager;
+    private SchedulePanel scheduleScreen;
+    private ArrayList<Employee> employees;
     
     public TreatmentController(PhysioManagerClientIF manager){
         this.manager = manager;
         //getTableData();
+        initScheduleJComboBox();
+    }
+    
+    public void initScheduleJComboBox(){
+        ArrayList<Employee> employees = getEmployees();
+        //scheduleScreen.fillJComboBox(employees);
+            System.out.println("LAMAARAAA POR VIDA PUTA ");
+            int i = 0;
+        for(Employee e : employees){
+            System.out.println(e.getFirstname()+ " " + e.getLastname());
+            scheduleScreen.addToCombobox("Hurensun" + i);
+            //scheduleScreen.addToCombobox(e.getFirstname()+ " " + e.getLastname());
+            i++;
+        }
     }
     
     public void setUIRef(AddTreatmentScreen parentScreen) {
@@ -49,6 +66,11 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
         System.out.println("SetUIRef TreatmentPanel");
     }
 
+    public void setUIRef(SchedulePanel scheduleScreen) {
+        this.scheduleScreen = scheduleScreen;
+        System.out.println("SetUIRef scheduleScreen");
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("TreatmentController, top of actionperformed");
@@ -201,4 +223,29 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
         
     }
     
+        public ArrayList<Employee> getEmployees(){
+            System.out.println("test try in addEmployeestocombobox");
+            ArrayList employees = new ArrayList();
+        try{
+            //String therapistName = null;
+            ArrayList<Employee> therapists = manager.getTherapists();
+            System.out.println("testing array" + therapists);
+            for (Employee e: therapists){
+                String therapistName = null;
+                therapistName = e.getFirstname() + " " + e.getLastname();
+                //System.out.println("testing name " + therapistName );
+                //names.add(e.getFirstname() + " " + e.getLastname());
+                employees.add(e);
+            }
+            System.out.println("filled array");
+            //scheduleScreen.fillJComboBox(names);
+            
+        } 
+        catch(RemoteException ex){
+            System.out.println("RemoteException at getEmployees");
+            System.out.println(ex.getMessage());
+        }
+        
+        return employees;
+        }
 }

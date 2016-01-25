@@ -6,6 +6,7 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentController;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -21,10 +22,11 @@ public class SchedulePanel extends javax.swing.JPanel {
      */
     public SchedulePanel(JFrame parentFrame, TreatmentController controller) {
         initComponents();
+        
         this.parentFrame = parentFrame;
         this.controller = controller;
         System.out.println("setting ui reference");
-        //controller.setUIRef(this);
+        controller.setUIRef(this);
     }
 
    
@@ -83,8 +85,6 @@ public class SchedulePanel extends javax.swing.JPanel {
 
         jLabel2.setText("Fysiotherapeut");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,6 +135,18 @@ public class SchedulePanel extends javax.swing.JPanel {
     public void getTableData(){
         controller.getTableData();
     }
+    
+        public void fillJComboBox(ArrayList<String> names){
+        
+            for(String name: names)
+                //System.out.println(name);
+                this.jComboBox1.addItem(name);
+    }
 
+         public void addToCombobox(String name){
+            System.out.println("addToCombobox: " + name);
+             
+            this.jComboBox1.addItem(name);
+     }
 
 }

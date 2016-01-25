@@ -68,4 +68,6 @@ public interface PhysioManagerClientIF extends Remote {
 
     public void getScheduleTableData() throws RemoteException;    
 
+    public ArrayList<Employee> getTherapists() throws RemoteException;
+
 }
