@@ -59,7 +59,6 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
             //scheduleScreen.addToCombobox(e.getFirstname()+ " " + e.getLastname());
             i++;
         }
-
     }
     
     public void setUIRef(AddTreatmentScreen parentScreen) {
