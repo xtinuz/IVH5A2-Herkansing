@@ -20,6 +20,7 @@ import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -194,10 +195,19 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     }
 
     @Override
-    public void getScheduleTableData() {
+    public void getScheduleTableData() throws RemoteException{
         
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
         Schedule schedule = new Schedule( scheduleItems );
+        
+   
+    }
+    
+    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException{
+        ArrayList dates = new ArrayList();
+        System.out.println("manager getsessionsbyDate");
+        return dates;
+        
     }
     
     @Override

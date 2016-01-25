@@ -10,6 +10,8 @@ import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
 import edu.avans.ivh5.client.view.ui.EmployeePanel;
 import edu.avans.ivh5.client.view.ui.LoginScreen;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
+import edu.avans.ivh5.shared.model.domain.PhysioPractice;
+import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.client.view.ui.TreatmentPanel;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Treatment;
@@ -22,6 +24,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -39,6 +43,7 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
     
     public TreatmentController(PhysioManagerClientIF manager){
         this.manager = manager;
+
         //getTableData();
         initScheduleJComboBox();
     }
@@ -54,6 +59,7 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
             //scheduleScreen.addToCombobox(e.getFirstname()+ " " + e.getLastname());
             i++;
         }
+
     }
     
     public void setUIRef(AddTreatmentScreen parentScreen) {
@@ -215,13 +221,7 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
     public void mouseExited(MouseEvent e) {
     }
     
-    public void getTableData(){
-        //agenda = manager.getSceduleTableData();  
-    }
     
-    public void setTableData(){
-        
-    }
     
         public ArrayList<Employee> getEmployees(){
             System.out.println("test try in addEmployeestocombobox");
