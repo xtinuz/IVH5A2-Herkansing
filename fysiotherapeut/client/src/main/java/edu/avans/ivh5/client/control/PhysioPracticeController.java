@@ -54,6 +54,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         saveInputFields();
+        System.out.println("TestButton");
     }
 
     
@@ -77,9 +78,11 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         this.practice.setBIC(parentScreen.getBICField());
         this.practice.setBank(parentScreen.getBankField());
 
+
         try {
             manager.saveCompanyInfo(practice);
             System.out.println("Company info saved");
+
         } catch (RemoteException ex) {
             System.out.println("saveCompanyInfo can not be called at the server");
         }

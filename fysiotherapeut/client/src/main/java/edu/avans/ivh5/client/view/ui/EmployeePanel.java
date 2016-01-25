@@ -36,9 +36,9 @@ public class EmployeePanel extends JPanel {
     private JButton logoutButton, addButton, alterButton, deleteButton;
     private final JFrame parentFrame;
     private JTable fysioTable;
+    private DefaultTableModel dtm;
     private JMenuItem alter, delete;
     private final TherapistController controller;
-    private DefaultTableModel dtm;
 
     /**
      * EmployeePanel creates the subpanels and adds them to itself It also
@@ -51,9 +51,9 @@ public class EmployeePanel extends JPanel {
      */
     public EmployeePanel(JFrame parentFrame, TherapistController controller) {
         this.controller = controller;
+        this.parentFrame = parentFrame;
         System.out.println("setting ui reference EmployeePanel");
         controller.setUIRef(this);
-        this.parentFrame = parentFrame;
         dtm = new DefaultTableModel();
 
         setLayout(new BorderLayout());
