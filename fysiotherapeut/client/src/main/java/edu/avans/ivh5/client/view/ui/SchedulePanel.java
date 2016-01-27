@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 public class SchedulePanel extends javax.swing.JPanel {
     private final JFrame parentFrame;
     private final ScheduleController controller;
-
     /**
      * Creates new form ScedulePanel
      */
@@ -60,6 +59,7 @@ public class SchedulePanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(800, 500));
+        setName(""); // NOI18N
 
         sceduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,8 +102,6 @@ public class SchedulePanel extends javax.swing.JPanel {
         jLabel1.setText("Datum:");
 
         jLabel2.setText("Fysiotherapeut");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
@@ -176,9 +174,6 @@ public class SchedulePanel extends javax.swing.JPanel {
         String day = (String) dayComboBox.getSelectedItem();
         String month = (String) monthComboBox.getSelectedItem();
         String year = (String) yearComboBox.getSelectedItem();
-        
-                
-        
         
         String stringDate = day + month + year;
         System.out.println(stringDate);

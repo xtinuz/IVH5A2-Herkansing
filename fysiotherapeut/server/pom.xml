@@ -51,8 +51,7 @@
 	<artifactId>ProftaakAPI</artifactId>
 	<version>1.0</version>
 	<scope>system</scope>
-	<systemPath>D:\Documents\Java UML VH5\IVH5A2-Herkansing\fysiotherapeut\target\physio-api.jar</systemPath>
-
+	<systemPath>C:\Users\ferdinand\Documents\GitHub\IVH5\IVH5A2-Herkansing\fysiotherapeut\target\physio-api.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>

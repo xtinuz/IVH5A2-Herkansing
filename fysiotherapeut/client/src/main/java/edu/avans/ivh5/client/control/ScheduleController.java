@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -124,11 +125,43 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     
     public void getTableData(String dateFromPanel) throws ParseException{
         try {
-            DateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
+            DateFormat df = new SimpleDateFormat("ddMMMMyyyy", Locale.US);
             System.out.println(dateFromPanel);
+            String day = null;
             Date date1 = df.parse( dateFromPanel );
-            System.out.print(date1);
+            System.out.println(date1);
             //System.out.print(date1);
+//            switch (day) {
+//                case "Monday":
+//                    
+//                    break;
+//                    
+//                case "Tuesday":
+//                    
+//                    break;
+//                    
+//                case "Wednesday":
+//                    
+//                    break;
+//                    
+//                case "Thursday":
+//                    
+//                    break;
+//                    
+//                case "Friday":
+//                    
+//                    break;
+//                    
+//                case "Saturday":
+//                    
+//                    break;
+//                    
+//                case "Sunday":
+//                    
+//                    break;
+//                
+//                
+//            }
             Date date2 = Calendar.getInstance().getTime();
             ArrayList<Session> sessions = null;
             System.out.println("getTablefunction in controller");

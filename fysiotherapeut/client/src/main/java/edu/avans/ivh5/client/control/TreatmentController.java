@@ -7,6 +7,7 @@ package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
+import edu.avans.ivh5.client.view.ui.AddTreatmentScreen2;
 import edu.avans.ivh5.client.view.ui.EmployeePanel;
 import edu.avans.ivh5.client.view.ui.LoginScreen;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
@@ -85,6 +86,8 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
                 System.out.println("actioncommand newTreatment");
                 
                 new AddTreatmentScreen(this, "newTreatment");
+                AddTreatmentScreen2 screen = new AddTreatmentScreen2(this);
+                screen.setVisible(true);
                 break;
             case "alterTreatment":
                 System.out.println("actioncommand alterTreatment");
