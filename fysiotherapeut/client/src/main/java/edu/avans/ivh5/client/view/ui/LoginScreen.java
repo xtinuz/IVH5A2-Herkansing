@@ -73,6 +73,9 @@ public class LoginScreen extends JFrame {
         loginPanel.add(passwordField);
         loginPanel.add(new JLabel(""));
         loginPanel.add(loginButton);
+        
+        usernameField.setText("bernd");
+        passwordField.setText("wachtwoord123");
 
         return loginPanel;
     }

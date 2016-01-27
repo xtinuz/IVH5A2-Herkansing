@@ -19,7 +19,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import org.w3c.dom.NamedNodeMap;
 
 /**
  *
@@ -41,17 +41,18 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
 
     @Override
     public boolean savePhysioPractice(PhysioPractice physiopractice) {
-        System.out.println("XMLDOMUserDAO is getting the obj:PhysioPractice");
+        System.out.println("XMLDOAPysioPracticeDAO is getting the obj:PhysioPractice");
         if (document != null) {
-            NodeList list = document.getElementsByTagName("physiopractice"); //hier de naam van hetgene wat je zoekt
+            /*NodeList list = document.getElementsByTagName("physiopractice"); //hier de naam van hetgene wat je zoekt
 
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);
                 if (node instanceof Element) {
                     Element child = (Element) node;
                     
-                    
+                    System.out.println("Practice name: " + physiopractice.getName());
                     //Set data
+                               
                     child.setAttribute("naam", physiopractice.getName());
                     child.setAttribute("address", physiopractice.getAddress());
                     child.setAttribute("postal", physiopractice.getPostal());
@@ -64,27 +65,51 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
                     child.setAttribute("bank", physiopractice.getBank());
                     
                     
+                    child.getElementsByTagName("naam").item(0).setTextContent(physiopractice.getName());
+       */
+                    Node practice = document.getElementsByTagName("physiopractice").item(0);
+                    Element child = (Element) practice;
+                    
+                    /*NamedNodeMap attr = practice.getAttributes();
+                    Node nodeName = attr.getNamedItem("name");
+                    nodeName.setTextContent(physiopractice.getName());
+                            */
+                    System.out.println("Practice name: " + physiopractice.getName());
+                    
+                    child.getElementsByTagName("name").item(0).setTextContent(physiopractice.getName());
+                    child.getElementsByTagName("address").item(0).setTextContent(physiopractice.getAddress());
+                    child.getElementsByTagName("postal").item(0).setTextContent(physiopractice.getPostal());
+                    child.getElementsByTagName("phone").item(0).setTextContent(physiopractice.getPhone());
+                    child.getElementsByTagName("email").item(0).setTextContent(physiopractice.getEmail());
+                    child.getElementsByTagName("kvk").item(0).setTextContent(physiopractice.getKVK());
+                    child.getElementsByTagName("iban").item(0).setTextContent(physiopractice.getIBAN());
+                    child.getElementsByTagName("bic").item(0).setTextContent(physiopractice.getBIC());
+                    child.getElementsByTagName("bank").item(0).setTextContent(physiopractice.getBank());
+                    
                     
                     this.domDocument.writeDocument();
                     return true;
-                }
-            }
+                //}
+            //}
         } else {
-            System.out.println("XMLDOMUserDAO could not get the PhysioPractice due to a missing document");
+            System.out.println("XMLDOAPysioPracticeDAO could not get the PhysioPractice due to a missing document");
         }
-        System.out.println("XMLDOMUserDAO did not find the PhysioPractice");
+        System.out.println("XMLDOAPysioPracticeDAO did not find the PhysioPractice");
         return false;
     }
     
     @Override
-    public PhysioPractice getPhysioPractice() {
-        System.out.println("XMLDOMUserDAO is getting the obj:PhysioPractice");
+    public PhysioPractice getCompanyInfo() {
+        System.out.println("XMLDOAPysioPracticeDAO is getting the obj:PhysioPractice");
         if (document != null) {
+            System.out.println("XMLDOAPysioPracticeDAO has found the document");
             NodeList list = document.getElementsByTagName("physiopractice"); // hier de naam van hetgene wat je zoekt
-
+            
             for (int i = 0; i < list.getLength(); i++) {
+                System.out.println("XMLDOAPysioPracticeDAO is executing FOR loop");
                 Node node = list.item(i);
                 if (node instanceof Element) {
+                    System.out.println("XMLDOAPysioPracticeDAO is executing IF statement");
                     Element child = (Element) node;
                   
                     String name = child.getElementsByTagName("naam").item(0).getTextContent();
@@ -97,7 +122,7 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
                     String IBAN = child.getElementsByTagName("IBAN").item(0).getTextContent();
                     String BIC = child.getElementsByTagName("BIC").item(0).getTextContent();
                     String bank = child.getElementsByTagName("bank").item(0).getTextContent();
-                    
+                    System.out.println("XMLDOAPysioPracticeDAO has updated the variables");                    
                     return new PhysioPractice(name, address, postal, city, phone, email, KVK, IBAN, BIC, bank);
                 }
             }

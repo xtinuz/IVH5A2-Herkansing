@@ -33,7 +33,7 @@ public class CompanyInfoPanel extends JPanel {
     }
     
     public JPanel createCenterPanel() {
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel();                                                                                                                                                                                             
         
         panel.setLayout(new GridLayout(11,4,5,5));
         panel.setBorder(new EmptyBorder(150,150,150,150));

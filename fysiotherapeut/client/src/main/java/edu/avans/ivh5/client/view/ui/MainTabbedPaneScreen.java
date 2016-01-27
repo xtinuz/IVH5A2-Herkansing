@@ -42,11 +42,11 @@ public class MainTabbedPaneScreen extends JFrame {
         JPanel EmployeePanel = new EmployeePanel(this, new TherapistController(manager));
         JPanel CompanyInfoPanel = new CompanyInfoPanel(new PhysioPracticeController(manager));
         
+        panes.add("Agenda", SchedulePanel);
         panes.add("Behandelingen", TreatmentsPanel);
         panes.add("Overzichten", OverviewPanel);
         panes.add("Fysiotherapeuten", EmployeePanel);
         panes.add("Praktijkgegevens", CompanyInfoPanel);
-        panes.add("Agenda", SchedulePanel);
         
         add(panes);
     }

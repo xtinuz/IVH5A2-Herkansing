@@ -78,11 +78,11 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         this.practice.setBIC(parentScreen.getBICField());
         this.practice.setBank(parentScreen.getBankField());
 
-        
+
         try {
-            System.out.println("Test1");
-            manager.saveCompanyInfo(this.practice);
-            System.out.println("Test2");
+            manager.saveCompanyInfo(practice);
+            System.out.println("Company info saved");
+
         } catch (RemoteException ex) {
             System.out.println("saveCompanyInfo can not be called at the server");
         }
@@ -112,7 +112,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+
     public boolean save(){
         
         

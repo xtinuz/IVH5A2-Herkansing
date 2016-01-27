@@ -55,7 +55,7 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
             int i = 0;
         for(Employee e : employees){
             System.out.println(e.getFirstname()+ " " + e.getLastname());
-            scheduleScreen.addToCombobox("Hurensun" + i);
+            //scheduleScreen.addToCombobox("Hurensun" + i);
             //scheduleScreen.addToCombobox(e.getFirstname()+ " " + e.getLastname());
             i++;
         }
