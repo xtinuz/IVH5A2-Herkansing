@@ -9,6 +9,7 @@ package edu.avans.ivh5.client.view.ui;
 import edu.avans.ivh5.client.control.TreatmentController;
 import java.util.ArrayList;
 import edu.avans.ivh5.client.control.ScheduleController;
+import edu.avans.ivh5.shared.model.domain.Employee;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParseException;
@@ -20,6 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author ferdinand
@@ -38,12 +41,14 @@ public class SchedulePanel extends javax.swing.JPanel {
         this.controller = controller;
         System.out.println("setting ui reference");
         controller.setUIRef(this);
+        
 
         jButton1.setActionCommand("refresh table");
         jButton1.addActionListener(controller);
-
+        jComboBox1.setModel(new DefaultComboBoxModel());
+        for (Object item : controller.getEmployees())
+        jComboBox1.addItem(item);
     }
-
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -103,8 +108,6 @@ public class SchedulePanel extends javax.swing.JPanel {
 
         jLabel2.setText("Fysiotherapeut");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
@@ -118,11 +121,8 @@ public class SchedulePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
@@ -135,8 +135,11 @@ public class SchedulePanel extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(31, 31, 31)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,9 +154,9 @@ public class SchedulePanel extends javax.swing.JPanel {
                     .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(239, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -186,16 +189,21 @@ public class SchedulePanel extends javax.swing.JPanel {
         
     }
     
-        public void fillJComboBox(ArrayList<String> names){
-        
-            for(String name: names)
-                //System.out.println(name);
-                this.jComboBox1.addItem(name);
-    }
-
-
-         public void addToCombobox(String name){
-            System.out.println("addToCombobox: " + name);
-            this.jComboBox1.addItem(name);
-     }
+//        public void fillJComboBox(ArrayList<String> names){
+//        
+//            for(String name: names)
+//                //System.out.println(name);
+//                this.jComboBox1.addItem(name);
+//    }
+//
+//
+//         public void addToCombobox(ArrayList<Employee> employees){
+//        employees = controller.getEmployees();
+//        System.out.println("got employees in panel");
+//            for(Employee e: employees)
+//                
+//                jComboBox1.addItem(e);
+//                System.out.println("looped employees");
+//        
+//     }
 }

@@ -45,21 +45,8 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
         this.manager = manager;
 
         //getTableData();
-        initScheduleJComboBox();
     }
     
-    public void initScheduleJComboBox(){
-        ArrayList<Employee> employees = getEmployees();
-        //scheduleScreen.fillJComboBox(employees);
-            System.out.println("LAMAARAAA POR VIDA PUTA ");
-            int i = 0;
-        for(Employee e : employees){
-            System.out.println(e.getFirstname()+ " " + e.getLastname());
-            //scheduleScreen.addToCombobox("Hurensun" + i);
-            //scheduleScreen.addToCombobox(e.getFirstname()+ " " + e.getLastname());
-            i++;
-        }
-    }
     
     public void setUIRef(AddTreatmentScreen parentScreen) {
         this.parentScreen = parentScreen;
@@ -219,32 +206,4 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    
-    
-    
-        public ArrayList<Employee> getEmployees(){
-            System.out.println("test try in addEmployeestocombobox");
-            ArrayList employees = new ArrayList();
-        try{
-            //String therapistName = null;
-            ArrayList<Employee> therapists = manager.getTherapists();
-            System.out.println("testing array" + therapists);
-            for (Employee e: therapists){
-                String therapistName = null;
-                therapistName = e.getFirstname() + " " + e.getLastname();
-                //System.out.println("testing name " + therapistName );
-                //names.add(e.getFirstname() + " " + e.getLastname());
-                employees.add(e);
-            }
-            System.out.println("filled array");
-            //scheduleScreen.fillJComboBox(names);
-            
-        } 
-        catch(RemoteException ex){
-            System.out.println("RemoteException at getEmployees");
-            System.out.println(ex.getMessage());
-        }
-        
-        return employees;
-        }
 }
