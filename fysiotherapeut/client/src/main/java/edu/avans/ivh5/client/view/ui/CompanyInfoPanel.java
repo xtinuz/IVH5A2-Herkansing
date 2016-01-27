@@ -30,6 +30,8 @@ public class CompanyInfoPanel extends JPanel {
         add(createCenterPanel(), BorderLayout.CENTER);
         System.out.println("setting ui reference CompanyInfoPanel");
         controller.setUIRef(this);
+        controller.getPhysioPractice();
+        controller.setInputFields();
     }
     
     public JPanel createCenterPanel() {
@@ -48,7 +50,7 @@ public class CompanyInfoPanel extends JPanel {
         // end of row 1
         
         // row 2
-        panel.add(new JLabel("Name praktijk:"));
+        panel.add(new JLabel("Naam praktijk:"));
         
         nameField = new JTextField();
         panel.add(nameField);
@@ -138,7 +140,7 @@ public class CompanyInfoPanel extends JPanel {
         // end of row 10
         
         // row 11
-        panel.add(new JLabel("Name bank:"));
+        panel.add(new JLabel("Bank:"));
         
         bankField = new JTextField();
         panel.add(bankField);

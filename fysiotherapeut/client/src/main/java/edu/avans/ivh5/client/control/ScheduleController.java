@@ -46,16 +46,14 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     
     public ScheduleController(PhysioManagerClientIF manager){
         this.manager = manager;
-
-    }
+         getEmployees();
+}
     
     public void setUIRef(SchedulePanel parentScreen) {
         this.parentScreen = parentScreen;
         System.out.println("SetUIRef AddTreatmentScreen");
     }
-        
-
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -175,6 +173,24 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         }
     
     }
+    
+    public ArrayList<Employee> getEmployees(){
+            ArrayList employees = new ArrayList();
+        try{
+            ArrayList<Employee> therapists = manager.getTherapists();
+            for (Employee e: therapists){
+                String therapistName = null;
+                therapistName = e.getFirstname() + " " + e.getLastname();
+                employees.add(therapistName);
+            }            
+        } 
+        catch(RemoteException ex){
+            System.out.println("RemoteException at getEmployees");
+            System.out.println(ex.getMessage());
+        }
+        return employees;
+        }
+
     
     public void setTableData(){
         
