@@ -29,12 +29,22 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
     public PhysioPracticeController(PhysioManagerClientIF manager) {
         this.manager = manager;
     // Deze moet nog opgehaald worden uit de XML
-        this.practice = new PhysioPractice();
+        practice = new PhysioPractice();
         //setInputFields();
     }
 
     public void setUIRef(CompanyInfoPanel screen) {
         parentScreen = screen;
+    }
+    
+    public PhysioPractice getPhysioPractice() {
+        try {
+            practice = manager.getCompanyInfo();
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException at AddEmployees()");
+            System.out.println(ex.getMessage());
+        }
+        return practice;
     }
     
     

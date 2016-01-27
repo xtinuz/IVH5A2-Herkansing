@@ -103,29 +103,34 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
         System.out.println("XMLDOAPysioPracticeDAO is getting the obj:PhysioPractice");
         if (document != null) {
             System.out.println("XMLDOAPysioPracticeDAO has found the document");
-            NodeList list = document.getElementsByTagName("physiopractice"); // hier de naam van hetgene wat je zoekt
+            /*NodeList list = document.getElementsByTagName("physiopractice"); // hier de naam van hetgene wat je zoekt
             
             for (int i = 0; i < list.getLength(); i++) {
                 System.out.println("XMLDOAPysioPracticeDAO is executing FOR loop");
                 Node node = list.item(i);
                 if (node instanceof Element) {
                     System.out.println("XMLDOAPysioPracticeDAO is executing IF statement");
-                    Element child = (Element) node;
-                  
-                    String name = child.getElementsByTagName("naam").item(0).getTextContent();
+                    Element child = (Element) node;*/
+                    
+                    Node practice = document.getElementsByTagName("physiopractice").item(0);
+                    Element child = (Element) practice;
+                    
+                    System.out.println("test");
+                    
+                    String name = child.getElementsByTagName("name").item(0).getTextContent();
                     String address = child.getElementsByTagName("address").item(0).getTextContent();
                     String postal = child.getElementsByTagName("postal").item(0).getTextContent();
                     String city = child.getElementsByTagName("city").item(0).getTextContent();
                     String phone = child.getElementsByTagName("phone").item(0).getTextContent();
                     String email = child.getElementsByTagName("email").item(0).getTextContent();
-                    String KVK = child.getElementsByTagName("KVK").item(0).getTextContent();
-                    String IBAN = child.getElementsByTagName("IBAN").item(0).getTextContent();
-                    String BIC = child.getElementsByTagName("BIC").item(0).getTextContent();
+                    String KVK = child.getElementsByTagName("kvk").item(0).getTextContent();
+                    String IBAN = child.getElementsByTagName("iban").item(0).getTextContent();
+                    String BIC = child.getElementsByTagName("bic").item(0).getTextContent();
                     String bank = child.getElementsByTagName("bank").item(0).getTextContent();
                     System.out.println("XMLDOAPysioPracticeDAO has updated the variables");                    
                     return new PhysioPractice(name, address, postal, city, phone, email, KVK, IBAN, BIC, bank);
-                }
-            }
+                //}
+            //}
         } else {
             System.out.println("XMLDOMUserDAO could not get the PhysioPractice due to a missing document");
         }
