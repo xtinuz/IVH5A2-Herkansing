@@ -185,6 +185,13 @@ public class SchedulePanel extends javax.swing.JPanel {
         return stringDate;
         
     }
+/*    
+    public String getTherapistFromComboBox(){
+        String therapist = (String) therapistComboBox.getSelectedItem();
+        return therapist;
+    }
+*/    
+    
     
 //        public void fillJComboBox(ArrayList<String> names){
 //        

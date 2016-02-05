@@ -63,13 +63,31 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
    
     @Override
     public void actionPerformed(ActionEvent e) {
+        testString();
         System.out.println("Validating company info ...");
         if (validatePractice()== true){
             System.out.println("Saving company info ...");
             saveInputFields();
-            JOptionPane.showMessageDialog(parentScreen, "Save succesful");         
+            JOptionPane.showMessageDialog(parentScreen, "Succesvol opgeslagen!");         
         };      
     }
+    
+    //TEST
+    public void testString(){
+      System.out.println("\nTESTING STRINGS");
+      String testName = "Gert-Jan van de Achternaam";
+      String output = "";
+      String[] parts = testName.split("\\s+");      //Splitting into array based on whitespace
+      int arrayCount = parts.length - 1;            //-1 because the array starts counting at [0]
+      
+      for (int n=1; n<arrayCount; n++){             //Combines everything BUT the fist and last element into a string
+          output = output + parts[n] + " ";
+      }
+      output = output + parts[arrayCount];          //Adds last element to the string (avoids space at the end of the string)
+      System.out.println(output);  
+      System.out.println("\n");
+    }
+
 
     /**
      * Saves all fields from the GUI
@@ -105,7 +123,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         Boolean result = null;
         
         
-        String errorMsg = "De volgende invoer is onjuist: ";
+        String errorMsg = "De volgende invoer is onjuist: \n";
         
         /*String errorMsg = "";
         String addressMsg = "";
@@ -118,7 +136,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         String bicMsg = "";
         String bankMsg = "";*/
               
-        String addressRegex ="[a-zA-Z]{0,25}\\s\\d{1,5}";
+        String addressRegex ="[a-zA-Z]{0,25}\\s\\d{1,5}+[a-zA-Z]{0,1}";
         String postalRegex ="[0-9]{4}+[A-Z]{2}";
         String cityRegex="[a-zA-Z]+[[ '-]?[a-zA-Z]+]*";
         String phoneRegex="\\d{10}";
@@ -133,7 +151,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         count++;
         } else {
         //postalMsg = "adress ";
-        errorMsg = errorMsg + "straatnaam & huisnummer ";
+        errorMsg = errorMsg + "- Straatnaam & huisnummer \n";
         }       
         
         //Validating postalcode
@@ -141,7 +159,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         count++;
         } else {
         //postalMsg = "postcode ";
-        errorMsg = errorMsg + "postcode ";
+        errorMsg = errorMsg + "- Postcode \n";
         }
         
         //Validating city
@@ -149,55 +167,54 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         count++;
         } else {    
         //cityMsg = "plaats ";  
-        errorMsg = errorMsg + "plaats ";
+        errorMsg = errorMsg + "- Plaats \n";
         }
         
         //Validating phonenumber
         if (parentScreen.getPhoneField().matches(phoneRegex)) { 
         count++;
         } else {
-        errorMsg = errorMsg + "telefoonnummer ";
+        errorMsg = errorMsg + "- Telefoonnummer \n";
         }
         
         //Validating email
         if (parentScreen.getMailField().matches(emailRegex)) { 
         count++;
         } else {
-        errorMsg = errorMsg + "email ";
+        errorMsg = errorMsg + "- Email \n";
         }
         
         //Validating kvk
         if (parentScreen.getKVKField().matches(kvkRegex)) { 
         count++;
         } else {
-        errorMsg = errorMsg + "KVK-nummer ";
+        errorMsg = errorMsg + "- KVK-nummer \n";
         }
 
         //Validating iban
         if (parentScreen.getIbanField().matches(ibanRegex)) { 
         count++;
         } else {
-        errorMsg = errorMsg + "IBAN";
+        errorMsg = errorMsg + "- IBAN \n";
         }
                
         //Validating bic
         if (parentScreen.getBICField().matches(bicRegex)) { 
         count++;
         } else {
-        errorMsg = errorMsg + "BIC";
+        errorMsg = errorMsg + "- BIC \n";
         }
         
         //Validating bank
         if (parentScreen.getBankField().matches(bankRegex)) { 
         count++;
         } else {
-        errorMsg = errorMsg + "bank ";
+        errorMsg = errorMsg + "- Bank \n";
         }
         
         if (count==9){
             result=true;
         } else {
-            //errorMsg="De volgende invoer is onjuist: " + addressMsg + postalMsg + cityMsg + phoneMsg + mailMsg + kvkMsg + ibanMsg + bicMsg + bankMsg;
             JOptionPane.showMessageDialog(parentScreen, errorMsg);
             result=false;     
         }
