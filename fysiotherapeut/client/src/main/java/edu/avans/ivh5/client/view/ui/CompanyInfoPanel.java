@@ -60,7 +60,7 @@ public class CompanyInfoPanel extends JPanel {
         // end of row 2
         
         // row 3
-        panel.add(new JLabel("Straatname + huisnummer:"));
+        panel.add(new JLabel("Straatname & huisnummer:"));
         
         addressField = new JTextField();
         panel.add(addressField);
@@ -100,7 +100,7 @@ public class CompanyInfoPanel extends JPanel {
         // end of row 6
         
         // row 7
-        panel.add(new JLabel("Email"));
+        panel.add(new JLabel("Email adres"));
         
         mailField = new JTextField();
         panel.add(mailField);
