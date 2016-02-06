@@ -63,7 +63,6 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
    
     @Override
     public void actionPerformed(ActionEvent e) {
-        testString();
         System.out.println("Validating company info ...");
         if (validatePractice()== true){
             System.out.println("Saving company info ...");
@@ -72,21 +71,7 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
         };      
     }
     
-    //TEST
-    public void testString(){
-      System.out.println("\nTESTING STRINGS");
-      String testName = "Gert-Jan van de Achternaam";
-      String output = "";
-      String[] parts = testName.split("\\s+");      //Splitting into array based on whitespace
-      int arrayCount = parts.length - 1;            //-1 because the array starts counting at [0]
-      
-      for (int n=1; n<arrayCount; n++){             //Combines everything BUT the fist and last element into a string
-          output = output + parts[n] + " ";
-      }
-      output = output + parts[arrayCount];          //Adds last element to the string (avoids space at the end of the string)
-      System.out.println(output);  
-      System.out.println("\n");
-    }
+
 
 
     /**

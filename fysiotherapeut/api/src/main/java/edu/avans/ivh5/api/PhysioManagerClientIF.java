@@ -70,5 +70,5 @@ public interface PhysioManagerClientIF extends Remote {
 
     public ArrayList<Employee> getTherapists() throws RemoteException;
 
-    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException;
+   // public ArrayList<Session> getsessionsByDate(Date date1, Date date2, String employee) throws RemoteException;
 }
