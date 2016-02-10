@@ -211,13 +211,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
    
     }
     
-    /*
-    public ArrayList<Session> getsessionsByDate(Date date1, Date date2, String employee) throws RemoteException{
+    @Override
+    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException{
         ArrayList dates = new ArrayList();
         System.out.println("manager getsessionsbyDate");
         return dates;  
     }
-    */
+    
     
     @Override
     public ArrayList<Employee> getTherapists() throws RemoteException {
