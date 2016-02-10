@@ -6,7 +6,9 @@
 package edu.avans.ivh5.server.model.dao.api;
 
 import edu.avans.ivh5.shared.model.domain.Treatment;
+import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,4 +22,5 @@ public interface TreatmentDAOIF {
     
     public boolean deleteTreatmentByTreatmentID(int treatment) throws RemoteException;
     
+    public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException; 
 }

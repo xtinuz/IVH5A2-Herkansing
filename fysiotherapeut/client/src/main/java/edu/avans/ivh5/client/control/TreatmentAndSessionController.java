@@ -7,7 +7,7 @@ package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
-import edu.avans.ivh5.client.view.ui.AddTreatmentScreen2;
+import edu.avans.ivh5.client.view.ui.AddSessionScreen;
 import edu.avans.ivh5.client.view.ui.EmployeePanel;
 import edu.avans.ivh5.client.view.ui.LoginScreen;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
@@ -16,6 +16,7 @@ import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.client.view.ui.TreatmentPanel;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Treatment;
+import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,15 +36,17 @@ import javax.swing.JTextField;
 // *
  * @author bernd_000
  */
-public class TreatmentController implements ActionListener, KeyListener, MouseListener {
+public class TreatmentAndSessionController implements ActionListener, KeyListener, MouseListener {
     private AddTreatmentScreen parentScreen;
     private TreatmentPanel parentPanel;
     private PhysioManagerClientIF manager;
     private SchedulePanel scheduleScreen;
     private ArrayList<Employee> employees;
+    private AddSessionScreen sessionScreen;
     
-    public TreatmentController(PhysioManagerClientIF manager){
+    public TreatmentAndSessionController(PhysioManagerClientIF manager){
         this.manager = manager;
+        //getEmployees();
 
         //getTableData();
     }
@@ -58,6 +61,11 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
         this.parentPanel = parentScreen;
         System.out.println("SetUIRef TreatmentPanel");
     }
+    
+    public void setUIRef(AddSessionScreen sessionScreen) {
+        this.sessionScreen = sessionScreen;
+        System.out.println("SetUIRef sessionScreen");
+    }
 
     public void setUIRef(SchedulePanel scheduleScreen) {
         this.scheduleScreen = scheduleScreen;
@@ -70,25 +78,22 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
         switch (e.getActionCommand()) {
             case "newTreatment":
                 System.out.println("actioncommand newTreatment");
-                
-                new AddTreatmentScreen(this, "newTreatment");
-                AddTreatmentScreen2 screen = new AddTreatmentScreen2(this);
+                AddSessionScreen screen = new AddSessionScreen(this);
                 screen.setVisible(true);
                 break;
             case "alterTreatment":
                 System.out.println("actioncommand alterTreatment");
-                
                 Treatment tempTreatment = null;
                 try {
                     tempTreatment = manager.getTreatmentByID(parentPanel.getTreatmentID());
                 } catch (RemoteException ex) {
-                    Logger.getLogger(TreatmentController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 Employee therapist = null;
                 try {
                     therapist = manager.getTherapistByTherapistID(Integer.parseInt(tempTreatment.getPhysioTherapistID()));
                 } catch (RemoteException ex) {
-                    Logger.getLogger(TreatmentController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 try {
@@ -116,7 +121,7 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
                 try {
                     manager.deleteTreatmentByTreatmentID(parentPanel.getTreatmentID());
                 } catch (RemoteException ex) {
-                    Logger.getLogger(TreatmentController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case "confirmSave":
@@ -208,5 +213,42 @@ public class TreatmentController implements ActionListener, KeyListener, MouseLi
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+    
+    
+    public ArrayList<Employee> getEmployees(){
+            ArrayList employees = new ArrayList();
+        try{
+            ArrayList<Employee> therapists = manager.getTherapists();
+            for (Employee e: therapists){
+                String therapistName = null;
+                therapistName = e.getFirstname() + " " + e.getLastname();
+                employees.add(therapistName);
+            }            
+        } 
+        catch(RemoteException ex){
+            System.out.println("RemoteException at getEmployees");
+            System.out.println(ex.getMessage());
+        }
+        return employees;
+        }
+    
+    public ArrayList<TreatmentType> getTreatmentTypes(){
+            ArrayList treatments = new ArrayList();
+        try{
+            System.out.println("Fsfljd");
+            ArrayList<TreatmentType> treatment = manager.getTreatmentTypes();
+            System.out.println("after loop");
+            for (TreatmentType t: treatment){
+                String treatmentCode = null;
+                treatmentCode = t.getTreatmentCode() + " " + t.getTreatmentName();
+                treatments.add(treatmentCode);   
+            }
+        }
+        catch(RemoteException ex){
+                System.out.println("RemoteException at getTreatments");
+                        System.out.println(ex.getMessage());
+            }
+        return treatments;
     }
 }

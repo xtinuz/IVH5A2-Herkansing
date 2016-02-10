@@ -42,11 +42,11 @@
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="therapeutLabel" pref="100" max="32767" attributes="0"/>
-                      <Component id="therapeutComboBox" max="32767" attributes="0"/>
+                      <Component id="therapistComboBox" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="klantComboBox" pref="100" max="32767" attributes="0"/>
+                      <Component id="clientComboBox" pref="100" max="32767" attributes="0"/>
                       <Component id="klantLabel" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -79,9 +79,9 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="bsnLabel" max="32767" attributes="0"/>
                                               <Component id="lastnameLabel2" max="32767" attributes="0"/>
@@ -98,18 +98,21 @@
                                               <Component id="mailTextField2" pref="100" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="treatmentcodeComboBox" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="treatmentcodeComboBox" min="-2" pref="277" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="sessionLabel" min="-2" pref="90" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                                  <EmptySpace pref="61" max="32767" attributes="0"/>
                                   <Component id="jButton2" min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -141,8 +144,8 @@
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="therapeutComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="klantComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="therapistComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="clientComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -213,7 +216,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JComboBox" name="therapeutComboBox">
+        <Component class="javax.swing.JComboBox" name="therapistComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -223,9 +226,10 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="klantComboBox">
+        <Component class="javax.swing.JComboBox" name="clientComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -235,6 +239,7 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="idLabel">
@@ -332,6 +337,7 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

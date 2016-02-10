@@ -6,7 +6,7 @@
 package edu.avans.ivh5.client.view.ui;
 
 
-import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
 import java.util.ArrayList;
 import edu.avans.ivh5.client.control.ScheduleController;
 import edu.avans.ivh5.shared.model.domain.Employee;

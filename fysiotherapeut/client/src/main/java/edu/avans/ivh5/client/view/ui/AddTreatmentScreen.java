@@ -6,7 +6,7 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TherapistController;
-import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.awt.Color;
@@ -32,12 +32,12 @@ public class AddTreatmentScreen extends JFrame {
     private JTextField IDField, treatmentCodeField, BSNField, EmployeeField;
     private JButton addTreatmentButton, cancelButton;
     private final ArrayList<JTextField> textFields;
-    private final TreatmentController controller;
+    private final TreatmentAndSessionController controller;
     private final String button;
     private JTable fysioTable;
     private DefaultTableModel dtm;
 
-    public AddTreatmentScreen(TreatmentController controller, String buttonAction) {
+    public AddTreatmentScreen(TreatmentAndSessionController controller, String buttonAction) {
         button = buttonAction;
         this.controller = controller;
         //controller.setUIRef(this);
@@ -46,7 +46,7 @@ public class AddTreatmentScreen extends JFrame {
         init();
     }
 
-    public AddTreatmentScreen(TreatmentController controller, String buttonAction, Employee therapist, Treatment treatment) {
+    public AddTreatmentScreen(TreatmentAndSessionController controller, String buttonAction, Employee therapist, Treatment treatment) {
         this.controller = controller;
         //controller.setUIRef(this);
 

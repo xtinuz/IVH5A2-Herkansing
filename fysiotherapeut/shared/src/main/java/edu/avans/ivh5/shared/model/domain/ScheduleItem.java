@@ -5,11 +5,12 @@
  */
 package edu.avans.ivh5.shared.model.domain;
 
+import java.io.Serializable;
 /**
  *
  * @author ferdinand
  */
-public class ScheduleItem {
+public class ScheduleItem implements Serializable{
     private String startTime;
     private String endTime;
     private  Employee physio;

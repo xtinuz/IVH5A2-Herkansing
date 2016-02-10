@@ -18,6 +18,7 @@ import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
+import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -220,4 +221,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
        System.out.println(employeeDAO.getEmployees());
         return employeeDAO.getEmployees();  
     }   
+    
+        
+    @Override
+    public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException {
+        System.out.println("getting treatmenttypes in managerimp");
+        TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
+        System.out.println("got the dao in managerimp");
+        return dao.getTreatmentTypes();
+    }
 }

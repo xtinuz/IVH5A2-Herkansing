@@ -6,12 +6,12 @@
 package edu.avans.ivh5.shared.model.domain;
 
 import java.util.ArrayList;
-
+import java.io.Serializable;
 /**
  *
  * @author ferdinand
  */
-public class Schedule {
+public class Schedule implements Serializable {
     private Employee physiotherapist;
     private ArrayList<Schedule> scheduleItem;
     
