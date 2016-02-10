@@ -9,6 +9,7 @@ import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
+import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
@@ -200,19 +201,23 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     @Override
     public void getScheduleTableData() throws RemoteException{
-        
+        //TreatmentAndSessionDaoIF dao = daoFactory.getTreatmentAndSessionDAO();
+        TreatmentDAOIF treatmentDao = daoFactory.getTreatmentDAO();
+        SessionDAOIF sessionDao = daoFactory.getSessionDAO();
+        System.out.println("manager getScheduleTableData");
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
         Schedule schedule = new Schedule( scheduleItems );
         
    
     }
     
-    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException{
+    /*
+    public ArrayList<Session> getsessionsByDate(Date date1, Date date2, String employee) throws RemoteException{
         ArrayList dates = new ArrayList();
         System.out.println("manager getsessionsbyDate");
-        return dates;
-        
+        return dates;  
     }
+    */
     
     @Override
     public ArrayList<Employee> getTherapists() throws RemoteException {
