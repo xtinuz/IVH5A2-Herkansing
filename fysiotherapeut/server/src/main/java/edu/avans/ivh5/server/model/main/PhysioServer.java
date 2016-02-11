@@ -17,10 +17,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import org.apache.log4j.PropertyConfigurator;
 
-/**
- *
- * @author bernd_000
- */
+
 public class PhysioServer {
     
     static private PhysioManagerClientIF stub;

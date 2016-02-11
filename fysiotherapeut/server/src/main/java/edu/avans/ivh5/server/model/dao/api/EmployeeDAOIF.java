@@ -8,10 +8,7 @@ package edu.avans.ivh5.server.model.dao.api;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import java.util.ArrayList;
 
-/**
- *
- * @author bernd_000
- */
+
 public interface EmployeeDAOIF {
     
     public boolean saveEmployee(Employee employee);

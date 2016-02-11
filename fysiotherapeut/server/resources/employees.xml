@@ -3,33 +3,15 @@
 	<employee>
 		<id>1</id>
 		<firstname>feree</firstname>
-		<lastname>van disseldorp</lastname>
+		<lastname>test</lastname>
 		<phoneNr>0606060606</phoneNr>
 		<email>fersemail@email.com</email>
 	</employee>
 
-	<employee>
-		<id>2</id>
-		<firstname>Martijn</firstname>
-		<lastname>Raaijmakers</lastname>
-		<phoneNr>06111112</phoneNr>
-		<email>rjmaij@avans.nl</email>
-	</employee>
 	
-	<employee>
-		<id>3</id>
-		<lastname>Rijvers</lastname>
-		<phoneNr>0610101010</phoneNr>
-		<firstname>Michel</firstname>
-		<email>mrijvers@avans.nl</email>
-	</employee>
 	
-	<employee>
-		<id>4</id>
-		<firstname>John</firstname>
-		<lastname>Op 't Hof</lastname>
-		<phoneNr>06kanker</phoneNr>
-		<email>jhof@avans.nl</email>
-	</employee>
 	
-</employees>
+	
+	
+	
+<employee><id>5</id><firstname>Therapeutje</firstname><lastname>qwerty</lastname><phoneNr>0612345678</phoneNr><email>Peut@je.com</email></employee></employees>

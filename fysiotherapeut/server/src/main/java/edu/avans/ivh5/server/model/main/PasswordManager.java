@@ -8,10 +8,7 @@ package edu.avans.ivh5.server.model.main;
 import java.security.MessageDigest;
 import java.util.stream.Stream;
 
-/**
- *
- * @author bernd_000
- */
+
 public class PasswordManager {
     public String saltPassword(char[] password, byte[] salt){ 
          //Typecast char arrays to string before concatenating 

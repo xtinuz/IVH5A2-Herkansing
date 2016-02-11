@@ -7,10 +7,7 @@ package edu.avans.ivh5.server.model.dao.api;
 
 import edu.avans.ivh5.shared.model.domain.PhysioPractice;
 
-/**
- *
- * @author Sjonn
- */
+
 public interface PhysioPracticeDAOIF {
     public boolean savePhysioPractice(PhysioPractice physiopractice);   
     public PhysioPractice getCompanyInfo();

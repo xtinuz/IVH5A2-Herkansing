@@ -14,10 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author bernd_000
- */
+
 public class CompanyInfoPanel extends JPanel {
     
     private JButton saveButton;

@@ -10,6 +10,7 @@ import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
@@ -25,10 +26,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author bernd_000
- */
+
 public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     private final DAOFactory daoFactory;
@@ -199,11 +197,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     }
 
     @Override
-    public void getScheduleTableData() throws RemoteException{
-        //TreatmentAndSessionDaoIF dao = daoFactory.getTreatmentAndSessionDAO();
-        TreatmentDAOIF treatmentDao = daoFactory.getTreatmentDAO();
-        SessionDAOIF sessionDao = daoFactory.getSessionDAO();
+    public void getScheduleTableData(ArrayList dates, String lastname) throws RemoteException{
         System.out.println("manager getScheduleTableData");
+        System.out.println("dates in manager = " + dates);
+        System.out.println("lastname in manager = " + lastname);
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        dao.getSceduleTableData(dates, lastname);
+        
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
         Schedule schedule = new Schedule( scheduleItems );
         

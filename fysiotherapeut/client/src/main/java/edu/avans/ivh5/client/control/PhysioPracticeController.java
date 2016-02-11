@@ -15,10 +15,7 @@ import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Sjonn
- */
+
 public class PhysioPracticeController implements ActionListener, KeyListener {
     private final PhysioManagerClientIF manager;
     private CompanyInfoPanel parentScreen;

@@ -22,10 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author bernd_000
- */
+
 public class AddTreatmentScreen extends JFrame {
 
     private JLabel ID, treatmentCode, BSN, Employee;

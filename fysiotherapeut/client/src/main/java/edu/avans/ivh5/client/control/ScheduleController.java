@@ -6,16 +6,9 @@
 package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
-import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
-import edu.avans.ivh5.client.view.ui.EmployeePanel;
-import edu.avans.ivh5.client.view.ui.LoginScreen;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
-import edu.avans.ivh5.shared.model.domain.PhysioPractice;
 import edu.avans.ivh5.shared.model.domain.Session;
-import edu.avans.ivh5.client.view.ui.TreatmentPanel;
 import edu.avans.ivh5.shared.model.domain.Employee;
-import edu.avans.ivh5.shared.model.domain.Treatment;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -24,22 +17,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
-import java.text.FieldPosition;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextField;
 
-/**
- *
- * @author bernd_000
- */
+
 public class ScheduleController implements ActionListener, KeyListener, MouseListener {
     private SchedulePanel parentScreen;
     private PhysioManagerClientIF manager;
@@ -60,11 +46,10 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         switch (e.getActionCommand()) {
             case "refresh table":
             try {
-                getLastNameFromCBox(); //Temporary until the rest is fully implemented
-                setTableData();
+                String lastname = getLastNameFromCBox(); //Temporary until the rest is fully implemented
                 Date date = parentScreen.getDate();
-                getTableDates(date);
                 parentScreen.setTableHeaderDates( date );
+                getSessionsForSchedule(date, lastname);
                 
             } catch (Exception ex) {
                 Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,15 +98,20 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public ArrayList getScheduleTableDates2(Date dateFromPanel){
+        ArrayList dates = new ArrayList();
+        
+        return dates;
+    }
     
-    public ArrayList getTableDates(Date dateFromPanel) throws ParseException{
+    
+    public ArrayList<String> getScheduleDates(Date dateFromPanel) throws ParseException{
         Date date1 = null;
         Date date2 = null;
         ArrayList tableDates = new ArrayList();
         try {
             Calendar c = Calendar.getInstance();
             c.setTime(dateFromPanel);
-            System.out.println("calendar c = " + c);
             int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
             System.out.println("day of week is " + dayOfWeek);
             
@@ -176,23 +166,20 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             }
             System.out.println("date1 = " + date1 + " date2 " + date2);
             
-            Calendar c1 = Calendar.getInstance();
-            c1.setTime(date1);
-            Date firstDate = c1.getTime();
-            System.out.println("first date = " + firstDate);
-            Calendar c2 = Calendar.getInstance();
-            c2.setTime(date2);
-            c2.add(Calendar.DATE, 1);
-            Date lastDatePlusOne = c2.getTime();
-            System.out.println("last date = " + lastDatePlusOne);
+            c.setTime(date1);
+            Date firstDate = c.getTime();
+            c.setTime(date2);
+            c.add(Calendar.DATE, 1);
+            Date lastDatePlusOne = c.getTime();
             Calendar loopCalendar = Calendar.getInstance();
             loopCalendar.setTime(firstDate);
+            DateFormat dtf = new SimpleDateFormat("dd-MM-yyyy") {};
             
             for (Date i = firstDate; i.before(lastDatePlusOne);){
-            System.out.println("testing loop " + i);
-            c2.setTime(i);
-            int dateForArray = c2.get(Calendar.DATE);
-            tableDates.add(dateForArray);
+            c.setTime(i); 
+            String strDate = dtf.format( c.getTime() );
+            System.out.println("strdate" + strDate);
+            tableDates.add(strDate);
             loopCalendar.add(Calendar.DATE, 1);
             i = loopCalendar.getTime();
             
@@ -209,14 +196,12 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
        
     }
     
-    public ArrayList<Session> getSessionsForSchedule(Date date, String therapistName){
+    public ArrayList<Session> getSessionsForSchedule(Date date, String lastname){
         ArrayList<Session> sessions = null;
-        String therapist = parentScreen.getTherapistFromComboBox();
-        try{
-        getTableDates(date); // should return the 7 dates to be used.
-        getEmployees(); // should return the selected employee.
         
-        manager.getScheduleTableData();
+        try{
+            ArrayList dates = getScheduleDates(date); // return the 7 days of the week matching with the date input.
+            manager.getScheduleTableData(dates, lastname);
         }
         catch (Exception ex){
             System.out.println(ex.getMessage());
@@ -242,7 +227,7 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         return employees;
         }
 
-    public void getLastNameFromCBox(){
+    public String getLastNameFromCBox(){
       System.out.println("\nTESTING STRINGS");
       String fullName = parentScreen.getTherapistFromComboBox();
       String lastName = "";
@@ -255,10 +240,12 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
       lastName = lastName + parts[arrayCount];          //Adds last element to the string (avoids space at the end of the string)
       System.out.println(lastName);  
       System.out.println("\n");
+      return lastName;
     }
     
+    
     public void setTableData() {
-        
+
     }
     
 }

@@ -5,21 +5,28 @@
  */
 package edu.avans.ivh5.shared.model.domain;
 
-/**
- *
- * @author ferdinand
- */
+
 public class ScheduleItem {
+    private String date;
     private String startTime;
     private String endTime;
     private  Employee physio;
     private ClientDTO client;
     
-    public ScheduleItem(String startTime, String endTime, Employee physio, ClientDTO client){
+    public ScheduleItem(String date, String startTime, String endTime, String lastnamePhysio, int clientBSN){
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.physio = physio;
         this.client = client;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getStartTime() {
@@ -53,7 +60,7 @@ public class ScheduleItem {
     public void setClient(ClientDTO client) {
         this.client = client;
     }
-    
-    
+
+ 
     
 }

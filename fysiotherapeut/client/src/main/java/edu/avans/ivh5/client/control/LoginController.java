@@ -17,10 +17,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author bernd_000
- */
+
 public class LoginController implements ActionListener, KeyListener {
 
     private final PhysioManagerClientIF manager;

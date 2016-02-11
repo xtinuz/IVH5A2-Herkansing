@@ -15,10 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-/**
- *
- * @author bernd_000
- */
+
 public class MainTabbedPaneScreen extends JFrame {
     
     private final PhysioManagerClientIF manager;

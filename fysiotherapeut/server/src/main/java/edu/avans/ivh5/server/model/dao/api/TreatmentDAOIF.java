@@ -8,10 +8,7 @@ package edu.avans.ivh5.server.model.dao.api;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 
-/**
- *
- * @author bernd_000
- */
+
 public interface TreatmentDAOIF {
 
     public void getSceduleTableData();

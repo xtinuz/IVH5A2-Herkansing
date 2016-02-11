@@ -5,10 +5,7 @@
  */
 package edu.avans.ivh5.server.model.dao.api;
 
-/**
- *
- * @author bernd_000
- */
+
 public interface UserDAOIF {
     public boolean checkUserExistance(String username);
     

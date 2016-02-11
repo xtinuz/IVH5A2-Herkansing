@@ -22,10 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- *
- * @author bernd_000
- */
+
 public class OverviewPanel extends JPanel {
 
     private JButton logoutButton, planningButton, cumulatiefButton, financeButton, printButton,
