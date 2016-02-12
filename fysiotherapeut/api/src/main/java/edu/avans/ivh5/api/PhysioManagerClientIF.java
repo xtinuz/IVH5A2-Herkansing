@@ -10,6 +10,7 @@ import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.PhysioPractice;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
+import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -67,5 +68,7 @@ public interface PhysioManagerClientIF extends Remote {
 
     public ArrayList<Employee> getTherapists() throws RemoteException;
 
-   // public ArrayList<Session> getsessionsByDate(Date date1, Date date2, String employee) throws RemoteException;
+    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException;
+    
+    public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException;
 }

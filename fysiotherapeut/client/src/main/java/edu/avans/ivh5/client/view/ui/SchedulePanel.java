@@ -1,8 +1,12 @@
-
+/*//GEN-LINE:variables
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.avans.ivh5.client.view.ui;
 
 
-import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
 import java.util.ArrayList;
 import edu.avans.ivh5.client.control.ScheduleController;
 import edu.avans.ivh5.shared.model.domain.Employee;
@@ -51,7 +55,7 @@ public class SchedulePanel extends javax.swing.JPanel {
     }
    
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -162,10 +166,10 @@ public class SchedulePanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JComboBox dayComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -175,16 +179,17 @@ public class SchedulePanel extends javax.swing.JPanel {
     private javax.swing.JTable sceduleTable;
     private javax.swing.JComboBox therapistComboBox;
     private javax.swing.JComboBox yearComboBox;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
 
-    
+        
     public Date getDate(){
         Date date = null;
         try{
         String day = (String) dayComboBox.getSelectedItem();
         String month = (String) monthComboBox.getSelectedItem();
         String year = (String) yearComboBox.getSelectedItem();
+        
         String stringDate = day + month + year;
         Date formattedDate = new SimpleDateFormat("ddMMMMyyyy", Locale.US).parse(stringDate);
         date = formattedDate;

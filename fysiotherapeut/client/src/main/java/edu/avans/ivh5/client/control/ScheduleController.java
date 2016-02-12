@@ -43,6 +43,7 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "refresh table":
+        
             try {
                 String lastname = getLastNameFromCBox(); //Temporary until the rest is fully implemented
                 Date date = parentScreen.getDate();
@@ -190,10 +191,10 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             
         }
         catch (Exception ex) {
-            System.out.println("Exception at gettabledata");
+            System.out.println("RemoteException or ParseException at gettabledata");
             System.out.println(ex.getMessage());
         }
-        
+    
         System.out.println("talesDates in controller " + tableDates);
         return tableDates;
        

@@ -5,31 +5,38 @@
  */
 package edu.avans.ivh5.shared.model.domain;
 
+import java.io.Serializable;
 
-public class ScheduleItem {
+
+    
+
+/**
+ *
+ * @author ferdinand
+ */
+public class ScheduleItem implements Serializable{
     private String date;
     private String startTime;
     private String endTime;
-    private  Employee physio;
-    private ClientDTO client;
+    private String lastname;
+    private int BSN;
     
-    public ScheduleItem(String date, String startTime, String endTime, Employee physio, ClientDTO client){
+    public ScheduleItem(String date, String startTime, String endTime, String lastname, int BSN){
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.physio = physio;
-        this.client = client;
+        this.lastname = lastname;
+        this.BSN = BSN;
     }
 
-    
-    public String getDate(){
+    public String getDate() {
         return date;
     }
-    
-    public void setDate(String date){
+
+    public void setDate(String date) {
         this.date = date;
     }
-    
+
     public String getStartTime() {
         return startTime;
     }
@@ -46,22 +53,22 @@ public class ScheduleItem {
         this.endTime = endTime;
     }
 
-    public Employee getPhysio() {
-        return physio;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setPhysio(Employee physio) {
-        this.physio = physio;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public ClientDTO getClient() {
-        return client;
+    public int getBSN() {
+        return BSN;
     }
 
-    public void setClient(ClientDTO client) {
-        this.client = client;
+    public void setBSN(int BSN) {
+        this.BSN = BSN;
     }
-    
+
     
     
 }

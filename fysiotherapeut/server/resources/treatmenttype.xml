@@ -1,150 +1,178 @@
 <treatmenttypes>
-	<treatmenttype treatmentcode="1000">
+	<treatmenttype>
+		<treatmentcode>1000</treatmentcode>
 		<name>Zitting fysiotherapie</name>
-		<price>32,66</price>
+		<price>32.66</price>
 		<description></description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1001">
+		<treatmenttype>
+		<treatmentcode>1001</treatmentcode>
 		<name>Zitting fysiotherapie</name>
-		<price>44,66</price>
+		<price>44.66</price>
 		<description>Inclusief toeslag uitbehandeling</description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1002">
+	<treatmenttype>
+		<treatmentcode>1002</treatmentcode>
 		<name>Zitting fysiotherapie</name>
-		<price>38,66</price>
+		<price>38.66</price>
 		<description>Inclusief inrichtingstoeslag</description>
 	</treatmenttype>
 		
-	<treatmenttype treatmentcode="1400">
+		<treatmenttype>
+		<treatmentcode>1400</treatmentcode>
 		<name>Eenmalig fysiotherapeutisch onderzoek</name>
-		<price>53,16</price>
+		<price>53.16</price>
 		<description></description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1401">
+		<treatmenttype>
+		<treatmentcode>1401</treatmentcode>
 		<name>Eenmalig fysiotherapeutisch onderzoek</name>
-		<price>65,16</price>
+		<price>65.16</price>
 		<description>Inclusief toeslag uitbehandeling</description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1402">
+		<treatmenttype>
+		<treatmentcode>1402</treatmentcode>
 		<name>Eenmalig fysiotherapeutisch onderzoek</name>
-		<price>59,16</price>
+		<price>59.16</price>
 		<description>Inclusief inrichtingstoeslag</description>
 	</treatmenttype>
 	
-	<treatmenttype treatmentcode="1850">
+	<treatmenttype>
+		<treatmentcode>1850</treatmentcode>
 		<name>Screening</name>
-		<price>10,40</price>
+		<price>10.40</price>
 		<description></description>
 	</treatmenttype>
 	
-	<treatmenttype treatmentcode="1860">
+	<treatmenttype>
+		<treatmentcode>1860</treatmentcode>
 		<name>Intake en onderzoek na screening</name>
-		<price>43,22</price>
+		<price>43.22</price>
 		<description></description>
 	</treatmenttype>		
-	<treatmenttype treatmentcode="1870">
+	<treatmenttype>
+		<treatmentcode>1870</treatmentcode>
 		<name>Intake en onderzoek na screening na verwijzing</name>
-		<price>43,22</price>
+		<price>43.22</price>
 		<description></description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1871">
+	<treatmenttype>
+		<treatmentcode>1871</treatmentcode>
 		<name>Intake en onderzoek na verwijzing</name>
-		<price>55,22</price>
+		<price>55.22</price>
 		<description>inclusief toeslag uitbehandeling</description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1872">
+	<treatmenttype>
+		<treatmentcode>1872</treatmentcode>
 		<name>Intake en onderzoek na verwijzing</name>
-		<price>49,22</price>
-		<description>inclusief inrichtingstoeslag/description>
+		<price>49.22</price>
+		<description>inclusief inrichtingstoeslag</description>
 	</treatmenttype>		
 	
-	<treatmenttype treatmentcode="1100">
+	<treatmenttype>
+		<treatmentcode>1100</treatmentcode>
 		<name>Zitting kinderfysiotherapie</name>
-		<price>42,66</price>
+		<price>42.66</price>
 		<description></description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1101">
+	<treatmenttype>
+		<treatmentcode>1101</treatmentcode>
 		<name>Zitting kinderfysiotherapie</name>
-		<price>56,66</price>
+		<price>56.66</price>
 		<description>Inclusief toeslag uitbehandeling</description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1102">
+	<treatmenttype>
+		<treatmentcode>1102</treatmentcode>
 		<name>Zitting kinderfysiotherapie</name>
-		<price>48,66</price>
+		<price>48.66</price>
 		<description>Inclusief inrichtingstoeslag</description>
 	</treatmenttype>
-	<treatmenttype treatmentcode="1103">
+	<treatmenttype>
+		<treatmentcode>1103</treatmentcode>
 		<name>Instructie/overleg ouders van de patient</name>
-		<price>42,66</price>
+		<price>42.66</price>
 		<description></description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1105">
+	<treatmenttype>
+		<treatmentcode>1105</treatmentcode>
 		<name>Eenmalig kinderfysiotherapeutisch rapport</name>
-		<price>32,66</price>
+		<price>32.66</price>
 		<description></description>
 	</treatmenttype>	
 
-	<treatmenttype treatmentcode="1200">
+	<treatmenttype>
+		<treatmentcode>1200</treatmentcode>
 		<name>Zitting manuele theraptie</name>
-		<price>42,66</price>
+		<price>42.66</price>
 		<description></description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1201">
+	<treatmenttype>
+		<treatmentcode>1201</treatmentcode>
 		<name>Zitting manuele theraptie</name>
-		<price>54,66</price>
+		<price>54.66</price>
 		<description>inclusief toeslag uitbehandeling</description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1202">
+	<treatmenttype>
+		<treatmentcode>1202</treatmentcode>
 		<name>Zitting manuele theraptie</name>
-		<price>48,66</price>
-		<description>inclusief inrichtingstoeslag/description>
+		<price>48.66</price>
+		<description>inclusief inrichtingstoeslag</description>
 	</treatmenttype>		
 	
-	<treatmenttype treatmentcode="1775">
+	<treatmenttype>
+		<treatmentcode>1775</treatmentcode>
 		<name>Zitting geriatrie fysiotherapie</name>
-		<price>42,66</price>
+		<price>42.66</price>
 		<description></description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1776">
+	<treatmenttype>
+		<treatmentcode>1776</treatmentcode>
 		<name>Zitting geriatrie fysiotherapie</name>
-		<price>54,66</price>
+		<price>54.66</price>
 		<description>inclusief toeslag uitbehandeling</description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1777">
+	<treatmenttype>
+		<treatmentcode>1777</treatmentcode>
 		<name>Zitting geriatrie fysiotherapie</name>
-		<price>48,66</price>
-		<description>inclusief inrichtingstoeslag/description>
+		<price>48.66</price>
+		<description>inclusief inrichtingstoeslag</description>
 	</treatmenttype>
 	
-	<treatmenttype treatmentcode="1500">
+	<treatmenttype>
+		<treatmentcode>1500</treatmentcode>
 		<name>Zitting oedeemtherapie</name>
-		<price>42,66</price>
+		<price>42.66</price>
 		<description></description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1501">
+	<treatmenttype>
+		<treatmentcode>1501</treatmentcode>
 		<name>Zitting oedeemtherapie</name>
-		<price>54,66</price>
+		<price>54.66</price>
 		<description>inclusief toeslag uitbehandeling</description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1502">
+	<treatmenttype>
+		<treatmentcode>1502</treatmentcode>
 		<name>Zitting oedeemtherapie</name>
-		<price>48,66</price>
-		<description>inclusief inrichtingstoeslag/description>
+		<price>48.66</price>
+		<description>inclusief inrichtingstoeslag</description>
 	</treatmenttype>
 	
-	<treatmenttype treatmentcode="1700">
+	<treatmenttype>
+		<treatmentcode>1700</treatmentcode>
 		<name>Lange zitting</name>
-		<price>42,66</price>
+		<price>42.66</price>
 		<description></description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1701">
+	<treatmenttype>
+		<treatmentcode>1701</treatmentcode>
 		<name>Lange zitting</name>
-		<price>54,66</price>
+		<price>54.66</price>
 		<description>inclusief toeslag uitbehandeling</description>
 	</treatmenttype>	
-	<treatmenttype treatmentcode="1702">
+	<treatmenttype>
+		<treatmentcode>1702</treatmentcode>
 		<name>Lange zitting</name>
-		<price>48,66</price>
-		<description>inclusief inrichtingstoeslag/description>
+		<price>48.66</price>
+		<description>inclusief inrichtingstoeslag</description>
 	</treatmenttype>	
 </treatmenttypes>

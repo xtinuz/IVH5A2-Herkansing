@@ -5,7 +5,7 @@
  */
 package edu.avans.ivh5.client.view.ui;
 
-import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,13 +36,13 @@ public class TreatmentPanel extends JPanel {
     private JComboBox employeeBox;
     private JLabel overviewLabel;
     private JTextField searchField;
-    private final TreatmentController controller;
+    private final TreatmentAndSessionController controller;
     private JFrame parentFrame;
     private JTable treatmentTable;
     private JMenuItem alter, delete;
     private DefaultTableModel dtm;
 
-    public TreatmentPanel(JFrame parentFrame, TreatmentController controller) {
+    public TreatmentPanel(JFrame parentFrame, TreatmentAndSessionController controller) {
         this.controller = controller;
         this.parentFrame = parentFrame;
         System.out.println("setting ui reference TreatmentPanel");
