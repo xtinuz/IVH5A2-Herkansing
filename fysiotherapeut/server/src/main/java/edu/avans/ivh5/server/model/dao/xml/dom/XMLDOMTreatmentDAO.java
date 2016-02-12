@@ -18,7 +18,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author bernd_000
+ * @author IVH5
  */
 public class XMLDOMTreatmentDAO implements TreatmentDAOIF {
     private XmlDOMDocument domDocument = null;

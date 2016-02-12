@@ -126,37 +126,10 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                 break;
             case "confirmSave":
                 System.out.println("actioncommand confirmsave");
-                /* 
-                {
-                    
-                    try {
-                        if (manager.saveEmployee(parentScreen.getEmployee())) {
-                            parentPanel.addEmployee(parentScreen.getEmployee(), manager.getMaxID());
-                        }
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(TherapistController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                        */
                 parentScreen.dispose();
                 break;
             case "confirmAlter":
                 System.out.println("actioncommand confirmAlter");
-                /*
-                 {
-                    try {
-                        Employee AlteredEmployee = parentScreen.getEmployee();
-                        //System.out.println("trying to alter Employee towards the manager");
-                        manager.alterEmployee(AlteredEmployee);
-                        this.parentPanel.updateTableRow(AlteredEmployee);
-                        //System.out.println("altered the employee in the manager");
-                    } catch (RemoteException ex) {
-                        System.out.println("RemoteException is gedaan");
-                        Logger.getLogger(TherapistController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                }
-                        */
                 parentScreen.dispose();
                 break;
             case "cancel":

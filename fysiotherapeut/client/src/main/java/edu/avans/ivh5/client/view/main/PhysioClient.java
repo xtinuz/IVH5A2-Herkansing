@@ -18,7 +18,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
- * @author bernd_000
+ * @author IVH5A2
  */
 public class PhysioClient {
 

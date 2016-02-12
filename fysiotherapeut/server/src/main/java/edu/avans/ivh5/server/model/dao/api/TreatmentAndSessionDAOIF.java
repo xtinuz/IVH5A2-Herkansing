@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 package edu.avans.ivh5.server.model.dao.api;
+import edu.avans.ivh5.shared.model.domain.Session;
+import edu.avans.ivh5.shared.model.domain.TreatmentType;
+import edu.avans.ivh5.shared.model.domain.Treatment;
+import edu.avans.ivh5.shared.model.domain.Employee;
 
 /**
  *
- * @author ferdinand
+ * @author IVH5
  */
 public interface TreatmentAndSessionDAOIF {
     
+    public boolean saveTreatment(Treatment treatment);
 }
