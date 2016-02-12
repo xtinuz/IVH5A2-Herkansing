@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><physiopractice xmlns:lib="http://www.avans.nl/ivh5/worked-example" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.avans.nl/ivh5/worked-example physiopractice.xsd">
 	<name>Zorg4U</name>
-	<address>Straat 123</address>
-	<postal>ABCD12</postal>
+	<address>Straat 123A</address>
+	<postal>1234AB</postal>
 	<city>Breda</city>
-	<phone>0123910391</phone>
+	<phone>0885257500</phone>
 	<email>info@zorg4u.nl</email>
-	<kvk>123</kvk>
-	<iban>123</iban>
-	<bic>123</bic>
-	<bank>Rabobank</bank>
+	<kvk>12312312</kvk>
+	<iban>NL91ABNA0417164300</iban>
+	<bic>ABNANL2A</bic>
+	<bank>ABN Amro</bank>
 </physiopractice>

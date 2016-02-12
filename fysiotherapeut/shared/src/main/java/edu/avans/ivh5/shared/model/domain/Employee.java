@@ -7,10 +7,7 @@ package edu.avans.ivh5.shared.model.domain;
 
 import java.io.Serializable;
 
-/**
- *
- * @author bernd_000
- */
+
 public class Employee implements Serializable {
 
     private String ID;

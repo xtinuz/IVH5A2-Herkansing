@@ -8,6 +8,7 @@ import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 
@@ -16,7 +17,6 @@ import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
  * factory provides XML DOM implementations for the domain classes in this
  * system.
  *
- * @author Robin Schellius
  */
 public class XmlDOMDAOFactory extends DAOFactory {
 
@@ -43,5 +43,10 @@ public class XmlDOMDAOFactory extends DAOFactory {
     @Override
     public TreatmentDAOIF getTreatmentDAO() {
         return new XMLDOMTreatmentDAO();
+    }
+
+    @Override
+    public TreatmentAndSessionDAOIF getTreatmentAndSessionDAO() {
+        return new XMLDOMTreatmentAndSessionDAO();
     }
 }

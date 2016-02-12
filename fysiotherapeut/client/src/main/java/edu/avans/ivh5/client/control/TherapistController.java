@@ -22,10 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 
-/**
- *
- * @author ferdinand
- */
+
 public class TherapistController implements ActionListener, KeyListener, MouseListener {
 
     private AddEmployeeScreen parentScreen;

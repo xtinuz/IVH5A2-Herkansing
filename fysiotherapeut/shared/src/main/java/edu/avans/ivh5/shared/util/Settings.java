@@ -8,7 +8,6 @@ import java.util.Properties;
 /**
  * Provides general utility functions for handling properties and settings.
  *  
- * @author Robin Schellius
  *
  */
 public class Settings {

@@ -13,10 +13,7 @@ import java.awt.print.PrinterException;
 import java.text.MessageFormat;
 import javax.swing.JTable;
 
-/**
- *
- * @author bernd_000
- */
+
 public class ReportingController implements ActionListener {
 
     private final PhysioManagerClientIF manager;

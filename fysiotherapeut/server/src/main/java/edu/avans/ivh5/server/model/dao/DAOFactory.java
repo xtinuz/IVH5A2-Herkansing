@@ -6,6 +6,7 @@ package edu.avans.ivh5.server.model.dao;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 
@@ -25,7 +26,6 @@ import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
  * for the specific data source has to extend from this DAOFactory class.
  * </p>
  *
- * @author Robin Schellius
  *
  */
 public abstract class DAOFactory {
@@ -67,6 +67,8 @@ public abstract class DAOFactory {
     public abstract SessionDAOIF getSessionDAO();
 
     public abstract TreatmentDAOIF getTreatmentDAO();
+    
+    public abstract TreatmentAndSessionDAOIF getTreatmentAndSessionDAO();
     
     public abstract PhysioPracticeDAOIF getPhysioPracticeDAO();
 

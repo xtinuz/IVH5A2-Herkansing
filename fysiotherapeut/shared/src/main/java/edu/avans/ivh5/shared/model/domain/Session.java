@@ -8,10 +8,7 @@ package edu.avans.ivh5.shared.model.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author bernd_000
- */
+
 public class Session implements Serializable {
     private Date Date;
     private Date StartTime;

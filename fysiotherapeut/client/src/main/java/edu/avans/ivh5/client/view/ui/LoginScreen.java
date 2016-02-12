@@ -16,10 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author bernd_000
- */
+
 public class LoginScreen extends JFrame {
     
     private final LoginController controller;

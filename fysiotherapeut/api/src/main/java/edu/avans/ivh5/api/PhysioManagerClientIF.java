@@ -15,10 +15,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author bernd_000
- */
+
 public interface PhysioManagerClientIF extends Remote {
     public boolean checkPassword(String username, char[] password) throws RemoteException;
     
@@ -66,7 +63,7 @@ public interface PhysioManagerClientIF extends Remote {
     
     public PhysioPractice getCompanyInfo() throws RemoteException; 
 
-    public void getScheduleTableData() throws RemoteException;    
+    public void getScheduleTableData(ArrayList dates, String lastname) throws RemoteException;    
 
     public ArrayList<Employee> getTherapists() throws RemoteException;
 

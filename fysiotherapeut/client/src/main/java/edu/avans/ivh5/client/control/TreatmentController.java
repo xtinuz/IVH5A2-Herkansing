@@ -31,10 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 
-/**
-// *
- * @author bernd_000
- */
+
 public class TreatmentController implements ActionListener, KeyListener, MouseListener {
     private AddTreatmentScreen parentScreen;
     private TreatmentPanel parentPanel;

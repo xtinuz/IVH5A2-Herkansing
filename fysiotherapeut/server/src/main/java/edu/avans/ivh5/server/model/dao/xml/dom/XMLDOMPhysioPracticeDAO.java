@@ -21,10 +21,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.NamedNodeMap;
 
-/**
- *
- * @author Sjonn
- */
+
 public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
     private XmlDOMDocument domDocument;
     private Document document;
@@ -43,38 +40,9 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
     public boolean savePhysioPractice(PhysioPractice physiopractice) {
         System.out.println("XMLDOAPysioPracticeDAO is getting the obj:PhysioPractice");
         if (document != null) {
-            /*NodeList list = document.getElementsByTagName("physiopractice"); //hier de naam van hetgene wat je zoekt
 
-            for (int i = 0; i < list.getLength(); i++) {
-                Node node = list.item(i);
-                if (node instanceof Element) {
-                    Element child = (Element) node;
-                    
-                    System.out.println("Practice name: " + physiopractice.getName());
-                    //Set data
-                               
-                    child.setAttribute("naam", physiopractice.getName());
-                    child.setAttribute("address", physiopractice.getAddress());
-                    child.setAttribute("postal", physiopractice.getPostal());
-                    child.setAttribute("city", physiopractice.getCity());
-                    child.setAttribute("phone", physiopractice.getPhone());
-                    child.setAttribute("email", physiopractice.getEmail());
-                    child.setAttribute("KVK", physiopractice.getKVK());
-                    child.setAttribute("IBAN", physiopractice.getIBAN());
-                    child.setAttribute("BIC", physiopractice.getBIC());
-                    child.setAttribute("bank", physiopractice.getBank());
-                    
-                    
-                    child.getElementsByTagName("naam").item(0).setTextContent(physiopractice.getName());
-       */
                     Node practice = document.getElementsByTagName("physiopractice").item(0);
                     Element child = (Element) practice;
-                    
-                    /*NamedNodeMap attr = practice.getAttributes();
-                    Node nodeName = attr.getNamedItem("name");
-                    nodeName.setTextContent(physiopractice.getName());
-                            */
-                    System.out.println("Practice name: " + physiopractice.getName());
                     
                     child.getElementsByTagName("name").item(0).setTextContent(physiopractice.getName());
                     child.getElementsByTagName("address").item(0).setTextContent(physiopractice.getAddress());
@@ -86,11 +54,8 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
                     child.getElementsByTagName("bic").item(0).setTextContent(physiopractice.getBIC());
                     child.getElementsByTagName("bank").item(0).setTextContent(physiopractice.getBank());
                     
-                    
                     this.domDocument.writeDocument();
                     return true;
-                //}
-            //}
         } else {
             System.out.println("XMLDOAPysioPracticeDAO could not get the PhysioPractice due to a missing document");
         }
@@ -103,14 +68,6 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
         System.out.println("XMLDOAPysioPracticeDAO is getting the obj:PhysioPractice");
         if (document != null) {
             System.out.println("XMLDOAPysioPracticeDAO has found the document");
-            /*NodeList list = document.getElementsByTagName("physiopractice"); // hier de naam van hetgene wat je zoekt
-            
-            for (int i = 0; i < list.getLength(); i++) {
-                System.out.println("XMLDOAPysioPracticeDAO is executing FOR loop");
-                Node node = list.item(i);
-                if (node instanceof Element) {
-                    System.out.println("XMLDOAPysioPracticeDAO is executing IF statement");
-                    Element child = (Element) node;*/
                     
                     Node practice = document.getElementsByTagName("physiopractice").item(0);
                     Element child = (Element) practice;
@@ -129,8 +86,6 @@ public class XMLDOMPhysioPracticeDAO implements PhysioPracticeDAOIF{
                     String bank = child.getElementsByTagName("bank").item(0).getTextContent();
                     System.out.println("XMLDOAPysioPracticeDAO has updated the variables");                    
                     return new PhysioPractice(name, address, postal, city, phone, email, KVK, IBAN, BIC, bank);
-                //}
-            //}
         } else {
             System.out.println("XMLDOMUserDAO could not get the PhysioPractice due to a missing document");
         }

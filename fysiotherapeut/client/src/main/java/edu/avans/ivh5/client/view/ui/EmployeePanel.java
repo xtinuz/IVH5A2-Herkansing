@@ -25,12 +25,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * EmployeePanel is a part of the MainTabbedPaneScreen The Panel contains
- * everything you need in order to
- *
- * @author bernd_000
- */
+
 public class EmployeePanel extends JPanel {
 
     private JButton logoutButton, addButton, alterButton, deleteButton;

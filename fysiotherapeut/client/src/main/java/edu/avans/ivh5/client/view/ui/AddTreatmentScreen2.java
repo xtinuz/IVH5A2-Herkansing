@@ -7,10 +7,7 @@ package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentController;
 
-/**
- *
- * @author ferdinand
- */
+
 public class AddTreatmentScreen2 extends javax.swing.JFrame {
     private TreatmentController controller;
 
