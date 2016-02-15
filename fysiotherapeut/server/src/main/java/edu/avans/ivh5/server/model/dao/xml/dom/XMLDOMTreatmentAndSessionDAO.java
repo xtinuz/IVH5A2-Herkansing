@@ -9,6 +9,7 @@ import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
+import edu.avans.ivh5.shared.model.domain.SharedTreatment;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -121,5 +122,38 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
         }
         System.out.println("XMLDOMEmployeeDAO did not find the treatment");
         return false;
+    }
+    
+    @Override
+    public ArrayList<SharedTreatment> getAllFinishedTreatments(){
+        System.out.println("XMLDOMTreatmentDAO is getAllFinishedTreatments");
+        ArrayList<SharedTreatment> treatments = new ArrayList();
+         if (document != null){
+            System.out.println("document not null");
+            NodeList treatmentslist = document.getElementsByTagName("treatment"); 
+            //NodeList sessiondateslist = new NodeList();
+            for (int i = 0; i < treatmentslist.getLength(); i++) {                                                      // For every treatment
+                int sessions = 0;
+                Node node = treatmentslist.item(i);                                                                     // Make a node for the treatment
+                 if (node instanceof Element) {                                                                         // Check if node is an Element
+                    Element child = (Element) node;                                                                     // child = Treatment
+                    if (child.getElementsByTagName("status").item(0).getTextContent().equals("open")) {
+                        NodeList treatmentchildlist = child.getChildNodes();                             
+                        for (int z = 0; z < treatmentchildlist.getLength(); z++){                                       // for every child the treatment has
+                            Node treatmentchildnode = treatmentchildlist.item(z);                                       // create a node for it.
+                            if(treatmentchildnode.getNodeName() == "session"){                                                                  // if it is a session
+                                sessions++;
+                            }
+                        }
+                        treatments.add(new SharedTreatment(
+                                child.getElementsByTagName("BSN").item(0).getTextContent(),
+                                child.getElementsByTagName("treatmentCode").item(0).getTextContent(),
+                                sessions
+                        ));
+                    }
+                 }
+            }
+        }
+         return treatments;
     }
 }
