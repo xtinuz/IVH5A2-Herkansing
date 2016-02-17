@@ -65,7 +65,7 @@ public abstract class DAOFactory {
     public abstract EmployeeDAOIF getEmployeeDAO();
 
     public abstract SessionDAOIF getSessionDAO();
-
+    
     public abstract TreatmentDAOIF getTreatmentDAO();
     
     public abstract TreatmentAndSessionDAOIF getTreatmentAndSessionDAO();

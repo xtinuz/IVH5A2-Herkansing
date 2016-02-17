@@ -14,4 +14,4 @@
 	
 	
 	
-<employee><id>5</id><firstname>Therapeutje</firstname><lastname>qwerty</lastname><phoneNr>0612345678</phoneNr><email>Peut@je.com</email></employee><employee><id>4</id><firstname>michel</firstname><lastname>rijvers</lastname><phoneNr>061239875643525</phoneNr><email/></employee></employees>
+<employee><id>5</id><firstname>Therapeutje</firstname><lastname>qwerty</lastname><phoneNr>0612345678</phoneNr><email>Peut@je.com</email></employee><employee><id>4</id><firstname>michel</firstname><lastname>rijvers</lastname><phoneNr/><email/></employee></employees>
