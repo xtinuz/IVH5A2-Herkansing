@@ -3,40 +3,40 @@
 	<treatment>
 		<treatmentid>1</treatmentid>
 		<treatmentcode>1000</treatmentcode>
-		<clientBSN>111222333</clientBSN>
-		<physiotherapist>test</physiotherapist>
+		<BSN>111222333</BSN>
+		<physiotherapist>lastnametest</physiotherapist>
 		<session>
 			<date>01-01-2016</date>
 			<starttime>10:00</starttime>
 			<endtime>10:30</endtime>
-			<notes>no notes</notes>
+			<notes>no notes first</notes>
 			<treatmentid>1</treatmentid>
 		</session>
 		<session>
 			<date>01-01-2016</date>
-			<starttime></starttime>
-			<endtime></endtime>
-			<notes>notes</notes>
+			<starttime>12:00</starttime>
+			<endtime>12:30</endtime>
+			<notes>no notes 2</notes>
 			<treatmentid>1</treatmentid>
 		</session>
 		<session>
-			<date>02-01-2016</date>
-			<starttime>12:00</starttime>
-			<endtime>12:30</endtime>
-			<notes>no notes</notes>
+			<date>01-01-2016</date>
+			<starttime>13:00</starttime>
+			<endtime>13:30</endtime>
+			<notes>no notes 3</notes>
 			<treatmentid>1</treatmentid>
 		</session>
 	</treatment>
 	<treatment>
 		<treatmentid>2</treatmentid>
 		<treatmentcode>1400</treatmentcode>
-		<clientBSN>123456789</clientBSN>
-		<physiotherapist>test</physiotherapist>
+		<BSN>123456789</BSN>
+		<physiotherapist>therapeut</physiotherapist>
 		<session>
 			<date>01-01-2016</date>
-			<starttime>15:00</starttime>
-			<endtime>15:30</endtime>
-			<notes>notes</notes>
+			<starttime>13:30</starttime>
+			<endtime>14:00</endtime>
+			<notes>no notes 4</notes>
 			<treatmentid>2</treatmentid>
 		</session>
 	</treatment>

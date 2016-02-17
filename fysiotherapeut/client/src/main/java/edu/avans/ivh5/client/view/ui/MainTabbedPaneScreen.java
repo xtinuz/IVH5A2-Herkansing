@@ -10,7 +10,7 @@ import edu.avans.ivh5.client.control.PhysioPracticeController;
 import edu.avans.ivh5.client.control.ReportingController;
 import edu.avans.ivh5.client.control.ScheduleController;
 import edu.avans.ivh5.client.control.TherapistController;
-import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -33,7 +33,7 @@ public class MainTabbedPaneScreen extends JFrame {
     private void createTabs() {
         JTabbedPane panes = new JTabbedPane();
 
-        JPanel TreatmentsPanel = new TreatmentPanel(this, new TreatmentController(manager));
+        JPanel TreatmentsPanel = new TreatmentPanel(this, new TreatmentAndSessionController(manager));
         JPanel SchedulePanel = new SchedulePanel(this, new ScheduleController(manager));
         JPanel OverviewPanel = new OverviewPanel(this, new ReportingController(manager));
         JPanel EmployeePanel = new EmployeePanel(this, new TherapistController(manager));

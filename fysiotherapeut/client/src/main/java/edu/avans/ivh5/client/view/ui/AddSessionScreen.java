@@ -5,24 +5,30 @@
  */
 package edu.avans.ivh5.client.view.ui;
 
-import edu.avans.ivh5.client.control.TreatmentController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
+import edu.avans.ivh5.shared.model.domain.TreatmentType;
+import javax.swing.DefaultComboBoxModel;
 
-
-public class AddTreatmentScreen2 extends javax.swing.JFrame {
-    private TreatmentController controller;
+/**
+ *
+ * @author ferdinand
+ */
+public class AddSessionScreen extends javax.swing.JFrame {
+    private TreatmentAndSessionController controller;
 
     /**
      * Creates new form AddTreatmentScreen2
      */
-    public AddTreatmentScreen2(TreatmentController treatmentController ) {
-        this.controller = controller;
+    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController ) {
+        this.controller = treatmentAndSessionController;
+        
+            
         initComponents();
-        
-        
+           controller.setUIRef(this);
+           fillTherapistComboBox();
+           fillTreatmentCodeComboBox();
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,8 +39,7 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        therapeutComboBox = new javax.swing.JComboBox();
-        klantComboBox = new javax.swing.JComboBox();
+        therapistComboBox = new javax.swing.JComboBox();
         idLabel = new javax.swing.JLabel();
         firstnameLabel1 = new javax.swing.JLabel();
         lastnameLabel1 = new javax.swing.JLabel();
@@ -68,12 +73,12 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
         sessionsTable = new javax.swing.JTable();
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        clientSearchField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        therapeutComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        klantComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        therapistComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        therapistComboBox.setName(""); // NOI18N
 
         idLabel.setText("ID");
 
@@ -97,11 +102,12 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
 
         therapeutLabel.setText("Fysiotherapeut");
 
-        klantLabel.setText("Klant");
+        klantLabel.setText("Zoek klant op BSN");
 
         treatmentcodeLabel.setText("Behandelcode:");
 
         treatmentcodeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        treatmentcodeComboBox.setName(""); // NOI18N
 
         commentsTextArea.setColumns(20);
         commentsTextArea.setRows(5);
@@ -146,11 +152,9 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(therapeutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(therapeutComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(klantComboBox, 0, 100, Short.MAX_VALUE)
-                    .addComponent(klantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(therapistComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(134, 134, 134)
+                .addComponent(klantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -176,30 +180,35 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
                                             .addComponent(lastnameTextField1)
                                             .addComponent(telTextField)
                                             .addComponent(mailTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))
-                                .addGap(95, 95, 95)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(bsnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lastnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(telLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(firstnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(mailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(treatmentcodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(95, 95, 95)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(bsnTextField)
-                                            .addComponent(firstnameTextField2)
-                                            .addComponent(lastnameTextField2)
-                                            .addComponent(telTextField2)
-                                            .addComponent(mailTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                                    .addComponent(treatmentcodeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(clientSearchField)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(bsnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(lastnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(telLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(firstnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(mailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(bsnTextField)
+                                                    .addComponent(firstnameTextField2)
+                                                    .addComponent(lastnameTextField2)
+                                                    .addComponent(telTextField2)
+                                                    .addComponent(mailTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(sessionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(123, 123, 123)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -225,8 +234,8 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(therapeutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(klantComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(therapistComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(clientSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(idLabel)
@@ -295,6 +304,7 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
     private javax.swing.JLabel bsnLabel;
     private javax.swing.JTextField bsnTextField;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField clientSearchField;
     private javax.swing.JTextArea commentsTextArea;
     private javax.swing.JLabel firstnameLabel1;
     private javax.swing.JLabel firstnameLabel2;
@@ -307,7 +317,6 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox klantComboBox;
     private javax.swing.JLabel klantLabel;
     private javax.swing.JLabel lastnameLabel1;
     private javax.swing.JLabel lastnameLabel2;
@@ -324,9 +333,25 @@ public class AddTreatmentScreen2 extends javax.swing.JFrame {
     private javax.swing.JLabel telLabel1;
     private javax.swing.JTextField telTextField;
     private javax.swing.JTextField telTextField2;
-    private javax.swing.JComboBox therapeutComboBox;
     private javax.swing.JLabel therapeutLabel;
+    private javax.swing.JComboBox therapistComboBox;
     private javax.swing.JComboBox treatmentcodeComboBox;
     private javax.swing.JLabel treatmentcodeLabel;
     // End of variables declaration//GEN-END:variables
+
+public void fillTherapistComboBox(){
+            therapistComboBox.setModel(new DefaultComboBoxModel());
+            for (Object item : controller.getEmployees())
+                therapistComboBox.addItem(item); 
 }
+
+public void fillTreatmentCodeComboBox(){
+    treatmentcodeComboBox.setModel(new DefaultComboBoxModel());
+    for (Object item: controller.getTreatmentTypes()){
+        
+        treatmentcodeComboBox.addItem(item);
+    }
+}
+}
+
+

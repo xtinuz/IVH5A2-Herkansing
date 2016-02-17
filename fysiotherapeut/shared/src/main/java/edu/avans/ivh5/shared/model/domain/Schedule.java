@@ -6,17 +6,20 @@
 package edu.avans.ivh5.shared.model.domain;
 
 import java.util.ArrayList;
-
-
-public class Schedule {
+import java.io.Serializable;
+/**
+ *
+ * @author ferdinand
+ */
+public class Schedule implements Serializable {
     private Employee physiotherapist;
-    private ArrayList<Schedule> scheduleItem;
+    private ArrayList<ScheduleItem> scheduleItem;
     
     public Schedule(ArrayList scheduleItems){
             this.scheduleItem = scheduleItems;
     }
     
-    public Schedule(Employee physiotherapist, ArrayList scheduleItems){
+    public Schedule(String lastname, ArrayList scheduleItems){
         this.physiotherapist = physiotherapist;
         this.scheduleItem = scheduleItems;
     }
@@ -29,13 +32,15 @@ public class Schedule {
         this.physiotherapist = physiotherapist;
     }
 
-    public ArrayList<Schedule> getScheduleItem() {
+    public ArrayList<ScheduleItem> getScheduleItems() {
         return scheduleItem;
     }
 
-    public void setScheduleItem(ArrayList<Schedule> scheduleItem) {
+    public void setScheduleItem(ArrayList<ScheduleItem> scheduleItem) {
         this.scheduleItem = scheduleItem;
     }
+
+
     
      
     

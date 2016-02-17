@@ -7,8 +7,13 @@ package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
+import edu.avans.ivh5.client.view.ui.SchedulePanel2;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Employee;
+import edu.avans.ivh5.shared.model.domain.Schedule;
+import edu.avans.ivh5.shared.model.domain.ScheduleItem;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,14 +21,21 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 
 public class ScheduleController implements ActionListener, KeyListener, MouseListener {
@@ -45,11 +57,10 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "refresh table":
+        
             try {
-                String lastname = getLastNameFromCBox(); //Temporary until the rest is fully implemented
-                Date date = parentScreen.getDate();
-                parentScreen.setTableHeaderDates( date );
-                getSessionsForSchedule(date, lastname);
+                setTableData();
+
                 
             } catch (Exception ex) {
                 Logger.getLogger(ScheduleController.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,6 +114,7 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         
         return dates;
     }
+    
     
     
     public ArrayList<String> getScheduleDates(Date dateFromPanel) throws ParseException{
@@ -173,12 +185,12 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             Date lastDatePlusOne = c.getTime();
             Calendar loopCalendar = Calendar.getInstance();
             loopCalendar.setTime(firstDate);
-            DateFormat dtf = new SimpleDateFormat("dd-MM-yyyy") {};
+            SimpleDateFormat dtf = new SimpleDateFormat("dd-MM-yyyy");
             
             for (Date i = firstDate; i.before(lastDatePlusOne);){
             c.setTime(i); 
             String strDate = dtf.format( c.getTime() );
-            System.out.println("strdate" + strDate);
+            //System.out.println("strdate" + strDate);
             tableDates.add(strDate);
             loopCalendar.add(Calendar.DATE, 1);
             i = loopCalendar.getTime();
@@ -190,18 +202,19 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             System.out.println("Exception at gettabledata");
             System.out.println(ex.getMessage());
         }
-        
+
         System.out.println("talesDates in controller " + tableDates);
         return tableDates;
-       
+ 
     }
     
-    public ArrayList<Session> getSessionsForSchedule(Date date, String lastname){
-        ArrayList<Session> sessions = null;
+    public ArrayList<ScheduleItem> getSessionsForSchedule(Date date, String lastname){
+        ArrayList<ScheduleItem> sessions = null;
         
         try{
-            ArrayList dates = getScheduleDates(date); // return the 7 days of the week matching with the date input.
-            manager.getScheduleTableData(dates, lastname);
+        ArrayList dates = getScheduleDates(date); // return the 7 days of the week matching with the date input.
+        Schedule schedule = manager.getScheduleTableData(dates, lastname);
+        sessions = schedule.getScheduleItems();
         }
         catch (Exception ex){
             System.out.println(ex.getMessage());
@@ -240,12 +253,79 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
       lastName = lastName + parts[arrayCount];          //Adds last element to the string (avoids space at the end of the string)
       System.out.println(lastName);  
       System.out.println("\n");
+      System.out.println("lastname " + lastName);
       return lastName;
     }
     
     
-    public void setTableData() {
+    public void setTableData() throws ParseException {
+        System.out.println("setTableData in controller");
+        String lastname = getLastNameFromCBox();
+        Date date = parentScreen.getDate();
+        ArrayList<ScheduleItem> scheduleItems = getSessionsForSchedule(date, lastname);
+        ArrayList<String> datesFromTable = getScheduleDates( date);
+        
+        parentScreen.setTableHeaderDates( date );
+        JTable table        = parentScreen.getTable();
+        JTableHeader th     = table.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableModel model    = table.getModel();
 
+            ListIterator<String> di = datesFromTable.listIterator();
+            
+            for (ScheduleItem scheduleItem : scheduleItems) {                                   // for every scheduleItem
+                for (int b = 0; b < model.getColumnCount(); b++){                               // for every column
+                    String toBeSplit = (String) tcm.getColumn(b).getHeaderValue();
+                    String splittedDate = toBeSplit.substring(toBeSplit.lastIndexOf(" ")+1);    // split the day from the date
+                    System.out.println("splitted date " + splittedDate);
+                    if ( splittedDate.equals( scheduleItem.getDate() ) ){                       // if the date of the column matches the scheduleItem date
+                        System.out.println("matched date");
+                        for(int c = 0; c < model.getRowCount(); c++){                           // for every row
+                            System.out.println("rowtest " + model.getValueAt(c, 0));
+                            if ( model.getValueAt(c, 0).equals( scheduleItem.getStartTime() ) ){    // if the row's time matches the scheduleItem's time
+                                System.out.println("matched time");
+                                model.setValueAt( scheduleItem.getLastname() + " : " + scheduleItem.getBSN() , c, b);
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
+            System.out.println( model.getColumnCount());
+            System.out.println( model.getRowCount());
+            System.out.println("searching empty cells");
+            for (int d = 1; d < model.getColumnCount(); d++){
+                for( int e = 0; e < model.getRowCount(); e++){
+//                    TableCellRenderer renderer = table.getCellRenderer(e, d);
+//                        Component c = renderer.getTableCellRendererComponent(table, null ,false, false, e, d);
+//                        c.setBackground(Color.GREEN);
+                    if( model.getValueAt(e, d) == null ){
+                        System.out.println("null value found");
+
+                    }
+                }
+            }
+    }
+    
+    
+    
+       public TableCellRenderer getRenderer() {
+        return new DefaultTableCellRenderer(){
+            @Override
+            public Component getTableCellRendererComponent(JTable table,
+                    Object value, boolean isSelected, boolean hasFocus,
+                    int row, int column) {
+                Component tableCellRendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus,row, column);
+                if( (null == value) && isSelected == false ){
+                    tableCellRendererComponent.setBackground(Color.GREEN);
+                } 
+//                    tableCellRendererComponent.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+//                }
+                return tableCellRendererComponent;
+            }
+        };
     }
     
 }
