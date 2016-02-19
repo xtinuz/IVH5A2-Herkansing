@@ -1,43 +1,44 @@
-<treatments>
-<treatment>
-	<treatmentid>1</treatmentid>
-	<treatmentcode>fer</treatmentcode>
-	<BSN>van disseldorp</BSN>
-	<physiotherapist>0606060606</physiotherapist>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><treatments>
+	<treatment>
+		<treatmentid>1</treatmentid>
+		<treatmentcode>1000</treatmentcode>
+		<BSN>111222333</BSN>
+		<physiotherapist>lastnametest</physiotherapist>
+		<status>actief</status>
 		<session>
-			<date></date>
-			<starttime></starttime>
-			<endtime></endtime>
-			<notes></notes>
-			<treatmentid></treatmentid>
+			<date>01-01-2016</date>
+			<starttime>10:00</starttime>
+			<endtime>10:30</endtime>
+			<notes>no notes first</notes>
+			<treatmentid>1</treatmentid>
 		</session>
-				<session>
-			<date></date>
-			<starttime></starttime>
-			<endtime></endtime>
-			<notes></notes>
-			<treatmentid></treatmentid>
-		</session>
-				<session>
-			<date></date>
-			<starttime></starttime>
-			<endtime></endtime>
-			<notes></notes>
-			<treatmentid></treatmentid>
-		</session>
-</treatment>
-
-<treatment>
-	<treatmentid>2</treatmentid>
-	<treatmentcode>Bernd</treatmentcode>
-	<BSN>van den Hoek</BSN>
-	<physiotherapist>0611111</physiotherapist>
 		<session>
-			<date></date>
-			<starttime></starttime>
-			<endtime></endtime>
-			<notes></notes>
-			<treatmentid></treatmentid>
+			<date>01-01-2016</date>
+			<starttime>12:00</starttime>
+			<endtime>12:30</endtime>
+			<notes>no notes 2</notes>
+			<treatmentid>1</treatmentid>
 		</session>
-</treatment>
+		<session>
+			<date>01-01-2016</date>
+			<starttime>13:00</starttime>
+			<endtime>13:30</endtime>
+			<notes>no notes 3</notes>
+			<treatmentid>1</treatmentid>
+		</session>
+	<treatment><treatmentid>4</treatmentid><treatmentcode>1400 Eenmalig fysiotherapeutisch onderzoek</treatmentcode><BSN>6153</BSN><physiotherapist>lastnametest</physiotherapist><status>actief</status></treatment></treatment>
+	<treatment>
+		<treatmentid>2</treatmentid>
+		<treatmentcode>1400</treatmentcode>
+		<BSN>123456789</BSN>
+		<physiotherapist>therapeut</physiotherapist>
+		<status>actief</status>
+		<session>
+			<date>01-01-2016</date>
+			<starttime>13:30</starttime>
+			<endtime>14:00</endtime>
+			<notes>no notes 4</notes>
+			<treatmentid>2</treatmentid>
+		</session>
+	</treatment>
 </treatments>

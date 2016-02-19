@@ -16,10 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author bernd_000
- */
+
 public class AddEmployeeScreen extends JFrame {
 
     private JLabel ID, phoneNumber, name, lastName, mail;

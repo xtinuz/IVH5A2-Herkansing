@@ -16,10 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- *
- * @author IVH5
- */
+
 public class XMLDOMTreatmentDAO implements TreatmentDAOIF {
     private XmlDOMDocument domDocument = null;
     private XmlDOMDocument domDocument2 = null;
@@ -100,8 +97,8 @@ public class XMLDOMTreatmentDAO implements TreatmentDAOIF {
     @Override
     public ArrayList<TreatmentType> getTreatmentTypes() {
         System.out.println("XMLDOMTreatmentDAO is getting all treatments");
-        ArrayList<TreatmentType> treatments = new ArrayList();
         if (document2 != null) {
+            ArrayList<TreatmentType> treatments = new ArrayList();
             NodeList list = document2.getElementsByTagName("treatmenttype");
 
             for (int i = 0; i < list.getLength(); i++) {

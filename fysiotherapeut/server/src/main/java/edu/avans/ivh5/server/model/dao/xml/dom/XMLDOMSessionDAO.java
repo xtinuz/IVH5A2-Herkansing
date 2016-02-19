@@ -8,10 +8,7 @@ package edu.avans.ivh5.server.model.dao.xml.dom;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
 import org.w3c.dom.Document;
 
-/**
- *
- * @author bernd_000
- */
+
 public class XMLDOMSessionDAO implements SessionDAOIF {
 
     private XmlDOMDocument domDocument = null;

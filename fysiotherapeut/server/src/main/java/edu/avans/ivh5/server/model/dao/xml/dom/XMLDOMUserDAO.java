@@ -11,10 +11,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- *
- * @author bernd_000
- */
+
 public class XMLDOMUserDAO implements UserDAOIF {
     
     private XmlDOMDocument domDocument = null;

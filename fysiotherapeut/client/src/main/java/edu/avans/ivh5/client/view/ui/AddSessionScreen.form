@@ -44,11 +44,8 @@
                       <Component id="therapeutLabel" pref="100" max="32767" attributes="0"/>
                       <Component id="therapistComboBox" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="clientComboBox" pref="100" max="32767" attributes="0"/>
-                      <Component id="klantLabel" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                  <Component id="klantLabel" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -80,27 +77,32 @@
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="bsnLabel" max="32767" attributes="0"/>
-                                              <Component id="lastnameLabel2" max="32767" attributes="0"/>
-                                              <Component id="telLabel" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="firstnameLabel2" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="mailLabel" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="bsnTextField" max="32767" attributes="0"/>
-                                              <Component id="firstnameTextField2" max="32767" attributes="0"/>
-                                              <Component id="lastnameTextField2" max="32767" attributes="0"/>
-                                              <Component id="telTextField2" max="32767" attributes="0"/>
-                                              <Component id="mailTextField2" pref="100" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="treatmentcodeComboBox" min="-2" pref="277" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="clientSearchField" max="32767" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="bsnLabel" max="32767" attributes="0"/>
+                                                      <Component id="lastnameLabel2" max="32767" attributes="0"/>
+                                                      <Component id="telLabel" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="firstnameLabel2" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="mailLabel" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="bsnTextField" max="32767" attributes="0"/>
+                                                      <Component id="firstnameTextField2" max="32767" attributes="0"/>
+                                                      <Component id="lastnameTextField2" max="32767" attributes="0"/>
+                                                      <Component id="telTextField2" max="32767" attributes="0"/>
+                                                      <Component id="mailTextField2" pref="100" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
@@ -145,7 +147,7 @@
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="3" attributes="0">
                                                       <Component id="therapistComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="clientComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="clientSearchField" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -217,19 +219,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="therapistComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-            <Property name="name" type="java.lang.String" value="" noResource="true"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="clientComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -319,7 +308,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="klantLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Klant"/>
+            <Property name="text" type="java.lang.String" value="Zoek klant op BSN"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="treatmentcodeLabel">
@@ -438,6 +427,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Opslaan"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="clientSearchField">
         </Component>
       </SubComponents>
     </Container>

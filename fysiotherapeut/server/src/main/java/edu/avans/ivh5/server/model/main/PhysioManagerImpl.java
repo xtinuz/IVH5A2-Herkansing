@@ -10,6 +10,7 @@ import edu.avans.ivh5.server.model.dao.DAOFactory;
 import edu.avans.ivh5.server.model.dao.api.EmployeeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.PhysioPracticeDAOIF;
 import edu.avans.ivh5.server.model.dao.api.SessionDAOIF;
+import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.server.model.dao.api.UserDAOIF;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
@@ -26,10 +27,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author bernd_000
- */
+
 public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     private final DAOFactory daoFactory;
@@ -113,7 +111,10 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     //Treatments
     @Override
     public boolean saveTreatment(Treatment treatment) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Savinug treatmenrt: " + treatment.toString());
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        System.out.println("DAO Save treatment");
+        return dao.saveTreatment(treatment);
     }
 
     @Override
@@ -200,11 +201,12 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     }
 
     @Override
-    public void getScheduleTableData() throws RemoteException{
-        //TreatmentAndSessionDaoIF dao = daoFactory.getTreatmentAndSessionDAO();
-        TreatmentDAOIF treatmentDao = daoFactory.getTreatmentDAO();
-        SessionDAOIF sessionDao = daoFactory.getSessionDAO();
+    public void getScheduleTableData(ArrayList dates, String lastname) throws RemoteException{
         System.out.println("manager getScheduleTableData");
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        System.out.println("lastname in manager = " + lastname);
+        dao.getScheduleTableData(dates, lastname);
+        
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
         Schedule schedule = new Schedule( scheduleItems );
         

@@ -6,13 +6,10 @@
 package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
-import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
 import edu.avans.ivh5.client.view.ui.AddSessionScreen;
-import edu.avans.ivh5.client.view.ui.EmployeePanel;
+import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
 import edu.avans.ivh5.client.view.ui.LoginScreen;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
-import edu.avans.ivh5.shared.model.domain.PhysioPractice;
-import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.client.view.ui.TreatmentPanel;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Treatment;
@@ -26,8 +23,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -51,7 +46,6 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
         //getTableData();
     }
     
-    
     public void setUIRef(AddTreatmentScreen parentScreen) {
         this.parentScreen = parentScreen;
         System.out.println("SetUIRef AddTreatmentScreen");
@@ -72,10 +66,24 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
         System.out.println("SetUIRef scheduleScreen");
     }
     
+    public void saveTreatment(Treatment treatment) {
+    treatment = sessionScreen.saveTreatment();
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("TreatmentController, top of actionperformed");
         switch (e.getActionCommand()) {
+            case "save treatment":
+                System.out.println("actioncommand savetreatment");
+                Treatment treatment = sessionScreen.saveTreatment();
+                try{
+                  System.out.println("Savinug treatmenrt: " + treatment.toString());
+                   manager.saveTreatment(treatment); 
+                } catch (RemoteException ex) {
+                    ex.getMessage();
+                }                
+                        break;
             case "newTreatment":
                 System.out.println("actioncommand newTreatment");
                 AddSessionScreen screen = new AddSessionScreen(this);
@@ -91,7 +99,7 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                 }
                 Employee therapist = null;
                 try {
-                    therapist = manager.getTherapistByTherapistID(Integer.parseInt(tempTreatment.getPhysioTherapistID()));
+                    therapist = manager.getTherapistByTherapistID(Integer.parseInt(tempTreatment.getPhysioTherapistLastName()));
                 } catch (RemoteException ex) {
                     Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -130,6 +138,7 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                 break;
             case "confirmAlter":
                 System.out.println("actioncommand confirmAlter");
+                
                 parentScreen.dispose();
                 break;
             case "cancel":
@@ -209,9 +218,8 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
     public ArrayList<TreatmentType> getTreatmentTypes(){
             ArrayList treatments = new ArrayList();
         try{
-            System.out.println("Fsfljd");
             ArrayList<TreatmentType> treatment = manager.getTreatmentTypes();
-            System.out.println("after loop");
+            System.out.println("looping");
             for (TreatmentType t: treatment){
                 String treatmentCode = null;
                 treatmentCode = t.getTreatmentCode() + " " + t.getTreatmentName();

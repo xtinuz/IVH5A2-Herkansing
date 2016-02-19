@@ -7,29 +7,28 @@ package edu.avans.ivh5.shared.model.domain;
 
 import java.io.Serializable;
 
-/**
- *
- * @author bernd_000
- */
+
 public class Treatment implements Serializable {
-    private String TreatmentID;
+    private int TreatmentID;
     private String TreatmentCode;
     private String BSN;
-    private String PhysioTherapistID;
+    private String PhysioTherapistLastName;
+    private String Status;
     
-    public Treatment(String TreatmentID, String TreatmentCode, String BSN, String PhysioTherapistID)
+    public Treatment(int TreatmentID, String TreatmentCode, String BSN, String PhysioTherapistLastName, String Status)
     {
         this.TreatmentID = TreatmentID;
         this.TreatmentCode = TreatmentCode;
         this.BSN = BSN;
-        this.PhysioTherapistID = PhysioTherapistID;
+        this.PhysioTherapistLastName = PhysioTherapistLastName;
+        this.Status = Status;
     }
 
-    public String getTreatmentID() {
+    public int getTreatmentID() {
         return TreatmentID;
     }
 
-    public void setTreatmentID(String TreatmentID) {
+    public void setTreatmentID(int TreatmentID) {
         this.TreatmentID = TreatmentID;
     }
 
@@ -49,12 +48,19 @@ public class Treatment implements Serializable {
         this.BSN = BSN;
     }
 
-    public String getPhysioTherapistID() {
-        return PhysioTherapistID;
+    public String getPhysioTherapistLastName() {
+        return PhysioTherapistLastName;
     }
 
-    public void setPhysioTherapistID(String PhysioTherapistID) {
-        this.PhysioTherapistID = PhysioTherapistID;
+    public void setPhysioTherapistLastName(String PhysioTherapistLastName) {
+        this.PhysioTherapistLastName = PhysioTherapistLastName;
     }
-    
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }   
 }

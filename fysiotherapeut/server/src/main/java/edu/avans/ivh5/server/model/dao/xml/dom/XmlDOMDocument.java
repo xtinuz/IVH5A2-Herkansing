@@ -26,10 +26,7 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-/**
- *
- * @author bernd_000
- */
+
 public class XmlDOMDocument {
 
     // The file that contains the XML data.

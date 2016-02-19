@@ -15,13 +15,13 @@ public class Schedule implements Serializable {
     private Employee physiotherapist;
     private ArrayList<Schedule> scheduleItem;
     
-    public Schedule(ArrayList scheduleItem){
-            this.scheduleItem = scheduleItem;
+    public Schedule(ArrayList scheduleItems){
+            this.scheduleItem = scheduleItems;
     }
     
-    public Schedule(Employee physiotherapist, ArrayList scheduleItem){
+    public Schedule(Employee physiotherapist, ArrayList scheduleItems){
         this.physiotherapist = physiotherapist;
-        this.scheduleItem = scheduleItem;
+        this.scheduleItem = scheduleItems;
     }
 
     public Employee getPhysiotherapist() {

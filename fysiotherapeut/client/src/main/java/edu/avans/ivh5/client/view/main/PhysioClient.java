@@ -16,10 +16,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import org.apache.log4j.PropertyConfigurator;
 
-/**
- *
- * @author IVH5A2
- */
+
 public class PhysioClient {
 
     public static void main(String[] args) {

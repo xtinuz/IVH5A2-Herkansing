@@ -15,7 +15,6 @@ import java.util.HashMap;
  * Handles the connection to a remote service via Java Remote Method Invocation
  * (RMI).
  *
- * @author Robin Schellius
  */
 public class RmiConnection {
 

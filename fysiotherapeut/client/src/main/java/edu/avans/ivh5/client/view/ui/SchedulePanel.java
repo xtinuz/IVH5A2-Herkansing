@@ -21,12 +21,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
-/**
- *
- * @author ferdinand
- */
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import static javax.xml.bind.DatatypeConverter.parseDate;
+
+
 public class SchedulePanel extends javax.swing.JPanel {
     private final JFrame parentFrame;
     private final ScheduleController controller;
@@ -35,7 +39,7 @@ public class SchedulePanel extends javax.swing.JPanel {
      */
     public SchedulePanel(JFrame parentFrame, ScheduleController controller) {
         initComponents();
-        
+        getTherapistFromComboBox();        
         this.parentFrame = parentFrame;
         this.controller = controller;
         System.out.println("setting ui reference");
@@ -44,9 +48,10 @@ public class SchedulePanel extends javax.swing.JPanel {
 
         jButton1.setActionCommand("refresh table");
         jButton1.addActionListener(controller);
-        jComboBox1.setModel(new DefaultComboBoxModel());
+        therapistComboBox.setModel(new DefaultComboBoxModel());
         for (Object item : controller.getEmployees())
-        jComboBox1.addItem(item);
+        therapistComboBox.addItem(item);
+        
     }
    
     @SuppressWarnings("unchecked")
@@ -57,7 +62,7 @@ public class SchedulePanel extends javax.swing.JPanel {
         sceduleTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        therapistComboBox = new javax.swing.JComboBox();
         monthComboBox = new javax.swing.JComboBox();
         dayComboBox = new javax.swing.JComboBox();
         yearComboBox = new javax.swing.JComboBox();
@@ -96,8 +101,11 @@ public class SchedulePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        sceduleTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
         sceduleTable.setMaximumSize(new java.awt.Dimension(930, 450));
         sceduleTable.setMinimumSize(new java.awt.Dimension(930, 450));
+        sceduleTable.setRowHeight(24);
+        sceduleTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(sceduleTable);
         if (sceduleTable.getColumnModel().getColumnCount() > 0) {
             sceduleTable.getColumnModel().getColumn(5).setResizable(false);
@@ -136,7 +144,7 @@ public class SchedulePanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(therapistComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)))
@@ -147,7 +155,7 @@ public class SchedulePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(therapistComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,8 +163,8 @@ public class SchedulePanel extends javax.swing.JPanel {
                     .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
@@ -164,43 +172,69 @@ public class SchedulePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify                     
     private javax.swing.JComboBox dayComboBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox monthComboBox;
     private javax.swing.JTable sceduleTable;
+    private javax.swing.JComboBox therapistComboBox;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration                   
 
 
-    public String getDate(){
         
+    public Date getDate(){
+        Date date = null;
+        try{
         String day = (String) dayComboBox.getSelectedItem();
         String month = (String) monthComboBox.getSelectedItem();
         String year = (String) yearComboBox.getSelectedItem();
         
         String stringDate = day + month + year;
-        System.out.println(stringDate);
-        return stringDate;
+        Date formattedDate = new SimpleDateFormat("ddMMMMyyyy", Locale.US).parse(stringDate);
+        date = formattedDate;
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
         
+        return date;
     }
     
-//        public void fillJComboBox(ArrayList<String> names){
-//        
-//            for(String name: names)
-//                //System.out.println(name);
-//                this.jComboBox1.addItem(name);
-//    }
-//
-//
-//         public void addToCombobox(ArrayList<Employee> employees){
-//        employees = controller.getEmployees();
-//        System.out.println("got employees in panel");
-//            for(Employee e: employees)
-//                
-//                jComboBox1.addItem(e);
-//                System.out.println("looped employees");
-//        
-//     }
+    public String getTherapistFromComboBox(){
+        String therapist = (String) therapistComboBox.getSelectedItem();
+        return therapist;
+        
+    }
+/*    
+    public String getTherapistFromComboBox(){
+        String therapist = (String) therapistComboBox.getSelectedItem();
+        return therapist;
+    }
+*/    
+    
+    
+    public void setTableHeaderDates(Date date){
+        ArrayList datesOfweek;
+        String[] days = {"Zondag" ,"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag","Zaterdag"};
+        try {
+            ArrayList datesOfWeek = controller.getScheduleDates( date );
+            JTableHeader th = sceduleTable.getTableHeader();
+            TableColumnModel tcm = th.getColumnModel();
+            for(int x = 1, y = tcm.getColumnCount()-1; x <= y; x++)
+            {
+                TableColumn tc = tcm.getColumn(x);
+                tc.setHeaderValue("" + days[x-1] + " " + datesOfWeek.get(x-1) );
+                //sceduleTable.repaint();
+                
+            }
+            
+            th.repaint();
+            //sceduleTable.repaint();
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(SchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

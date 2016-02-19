@@ -6,6 +6,7 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentAndSessionController;
+import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import javax.swing.DefaultComboBoxModel;
 
@@ -27,8 +28,10 @@ public class AddSessionScreen extends javax.swing.JFrame {
            controller.setUIRef(this);
            fillTherapistComboBox();
            fillTreatmentCodeComboBox();
+           saveButton.setActionCommand("save treatment");
+           saveButton.addActionListener( controller );
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +43,6 @@ public class AddSessionScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         therapistComboBox = new javax.swing.JComboBox();
-        clientComboBox = new javax.swing.JComboBox();
         idLabel = new javax.swing.JLabel();
         firstnameLabel1 = new javax.swing.JLabel();
         lastnameLabel1 = new javax.swing.JLabel();
@@ -74,14 +76,12 @@ public class AddSessionScreen extends javax.swing.JFrame {
         sessionsTable = new javax.swing.JTable();
         cancelButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        clientSearchField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         therapistComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         therapistComboBox.setName(""); // NOI18N
-
-        clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        clientComboBox.setName(""); // NOI18N
 
         idLabel.setText("ID");
 
@@ -105,7 +105,7 @@ public class AddSessionScreen extends javax.swing.JFrame {
 
         therapeutLabel.setText("Fysiotherapeut");
 
-        klantLabel.setText("Klant");
+        klantLabel.setText("Zoek klant op BSN");
 
         treatmentcodeLabel.setText("Behandelcode:");
 
@@ -156,10 +156,8 @@ public class AddSessionScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(therapeutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(therapistComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(clientComboBox, 0, 100, Short.MAX_VALUE)
-                    .addComponent(klantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(134, 134, 134)
+                .addComponent(klantLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -187,23 +185,26 @@ public class AddSessionScreen extends javax.swing.JFrame {
                                             .addComponent(mailTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(treatmentcodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(95, 95, 95)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(bsnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lastnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(telLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(firstnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(mailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(bsnTextField)
-                                            .addComponent(firstnameTextField2)
-                                            .addComponent(lastnameTextField2)
-                                            .addComponent(telTextField2)
-                                            .addComponent(mailTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(treatmentcodeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(clientSearchField)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(bsnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(lastnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(telLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(firstnameLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(mailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(bsnTextField)
+                                                    .addComponent(firstnameTextField2)
+                                                    .addComponent(lastnameTextField2)
+                                                    .addComponent(telTextField2)
+                                                    .addComponent(mailTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(sessionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(123, 123, 123)
@@ -237,7 +238,7 @@ public class AddSessionScreen extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(therapistComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(clientComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(clientSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(idLabel)
@@ -306,7 +307,7 @@ public class AddSessionScreen extends javax.swing.JFrame {
     private javax.swing.JLabel bsnLabel;
     private javax.swing.JTextField bsnTextField;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox clientComboBox;
+    private javax.swing.JTextField clientSearchField;
     private javax.swing.JTextArea commentsTextArea;
     private javax.swing.JLabel firstnameLabel1;
     private javax.swing.JLabel firstnameLabel2;
@@ -354,6 +355,32 @@ public void fillTreatmentCodeComboBox(){
         treatmentcodeComboBox.addItem(item);
     }
 }
+
+public Treatment saveTreatment(){
+        int treatmentID = 0;
+        String treatmentCode = (String) treatmentcodeComboBox.getSelectedItem();
+        String BSN = bsnTextField.getText();
+        String PhysioTherapistLastName = lastnameTextField1.getText();
+        String Status = "actief";
+        
+        Treatment newTreatment = new Treatment(treatmentID, treatmentCode, BSN, PhysioTherapistLastName, Status);
+        System.out.println("reached return");
+        return newTreatment;
+    }
+
+/*
+public Treatment saveNewTreatment(){
+        int treatmentID = 0;
+        String treatmentCode = (String) treatmentcodeComboBox.getSelectedItem();
+        String BSN = bsnTextField.getText();
+        String PhysioTherapistLastName = lastnameTextField1.getText();
+        String Status = "actief";
+        
+        Treatment newTreatment = new Treatment(treatmentID, treatmentCode, BSN, PhysioTherapistLastName, Status);
+        System.out.println("reached return");
+        return newTreatment;
+    }
+*/
 }
 
 

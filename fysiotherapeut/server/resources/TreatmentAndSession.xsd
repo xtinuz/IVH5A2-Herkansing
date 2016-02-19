@@ -3,27 +3,28 @@
 	xmlns:lib="http://www.avans.nl/ivh5/worked-example">
 
     <element>
-		<complexType>
+	<complexType>
            <sequence>
-				<element name="Treatment">
-					<element name="treatmentid" type="string"></element>
-					<element name="treatmentcode" type="string"></element>
-					<element name="BSN" type="string"></element>
-					<element name="physiotherapist" type="string"></element>
-					<element>
-						<complexType>
-           					<sequence>
-								<element name="Session">
-									<element name="Date" type="Date"></element>
-									<element name="Starttime" type="Date"></element>
-									<element name="Endtime" type="Date"></element>
-									<element name="Notes" type="string"></element>
-								</element>
+		<element name="Treatment">
+			<element name="treatmentid" type="integer"></element>
+			<element name="treatmentcode" type="string"></element>
+			<element name="BSN" type="string"></element>
+			<element name="physiotherapist" type="string"></element>
+			<element name="status" type="string"></element>
+			<element>
+				<complexType>
+           				<sequence>
+						<element name="Session">
+							<element name="Date" type="Date"></element>
+							<element name="Starttime" type="Date"></element>
+							<element name="Endtime" type="Date"></element>
+							<element name="Notes" type="string"></element>
+						</element>
             				</sequence>
-						</complexType>
-    				</element>
-				</element>
+				</complexType>
+    			</element>
+			</element>
             </sequence>
-		</complexType>
+	</complexType>
     </element>
 </schema>
