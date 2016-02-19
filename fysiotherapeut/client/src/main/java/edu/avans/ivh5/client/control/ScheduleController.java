@@ -14,6 +14,7 @@ import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -32,6 +33,7 @@ import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -45,6 +47,7 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     public ScheduleController(PhysioManagerClientIF manager){
         this.manager = manager;
          getEmployees();
+         
          //getLastNameFromCBox();
 }
     
@@ -264,13 +267,16 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         Date date = parentScreen.getDate();
         ArrayList<ScheduleItem> scheduleItems = getSessionsForSchedule(date, lastname);
         ArrayList<String> datesFromTable = getScheduleDates( date);
-        
-        parentScreen.setTableHeaderDates( date );
         JTable table        = parentScreen.getTable();
         JTableHeader th     = table.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
-        TableModel model    = table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        parentScreen.setTableHeaderDates( date );
+        table.repaint();
+        parentScreen.repaint();
 
+            clearTable();
+            
             ListIterator<String> di = datesFromTable.listIterator();
             
             for (ScheduleItem scheduleItem : scheduleItems) {                                   // for every scheduleItem
@@ -292,21 +298,29 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
                     }
                 }
             }
+            repaintTable();
+    }
+    
+    
+    
+    
+    public void repaintTable() {
+        JTable table        = parentScreen.getTable();
+    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+    tableModel.fireTableDataChanged();
+    table.repaint();
 
-            System.out.println( model.getColumnCount());
-            System.out.println( model.getRowCount());
-            System.out.println("searching empty cells");
-            for (int d = 1; d < model.getColumnCount(); d++){
-                for( int e = 0; e < model.getRowCount(); e++){
-//                    TableCellRenderer renderer = table.getCellRenderer(e, d);
-//                        Component c = renderer.getTableCellRendererComponent(table, null ,false, false, e, d);
-//                        c.setBackground(Color.GREEN);
-                    if( model.getValueAt(e, d) == null ){
-                        System.out.println("null value found");
-
-                    }
-                }
+}
+    
+    private void clearTable() {
+        DefaultTableModel tableModel = (DefaultTableModel)parentScreen.getTable().getModel();
+        for(int x = 1; x < tableModel.getColumnCount(); x++)
+        {
+            for(int y = 0 ; y < tableModel.getRowCount(); y++)
+            {
+                tableModel.setValueAt(null, y, x);
             }
+        }
     }
     
     
