@@ -201,24 +201,21 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     }
 
     @Override
-    public void getScheduleTableData(ArrayList dates, String lastname) throws RemoteException{
+    public Schedule getScheduleTableData(ArrayList dates, String lastname) throws RemoteException{
         System.out.println("manager getScheduleTableData");
         TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
-        System.out.println("lastname in manager = " + lastname);
-        dao.getScheduleTableData(dates, lastname);
-        
-        ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
-        Schedule schedule = new Schedule( scheduleItems );
-        
+        Schedule schedule = dao.getScheduleTableData(dates, lastname);
+  
+        return schedule;
    
     }
     
-    @Override
-    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException{
-        ArrayList dates = new ArrayList();
-        System.out.println("manager getsessionsbyDate");
-        return dates;  
-    }
+//    @Override
+//    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException{
+//        ArrayList dates = new ArrayList();
+//        System.out.println("manager getsessionsbyDate");
+//        return dates;  
+//    }
     
     
     @Override

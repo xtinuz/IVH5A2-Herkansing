@@ -5,9 +5,13 @@
  */
 package edu.avans.ivh5.api;
 
+import edu.avans.ivh5.shared.model.domain.SharedTreatment;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 
 public interface PhysioManagerServerIF extends Remote {
+    ArrayList<SharedTreatment> getAllFinishedTreatments() throws RemoteException;
     
 }

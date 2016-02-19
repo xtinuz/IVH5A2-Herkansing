@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><treatments>
+<?xml version="1.0"?>
+<treatments>
 	<treatment>
 		<treatmentid>1</treatmentid>
 		<treatmentcode>1000</treatmentcode>
@@ -82,7 +83,7 @@
 			<notes>no notes 3</notes>
 			<treatmentid>1</treatmentid>
 		</session>
-	<treatment><treatmentid>4</treatmentid><treatmentcode>1400 Eenmalig fysiotherapeutisch onderzoek</treatmentcode><BSN>6153</BSN><physiotherapist>lastnametest</physiotherapist><status>actief</status></treatment></treatment>
+	</treatment>
 	<treatment>
 		<treatmentid>2</treatmentid>
 		<treatmentcode>1400</treatmentcode>
@@ -95,34 +96,6 @@
 			<endtime>14:00</endtime>
 			<notes>no notes 4</notes>
 			<treatmentid>2</treatmentid>
-		</session>
-	</treatment>
-	<treatment>
-		<treatmentid>1</treatmentid>
-		<treatmentcode>1000</treatmentcode>
-		<BSN>111222333</BSN>
-		<physiotherapist>lastnametest</physiotherapist>
-		<status>Open</status>
-		<session>
-			<date>01-01-2016</date>
-			<starttime>10:00</starttime>
-			<endtime>10:30</endtime>
-			<notes>no notes first</notes>
-			<treatmentid>1</treatmentid>
-		</session>
-		<session>
-			<date>01-01-2016</date>
-			<starttime>12:00</starttime>
-			<endtime>12:30</endtime>
-			<notes>no notes 2</notes>
-			<treatmentid>1</treatmentid>
-		</session>
-		<session>
-			<date>01-01-2016</date>
-			<starttime>13:00</starttime>
-			<endtime>13:30</endtime>
-			<notes>no notes 3</notes>
-			<treatmentid>1</treatmentid>
 		</session>
 	</treatment>
 </treatments>

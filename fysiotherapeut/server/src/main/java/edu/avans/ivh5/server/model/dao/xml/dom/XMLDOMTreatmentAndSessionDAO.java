@@ -9,6 +9,7 @@ import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
+import edu.avans.ivh5.shared.model.domain.SharedTreatment;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -42,13 +43,14 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
    
     @Override
     public Schedule getScheduleTableData( ArrayList dates, String lastname) {
-         System.out.println("Scheduledata in DAO");
+        System.out.println("Scheduledata in DAO");
         Schedule schedule = null;
+        int BSN = 0;
         
         if ((document != null) && (lastname != null)){
-            System.out.println("document not null");
+            System.out.println("document not null and lastname not null");
+            ArrayList scheduleItems = new ArrayList();
             NodeList treatmentslist = document.getElementsByTagName("treatment"); 
-            //NodeList sessiondateslist = new NodeList();
             for (int i = 0; i < treatmentslist.getLength(); i++) {                                                      // For every treatment
                 Node node = treatmentslist.item(i);                                                                     // Make a node for the treatment
                  if (node instanceof Element) {                                                                         // Check if node is an Element
@@ -59,11 +61,35 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
                         System.out.println("treatmentchildlist " + treatmentchildlist.getLength());
                         for (int z = 0; z < treatmentchildlist.getLength(); z++){                                       // for every child the treatment has
                             Node treatmentchildnode = treatmentchildlist.item(z);                                       // create a node for it.
+                            //Element treatmentchildElement = (Element) treatmentchildnode;
                             String nodeName = treatmentchildnode.getNodeName();                                         // get the nodename
+                            if(nodeName == "BSN"){
+                                Element bsnElement = (Element) treatmentchildnode;
+                                BSN = Integer.parseInt( bsnElement.getTextContent() );
+                            }
                             if(nodeName == "session"){                                                                  // if it is a session
-                                Element testelement = (Element) treatmentchildnode;
-                                String date = testelement.getElementsByTagName("date").item(0).getTextContent();
+                                Element sessionElement = (Element) treatmentchildnode;
+                                String date = sessionElement.getElementsByTagName("date").item(0).getTextContent();
                                 System.out.println( "after if + " + date);
+                                Iterator<String> datesIterator = dates.iterator();
+                                while(datesIterator.hasNext()){
+                                    String compare = datesIterator.next();
+                                    if(date.equals(compare)){
+                                        System.out.println("match at " + compare);
+                                        String starttime = sessionElement.getElementsByTagName("starttime").item(0).getTextContent();
+                                        String endtime = sessionElement.getElementsByTagName("endtime").item(0).getTextContent();
+                                        
+                                        ScheduleItem scheduleItem = new ScheduleItem(date, starttime, endtime, lastname, BSN);
+                                        scheduleItems.add(scheduleItem);
+                                        
+                                        System.out.println("starttime = " + starttime);
+                                        System.out.println("bsn = " + BSN);
+                                    }
+                                    else {
+                                        System.out.println("no match at " + compare + "compare to " + date);
+                                        
+                                    }
+                                }
                                 
                                 
                             }
@@ -71,7 +97,19 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
                     }
                  }
             }
+            schedule = new Schedule( lastname, scheduleItems);
         }
+        
+        
+        else if (document != null){
+            System.out.println("document not null, No lastname parameter");
+            
+        }
+        
+        else {
+            System.out.println("Document is not found");
+        }
+
         return schedule;
     }   
     
@@ -124,6 +162,40 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
         System.out.println("XMLDOMEmployeeDAO did not find the treatment");
         return false;
     }
+    
+    @Override
+    public ArrayList<SharedTreatment> getAllFinishedTreatments(){
+        System.out.println("XMLDOMTreatmentDAO is getAllFinishedTreatments");
+        ArrayList<SharedTreatment> treatments = new ArrayList();
+         if (document != null){
+            System.out.println("document not null");
+            NodeList treatmentslist = document.getElementsByTagName("treatment"); 
+            //NodeList sessiondateslist = new NodeList();
+            for (int i = 0; i < treatmentslist.getLength(); i++) {                                                      // For every treatment
+                int sessions = 0;
+                Node node = treatmentslist.item(i);                                                                     // Make a node for the treatment
+                 if (node instanceof Element) {                                                                         // Check if node is an Element
+                    Element child = (Element) node;                                                                     // child = Treatment
+                    if (child.getElementsByTagName("status").item(0).getTextContent().equals("open")) {
+                        NodeList treatmentchildlist = child.getChildNodes();                             
+                        for (int z = 0; z < treatmentchildlist.getLength(); z++){                                       // for every child the treatment has
+                            Node treatmentchildnode = treatmentchildlist.item(z);                                       // create a node for it.
+                            if(treatmentchildnode.getNodeName() == "session"){                                                                  // if it is a session
+                                sessions++;
+                            }
+                        }
+                        treatments.add(new SharedTreatment(
+                                child.getElementsByTagName("BSN").item(0).getTextContent(),
+                                child.getElementsByTagName("treatmentCode").item(0).getTextContent(),
+                                sessions
+                        ));
+                    }
+                 }
+            }
+        }
+         return treatments;
+    }
+
     @Override
     public int getMaxID() {
         System.out.println("XMLDOMTreatmentandSessionDAO is getting the max id");

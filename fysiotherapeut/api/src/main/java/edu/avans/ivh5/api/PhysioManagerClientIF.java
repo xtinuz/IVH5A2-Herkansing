@@ -8,6 +8,7 @@ package edu.avans.ivh5.api;
 import edu.avans.ivh5.shared.model.domain.ClientDTO;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.PhysioPractice;
+import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
@@ -64,11 +65,11 @@ public interface PhysioManagerClientIF extends Remote {
     
     public PhysioPractice getCompanyInfo() throws RemoteException; 
 
-    public void getScheduleTableData(ArrayList dates, String lastname) throws RemoteException;    
+    public Schedule getScheduleTableData(ArrayList dates, String lastname) throws RemoteException;    
 
     public ArrayList<Employee> getTherapists() throws RemoteException;
 
-    public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException;
+    //public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException;
     
     public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException;
 }
