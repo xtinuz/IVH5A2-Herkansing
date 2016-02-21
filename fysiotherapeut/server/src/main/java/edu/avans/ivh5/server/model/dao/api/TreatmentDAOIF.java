@@ -20,4 +20,7 @@ public interface TreatmentDAOIF {
     public boolean deleteTreatmentByTreatmentID(int treatment) throws RemoteException;
     
     public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException; 
+    
+    public edu.avans.ivh5.shared.models.TreatmentType getTreatmentTypeByTreatmentCode(String Treatmentcode);
+    
 }
