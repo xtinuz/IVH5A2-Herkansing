@@ -9,7 +9,7 @@ import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
-import edu.avans.ivh5.shared.model.domain.SharedTreatment;
+import edu.avans.ivh5.shared.models.*;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -172,7 +172,8 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
                 Node node = treatmentslist.item(i);                                                                     // Make a node for the treatment
                  if (node instanceof Element) {                                                                         // Check if node is an Element
                     Element child = (Element) node;                                                                     // child = Treatment
-                    if (child.getElementsByTagName("status").item(0).getTextContent().equals("open")) {
+                    if (child.getElementsByTagName("status").item(0).getTextContent().equals("Afgerond")) {
+                        child.getElementsByTagName("status").item(0).setTextContent("Gefactureerd");
                         NodeList treatmentchildlist = child.getChildNodes();                             
                         for (int z = 0; z < treatmentchildlist.getLength(); z++){                                       // for every child the treatment has
                             Node treatmentchildnode = treatmentchildlist.item(z);                                       // create a node for it.
@@ -182,12 +183,14 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
                         }
                         treatments.add(new SharedTreatment(
                                 child.getElementsByTagName("BSN").item(0).getTextContent(),
-                                child.getElementsByTagName("treatmentCode").item(0).getTextContent(),
+                                child.getElementsByTagName("treatmentcode").item(0).getTextContent(),
                                 sessions
                         ));
+                        // TODO: verander status naar "done" oid
                     }
                  }
             }
+            domDocument.writeDocument();
         }
          return treatments;
     }

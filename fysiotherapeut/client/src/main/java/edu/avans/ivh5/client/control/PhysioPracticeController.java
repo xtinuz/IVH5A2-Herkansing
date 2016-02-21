@@ -61,10 +61,18 @@ public class PhysioPracticeController implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Validating company info ...");
+        
+        switch (e.getActionCommand()) {
+            case "validatePractice":
+                System.out.println("validatePractice");
+                System.out.println("Saving company info ...");
+                saveInputFields();
+                JOptionPane.showMessageDialog(parentScreen, "Succesvol opgeslagen!");   
+                break;
+        }
+        
         if (validatePractice()== true){
-            System.out.println("Saving company info ...");
-            saveInputFields();
-            JOptionPane.showMessageDialog(parentScreen, "Succesvol opgeslagen!");         
+                  
         };      
     }
     

@@ -6,7 +6,7 @@
 package edu.avans.ivh5.server.model.dao.api;
 
 import edu.avans.ivh5.shared.model.domain.Schedule;
-import edu.avans.ivh5.shared.model.domain.SharedTreatment;
+import edu.avans.ivh5.shared.models.*;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;

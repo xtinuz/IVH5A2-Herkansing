@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 public class CompanyInfoPanel extends JPanel {
     
-    private JButton saveButton;
+    private JButton saveButton, testbutton;
     private JTextField nameField, addressField, postalField, cityField, phoneField, mailField, KVKField, IBANField, BICField, bankField;
     private PhysioPracticeController controller;
     
@@ -43,7 +43,13 @@ public class CompanyInfoPanel extends JPanel {
         
         saveButton = new JButton("Opslaan");
         saveButton.addActionListener(this.controller);
+        saveButton.setActionCommand("validatePractice");
         panel.add(saveButton);
+        
+        testbutton = new JButton("GET CLIENT");
+        testbutton.addActionListener(this.controller);
+        testbutton.setActionCommand("getClient");
+        panel.add(testbutton);
         // end of row 1
         
         // row 2

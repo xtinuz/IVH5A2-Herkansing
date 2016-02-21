@@ -26,10 +26,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import edu.avans.ivh5.shared.rmi.*;
 
 
 public class PhysioManagerImpl implements PhysioManagerClientIF {
-
+    private final InsuranceServerInterface insuranceServer;
     private final DAOFactory daoFactory;
     private final PasswordManager passwordManager;
     private final String service;
@@ -38,6 +39,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         daoFactory = DAOFactory.getDAOFactory("edu.avans.ivh5.server.model.dao.xml.dom.XmlDOMDAOFactory");
         passwordManager = new PasswordManager();
         this.service = service;
+        insuranceServer = PhysioServer.getInsuranceServerInterface();
     }
 
     @Override
@@ -152,8 +154,11 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     //CLient
     @Override
-    public ClientDTO getClient() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public edu.avans.ivh5.shared.models.ClientDTO getClient() throws RemoteException {
+        edu.avans.ivh5.shared.models.ClientDTO client = insuranceServer.getClient("500005243");
+        System.out.println("Functionality getClient trough RMi");
+        System.out.println("Naam: " + client.getName() + " " + client.getLastName());
+        return client;
     }
 
     @Override
