@@ -23,20 +23,26 @@ import org.w3c.dom.NodeList;
 public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
     private XmlDOMDocument domDocument = null;
     private Document document = null;
+    private XmlDOMDocument domDocument2 = null;
+    private Document document2 = null;
 
     public XMLDOMTreatmentAndSessionDAO() {
         this.domDocument = new XmlDOMDocument("resources\\TreatmentAndSession.xml", "resources\\TreatmentAndSession.xsd");
         this.document = domDocument.getDocument();
+        this.domDocument2 = new XmlDOMDocument("resources\\treatmenttype.xml", "resources\\treatmenttype.xsd");
+        this.document2 = domDocument2.getDocument();
     }
     
     private void getDocument() {
         this.domDocument = new XmlDOMDocument("resources\\TreatmentAndSession.xml", "resources\\TreatmentAndSession.xsd");
         this.document = domDocument.getDocument();
+        this.domDocument2 = new XmlDOMDocument("resources\\treatmenttype.xml", "resources\\treatmenttype.xsd");
+        this.document2 = domDocument2.getDocument();
     }
 
    
     @Override
-    public Schedule getSceduleTableData( ArrayList dates, String lastname) {
+    public Schedule getScheduleTableData( ArrayList dates, String lastname) {
         System.out.println("Scheduledata in DAO");
         Schedule schedule = null;
         int BSN = 0;
@@ -105,9 +111,7 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
         }
 
         return schedule;
-           
-    }
-        
+    }   
     
     @Override
     public boolean deleteTreatment(Treatment treatment) throws RemoteException{
@@ -193,5 +197,53 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
             domDocument.writeDocument();
         }
          return treatments;
+    }
+
+    @Override
+    public int getMaxID() {
+        System.out.println("XMLDOMTreatmentandSessionDAO is getting the max id");
+        if (document != null) {
+            NodeList list = document.getElementsByTagName("treatment");
+            return list.getLength();
+        } else {
+            System.out.println("XMLDOMtreatmentandsessionDAO did not find the max id due to a missing document");
+            return 0;
+        }
+    }
+    
+    @Override
+    public boolean saveTreatment(Treatment newTreatment)
+    {
+        System.out.println("XMLDOMTreatmentDAO save ");
+
+        // vind root element treatments
+        Node rootElement = document.getElementsByTagName("treatment").item(0);
+        // maak nieuwe lege treatment en voeg deze toe aan treatments
+        Element treatments = document.createElement("treatment");
+        rootElement.appendChild(treatments);
+
+        // voeg data toe
+        Element TreatmentID = document.createElement("treatmentid");
+        TreatmentID.appendChild(document.createTextNode(Integer.toString(getMaxID() + 1)));
+        treatments.appendChild(TreatmentID);
+
+        Element TreatmentCode = document.createElement("treatmentcode");
+        TreatmentCode.appendChild(document.createTextNode(newTreatment.getTreatmentCode()));
+        treatments.appendChild(TreatmentCode);
+
+        Element BSN = document.createElement("BSN");
+        BSN.appendChild(document.createTextNode(newTreatment.getBSN()));
+        treatments.appendChild(BSN);
+
+        Element PhysioTherapistLastName = document.createElement("physiotherapist");
+        PhysioTherapistLastName.appendChild(document.createTextNode(newTreatment.getPhysioTherapistLastName()));
+        treatments.appendChild(PhysioTherapistLastName);
+        
+        Element status = document.createElement("status");
+        status.appendChild(document.createTextNode(newTreatment.getStatus()));
+        treatments.appendChild(status);
+
+        domDocument.writeDocument();
+        return true;
     }
 }

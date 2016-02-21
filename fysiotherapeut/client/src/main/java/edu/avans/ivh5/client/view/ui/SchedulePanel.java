@@ -26,8 +26,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -41,7 +43,7 @@ public class SchedulePanel extends javax.swing.JPanel {
     /**
      * Creates new form ScedulePanel
      */
-    public SchedulePanel(JFrame parentFrame, ScheduleController controller) {
+    public SchedulePanel(JFrame parentFrame, ScheduleController controller){
         initComponents();
         getTherapistFromComboBox();        
         this.parentFrame = parentFrame;
@@ -52,9 +54,15 @@ public class SchedulePanel extends javax.swing.JPanel {
 
         jButton1.setActionCommand("refresh table");
         jButton1.addActionListener(controller);
-        therapistComboBox.setModel(new DefaultComboBoxModel());
-        for (Object item : controller.getEmployees())
-        therapistComboBox.addItem(item);
+        refreshComboBox();
+        controller.runTimer();
+        
+        try {
+            controller.setTableData();
+        } 
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
         
     }
    
@@ -291,7 +299,19 @@ public class SchedulePanel extends javax.swing.JPanel {
         return jtable;
     }
     
-    
+    public void repaintTable(){
+        DefaultTableModel dm = (DefaultTableModel)sceduleTable.getModel();
+        dm.fireTableDataChanged(); // notifies the JTable that the model has changed
+        sceduleTable.repaint();
+    }
   
+
+    public void refreshComboBox() {
+        System.out.println("refresh combo in screen");
+        therapistComboBox.setModel(new DefaultComboBoxModel());
+        for (Object item : controller.getEmployees())
+        therapistComboBox.addItem(item);
+        
+    }
 
 }

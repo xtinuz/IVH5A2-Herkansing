@@ -50,7 +50,7 @@ public class AddTreatmentScreen extends JFrame {
         button = buttonAction;
         textFields = new ArrayList<>();
         init();
-        IDField.setText(treatment.getTreatmentID());
+//        IDField.setText(treatment.getTreatmentID());
         IDField.setEditable(false);
         treatmentCodeField.setText(treatment.getTreatmentCode());
         BSNField.setText(treatment.getBSN());
@@ -171,15 +171,15 @@ public class AddTreatmentScreen extends JFrame {
         textFields.get(textFields.indexOf(source) + 1).requestFocus();
     }
 
-    public Treatment getTreatment() {
-        System.out.println("Adding employee");
-        String id = IDField.getText();
-        String treatmentCode = treatmentCodeField.getText();
-        String BSN = BSNField.getText();
-        String Employee = EmployeeField.getText();
-        
-        Treatment newTreatment = new Treatment(id, treatmentCode, BSN, Employee);
-
-        return newTreatment;
-    }
+//    public Treatment getTreatment() {
+//        System.out.println("Adding employee");
+//        String id = IDField.getText();
+//        String treatmentCode = treatmentCodeField.getText();
+//        String BSN = BSNField.getText();
+//        String Employee = EmployeeField.getText();
+//        
+//        Treatment newTreatment = new Treatment(id, treatmentCode, BSN, Employee);
+//
+//        return newTreatment;
+//    }
 }

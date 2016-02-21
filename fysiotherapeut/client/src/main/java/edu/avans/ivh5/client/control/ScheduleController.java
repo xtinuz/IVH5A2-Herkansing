@@ -14,6 +14,7 @@ import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -27,11 +28,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -45,12 +49,12 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     public ScheduleController(PhysioManagerClientIF manager){
         this.manager = manager;
          getEmployees();
+         
          //getLastNameFromCBox();
 }
     
     public void setUIRef(SchedulePanel parentScreen) {
         this.parentScreen = parentScreen;
-        System.out.println("SetUIRef AddTreatmentScreen");
     }
     
     @Override
@@ -241,7 +245,6 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         }
 
     public String getLastNameFromCBox(){
-      System.out.println("\nTESTING STRINGS");
       String fullName = parentScreen.getTherapistFromComboBox();
       String lastName = "";
       String[] parts = fullName.split("\\s+");      //Splitting into array based on whitespace
@@ -251,8 +254,6 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
           lastName = lastName + parts[n] + " ";
       }
       lastName = lastName + parts[arrayCount];          //Adds last element to the string (avoids space at the end of the string)
-      System.out.println(lastName);  
-      System.out.println("\n");
       System.out.println("lastname " + lastName);
       return lastName;
     }
@@ -264,26 +265,27 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         Date date = parentScreen.getDate();
         ArrayList<ScheduleItem> scheduleItems = getSessionsForSchedule(date, lastname);
         ArrayList<String> datesFromTable = getScheduleDates( date);
-        
-        parentScreen.setTableHeaderDates( date );
         JTable table        = parentScreen.getTable();
         JTableHeader th     = table.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
-        TableModel model    = table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        parentScreen.setTableHeaderDates( date );
+        table.repaint();
+        parentScreen.repaint();
 
+            clearTable();
+            
             ListIterator<String> di = datesFromTable.listIterator();
             
             for (ScheduleItem scheduleItem : scheduleItems) {                                   // for every scheduleItem
                 for (int b = 0; b < model.getColumnCount(); b++){                               // for every column
                     String toBeSplit = (String) tcm.getColumn(b).getHeaderValue();
                     String splittedDate = toBeSplit.substring(toBeSplit.lastIndexOf(" ")+1);    // split the day from the date
-                    System.out.println("splitted date " + splittedDate);
                     if ( splittedDate.equals( scheduleItem.getDate() ) ){                       // if the date of the column matches the scheduleItem date
-                        System.out.println("matched date");
+                        //System.out.println("matched date");
                         for(int c = 0; c < model.getRowCount(); c++){                           // for every row
-                            System.out.println("rowtest " + model.getValueAt(c, 0));
                             if ( model.getValueAt(c, 0).equals( scheduleItem.getStartTime() ) ){    // if the row's time matches the scheduleItem's time
-                                System.out.println("matched time");
+                                //System.out.println("matched time");
                                 model.setValueAt( scheduleItem.getLastname() + " : " + scheduleItem.getBSN() , c, b);
                                 
                             }
@@ -292,21 +294,28 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
                     }
                 }
             }
+            repaintTable();
+    }
+    
+    
+    
+    public void repaintTable() {
+        JTable table        = parentScreen.getTable();
+    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+    tableModel.fireTableDataChanged();
+    table.repaint();
 
-            System.out.println( model.getColumnCount());
-            System.out.println( model.getRowCount());
-            System.out.println("searching empty cells");
-            for (int d = 1; d < model.getColumnCount(); d++){
-                for( int e = 0; e < model.getRowCount(); e++){
-//                    TableCellRenderer renderer = table.getCellRenderer(e, d);
-//                        Component c = renderer.getTableCellRendererComponent(table, null ,false, false, e, d);
-//                        c.setBackground(Color.GREEN);
-                    if( model.getValueAt(e, d) == null ){
-                        System.out.println("null value found");
-
-                    }
-                }
+}
+    
+    private void clearTable() {
+        DefaultTableModel tableModel = (DefaultTableModel)parentScreen.getTable().getModel();
+        for(int x = 1; x < tableModel.getColumnCount(); x++)
+        {
+            for(int y = 0 ; y < tableModel.getRowCount(); y++)
+            {
+                tableModel.setValueAt(null, y, x);
             }
+        }
     }
     
     
@@ -327,5 +336,15 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             }
         };
     }
-    
+       
+       public void runTimer(){
+           Timer timer = new Timer();
+           timer.schedule( new TimerTask(){
+               @Override
+               public void run(){
+                   parentScreen.refreshComboBox();    
+               }
+           }, 0, 8000);   
+       }
+         
 }
