@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<treatments>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><treatments>
 	<treatment>
 		<treatmentid>1</treatmentid>
 		<treatmentcode>1000</treatmentcode>
@@ -83,7 +82,7 @@
 			<notes>no notes 3</notes>
 			<treatmentid>1</treatmentid>
 		</session>
-	</treatment>
+	<treatment><treatmentid>4</treatmentid><treatmentcode>1400 Eenmalig fysiotherapeutisch onderzoek</treatmentcode><BSN>6153</BSN><physiotherapist>lastnametest</physiotherapist><status>actief</status></treatment></treatment>
 	<treatment>
 		<treatmentid>2</treatmentid>
 		<treatmentcode>1400</treatmentcode>

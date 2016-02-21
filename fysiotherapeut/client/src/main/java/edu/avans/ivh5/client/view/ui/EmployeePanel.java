@@ -47,7 +47,6 @@ public class EmployeePanel extends JPanel {
     public EmployeePanel(JFrame parentFrame, TherapistController controller) {
         this.controller = controller;
         this.parentFrame = parentFrame;
-        System.out.println("setting ui reference EmployeePanel");
         controller.setUIRef(this);
         dtm = new DefaultTableModel();
 

@@ -26,6 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -53,9 +54,8 @@ public class SchedulePanel extends javax.swing.JPanel {
 
         jButton1.setActionCommand("refresh table");
         jButton1.addActionListener(controller);
-        therapistComboBox.setModel(new DefaultComboBoxModel());
-        for (Object item : controller.getEmployees())
-        therapistComboBox.addItem(item);
+        refreshComboBox();
+        controller.runTimer();
         
         try {
             controller.setTableData();
@@ -305,5 +305,13 @@ public class SchedulePanel extends javax.swing.JPanel {
         sceduleTable.repaint();
     }
   
+
+    public void refreshComboBox() {
+        System.out.println("refresh combo in screen");
+        therapistComboBox.setModel(new DefaultComboBoxModel());
+        for (Object item : controller.getEmployees())
+        therapistComboBox.addItem(item);
+        
+    }
 
 }

@@ -6,10 +6,11 @@
 	<complexType>
            <sequence>
 		<element name="Treatment">
-			<element name="treatmentid" type="string"></element>
+			<element name="treatmentid" type="integer"></element>
 			<element name="treatmentcode" type="string"></element>
 			<element name="BSN" type="string"></element>
 			<element name="physiotherapist" type="string"></element>
+			<element name="status" type="string"></element>
 			<element>
 				<complexType>
            				<sequence>

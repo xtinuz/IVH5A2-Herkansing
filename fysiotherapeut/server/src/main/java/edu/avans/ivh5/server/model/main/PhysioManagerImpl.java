@@ -111,7 +111,10 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     //Treatments
     @Override
     public boolean saveTreatment(Treatment treatment) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Savinug treatmenrt: " + treatment.toString());
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        System.out.println("DAO Save treatment");
+        return dao.saveTreatment(treatment);
     }
 
     @Override
@@ -201,7 +204,7 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     public Schedule getScheduleTableData(ArrayList dates, String lastname) throws RemoteException{
         System.out.println("manager getScheduleTableData");
         TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
-        Schedule schedule = dao.getSceduleTableData(dates, lastname);
+        Schedule schedule = dao.getScheduleTableData(dates, lastname);
   
         return schedule;
    

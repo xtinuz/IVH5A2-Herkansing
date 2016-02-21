@@ -6,6 +6,7 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentAndSessionController;
+import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import javax.swing.DefaultComboBoxModel;
 
@@ -27,8 +28,10 @@ public class AddSessionScreen extends javax.swing.JFrame {
            controller.setUIRef(this);
            fillTherapistComboBox();
            fillTreatmentCodeComboBox();
+           saveButton.setActionCommand("save treatment");
+           saveButton.addActionListener( controller );
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -352,6 +355,32 @@ public void fillTreatmentCodeComboBox(){
         treatmentcodeComboBox.addItem(item);
     }
 }
+
+public Treatment saveTreatment(){
+        int treatmentID = 0;
+        String treatmentCode = (String) treatmentcodeComboBox.getSelectedItem();
+        String BSN = bsnTextField.getText();
+        String PhysioTherapistLastName = lastnameTextField1.getText();
+        String Status = "actief";
+        
+        Treatment newTreatment = new Treatment(treatmentID, treatmentCode, BSN, PhysioTherapistLastName, Status);
+        System.out.println("reached return");
+        return newTreatment;
+    }
+
+/*
+public Treatment saveNewTreatment(){
+        int treatmentID = 0;
+        String treatmentCode = (String) treatmentcodeComboBox.getSelectedItem();
+        String BSN = bsnTextField.getText();
+        String PhysioTherapistLastName = lastnameTextField1.getText();
+        String Status = "actief";
+        
+        Treatment newTreatment = new Treatment(treatmentID, treatmentCode, BSN, PhysioTherapistLastName, Status);
+        System.out.println("reached return");
+        return newTreatment;
+    }
+*/
 }
 
 

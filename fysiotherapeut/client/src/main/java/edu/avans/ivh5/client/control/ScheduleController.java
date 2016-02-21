@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
@@ -53,7 +55,6 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
     
     public void setUIRef(SchedulePanel parentScreen) {
         this.parentScreen = parentScreen;
-        System.out.println("SetUIRef AddTreatmentScreen");
     }
     
     @Override
@@ -244,7 +245,6 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
         }
 
     public String getLastNameFromCBox(){
-      System.out.println("\nTESTING STRINGS");
       String fullName = parentScreen.getTherapistFromComboBox();
       String lastName = "";
       String[] parts = fullName.split("\\s+");      //Splitting into array based on whitespace
@@ -254,8 +254,6 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
           lastName = lastName + parts[n] + " ";
       }
       lastName = lastName + parts[arrayCount];          //Adds last element to the string (avoids space at the end of the string)
-      System.out.println(lastName);  
-      System.out.println("\n");
       System.out.println("lastname " + lastName);
       return lastName;
     }
@@ -283,13 +281,11 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
                 for (int b = 0; b < model.getColumnCount(); b++){                               // for every column
                     String toBeSplit = (String) tcm.getColumn(b).getHeaderValue();
                     String splittedDate = toBeSplit.substring(toBeSplit.lastIndexOf(" ")+1);    // split the day from the date
-                    System.out.println("splitted date " + splittedDate);
                     if ( splittedDate.equals( scheduleItem.getDate() ) ){                       // if the date of the column matches the scheduleItem date
-                        System.out.println("matched date");
+                        //System.out.println("matched date");
                         for(int c = 0; c < model.getRowCount(); c++){                           // for every row
-                            System.out.println("rowtest " + model.getValueAt(c, 0));
                             if ( model.getValueAt(c, 0).equals( scheduleItem.getStartTime() ) ){    // if the row's time matches the scheduleItem's time
-                                System.out.println("matched time");
+                                //System.out.println("matched time");
                                 model.setValueAt( scheduleItem.getLastname() + " : " + scheduleItem.getBSN() , c, b);
                                 
                             }
@@ -300,7 +296,6 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             }
             repaintTable();
     }
-    
     
     
     
@@ -341,5 +336,15 @@ public class ScheduleController implements ActionListener, KeyListener, MouseLis
             }
         };
     }
-    
+       
+       public void runTimer(){
+           Timer timer = new Timer();
+           timer.schedule( new TimerTask(){
+               @Override
+               public void run(){
+                   parentScreen.refreshComboBox();    
+               }
+           }, 0, 8000);   
+       }
+         
 }

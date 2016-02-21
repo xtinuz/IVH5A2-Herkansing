@@ -19,5 +19,5 @@ public interface TreatmentDAOIF {
     
     public boolean deleteTreatmentByTreatmentID(int treatment) throws RemoteException;
     
-    public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException; 
+    public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException;
 }
