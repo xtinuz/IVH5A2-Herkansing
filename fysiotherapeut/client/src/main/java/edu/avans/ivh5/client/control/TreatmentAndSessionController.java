@@ -14,6 +14,7 @@ import edu.avans.ivh5.client.view.ui.TreatmentPanel;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
+import edu.avans.ivh5.shared.models.ClientDTO;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -72,9 +73,9 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("TreatmentController, top of actionperformed");
+        System.out.println("TreatmentAndSessionController, top of actionperformed");
         switch (e.getActionCommand()) {
-            case "save treatment":
+            case "saveTreatment":
                 System.out.println("actioncommand savetreatment");
                 Treatment treatment = sessionScreen.saveTreatment();
                 try{
@@ -86,34 +87,42 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                         break;
             case "newTreatment":
                 System.out.println("actioncommand newTreatment");
-                AddSessionScreen screen = new AddSessionScreen(this);
+                AddSessionScreen screen = new AddSessionScreen(this, true);
                 screen.setVisible(true);
                 break;
-            case "alterTreatment":
+            case "openAlterScreen":
                 System.out.println("actioncommand alterTreatment");
+                
+                //Get Treatment data
                 Treatment tempTreatment = null;
                 try {
                     tempTreatment = manager.getTreatmentByID(parentPanel.getTreatmentID());
                 } catch (RemoteException ex) {
                     Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                //Get Client data
+                ClientDTO client = new ClientDTO("Joey", "Beljaars", "0187484337", "joeyBeljaars@hotmail.com", "114441231f" );
+                /*
+                ClientDTO client = null;
+                try {
+                    client = manager.getClient(tempTreatment.getBSN());
+                } catch (RemoteException ex) {
+                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        */
+                
+                //Get Employee data
                 Employee therapist = null;
                 try {
-                    therapist = manager.getTherapistByTherapistID(Integer.parseInt(tempTreatment.getPhysioTherapistLastName()));
+                    therapist = manager.getTherapist(tempTreatment.getPhysioTherapistLastName());
                 } catch (RemoteException ex) {
                     Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                try {
-                    new AddTreatmentScreen(
-                            this,
-                            "alterTreatment",
-                            therapist,
-                            tempTreatment
-                    );
-                } catch (NullPointerException ex) {
-                    System.out.println("No employee selected");
-                }
+                AddSessionScreen alterScreen = new AddSessionScreen(this, false, therapist, tempTreatment, client);
+                alterScreen.setVisible(true);
+                alterScreen.fillFields();
                 break;
             case "logout":
                 System.out.println("actioncommand logout");
@@ -125,12 +134,18 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                 break;
             case "deleteTreatment":
                 System.out.println("actioncommand delete");
-
+                parentPanel.removeTreatmentByTreatmentIDDIRTY();
+/*
                 try {
                     manager.deleteTreatmentByTreatmentID(parentPanel.getTreatmentID());
+                    System.out.println(parentPanel.getTreatmentID());
                 } catch (RemoteException ex) {
                     Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } */
+                break;
+            case "alterTreatment":
+                System.out.println("actioncommand confirmsave");
+                parentScreen.dispose();
                 break;
             case "confirmSave":
                 System.out.println("actioncommand confirmsave");
@@ -231,5 +246,25 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                         System.out.println(ex.getMessage());
             }
         return treatments;
+    }
+    
+    public void getClient(String needle){
+        try {
+            ClientDTO client = manager.getClient(needle);
+            sessionScreen.updateClient(client);
+        } catch (RemoteException ex) {
+            Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addTreatments() {
+        try {
+            ArrayList<Treatment> treatments = manager.getTreatments();
+            System.out.println("test addtreatments after manager " + treatments.size());
+            parentPanel.addTreatments( treatments);
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException at AddEmployees()");
+            System.out.println(ex.getMessage()); 
+        }
     }
 }

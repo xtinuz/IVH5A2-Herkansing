@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -35,7 +36,7 @@ public class TreatmentPanel extends JPanel {
     private JButton logOutButton, newButton, changeButton, deleteButton;
     private JComboBox employeeBox;
     private JLabel overviewLabel;
-    private JTextField searchField;
+    //private JTextField searchField;
     private final TreatmentAndSessionController controller;
     private JFrame parentFrame;
     private JTable treatmentTable;
@@ -45,11 +46,14 @@ public class TreatmentPanel extends JPanel {
     public TreatmentPanel(JFrame parentFrame, TreatmentAndSessionController controller) {
         this.controller = controller;
         this.parentFrame = parentFrame;
+        dtm = new DefaultTableModel();
         System.out.println("setting ui reference TreatmentPanel");
         controller.setUIRef(this);
         setLayout(new BorderLayout());
         add(createNorthPanel(), BorderLayout.NORTH);
         add(createCenterPanel(), BorderLayout.CENTER);
+        
+        this.controller.addTreatments();
     }
 
     private JPanel createNorthPanel() {
@@ -81,7 +85,7 @@ public class TreatmentPanel extends JPanel {
         panel.add(newButton);
         
         changeButton = new JButton("Wijzig");
-        changeButton.setActionCommand("alterTreatment");
+        changeButton.setActionCommand("openAlterScreen");
         changeButton.addActionListener(controller);
         panel.add(changeButton);
         
@@ -100,26 +104,47 @@ public class TreatmentPanel extends JPanel {
         panel.add(new JLabel(""));
         panel.add(new JLabel(""));
 
+        /*
         searchField = new JTextField();
-        panel.add(searchField);
+        panel.add(searchField); */
         // end row 3
 
         return panel;
     }
 
-    private JPanel createCenterPanel() {
-        JPanel panel = new JPanel(new GridLayout(1, 1));
-        panel.setBorder(new EmptyBorder(15, 10, 0, 10));
+   private JPanel createCenterPanel() {
+//        JPanel panel = new JPanel(new GridLayout(1, 1));
+//        panel.setBorder(new EmptyBorder(15, 10, 0, 10));
+        JPanel panel = new JPanel();
 
-        Object rowData[][] = {{"1000", "Row1-Column2", "Row1-Column3", "Row1-Column4", "Row1-Column5"},
-        {"1001", "Row2-Column2", "Row2-Column3", "Row2-Column4", "Row2-Column5"}};
-        Object columnNames[] = {"ID", "Fysiotherapeut", "Cliënt", "Behandelcode", "Status"};
-        treatmentTable = new JTable(rowData, columnNames);
+        panel.setLayout(new BorderLayout());
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new GridLayout(1, 5));
+        JLabel label = new JLabel("Behandelingen: ");
+        label.setFont(new Font("Arial", Font.PLAIN, 20));
+        northPanel.add(label);
+
+        JPanel centerPanel = new JPanel(new GridLayout(1, 1));
+        centerPanel.setBorder(new EmptyBorder(15, 10, 0, 10));
+        
+        dtm.addColumn("treatmentid");
+        dtm.addColumn("Treatmentcode");
+        dtm.addColumn("KlantBSN");
+        dtm.addColumn("FysioTherapeutAchternaam");
+        dtm.addColumn("Status");
+        treatmentTable = new JTable(dtm);
         treatmentTable.setFillsViewportHeight(true);
         treatmentTable.getTableHeader().setBackground(Color.CYAN);
-        treatmentTable.addMouseListener(new MouseListener() {
+        treatmentTable.addMouseListener(controller);
+        
+//        treatmentTable = new JTable(rowData, columnNames);
+//        treatmentTable.setFillsViewportHeight(true);
+//        treatmentTable.getTableHeader().setBackground(Color.CYAN);
+//        treatmentTable.addMouseListener(new MouseListener() {
 
-            @Override
+            
+/*            @Override
             public void mouseClicked(MouseEvent e) {
             }
 
@@ -147,19 +172,32 @@ public class TreatmentPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
             }
 
-        });
+        });*/
 
         // Make the table vertically scrollable
         JScrollPane scrollPane = new JScrollPane(treatmentTable);
 
-        panel.add(scrollPane);
+        centerPanel.add(scrollPane);
 
+        panel.add(northPanel, BorderLayout.NORTH);
+        panel.add(centerPanel, BorderLayout.CENTER);
+        
         return panel;
     }
+   
+   public void removeTreatmentByTreatmentIDDIRTY(){
+       for(int i = 0; i < dtm.getRowCount(); i++){//For each row
+            if(dtm.getValueAt(i, 0).equals(this.getTreatmentID())){//Search the model
+                dtm.removeRow(i);
+            }
+        }
+   }
+   
 
     public int getTreatmentID() {
-        System.out.println("Dit moet de ID ZIJN: " + (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0));
-        return Integer.parseInt( (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0));
+        //System.out.println("Dit moet de ID ZIJN: " + (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0));
+        return Integer.parseInt(treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0).toString());
+//        return Integer.parseInt( (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0));
     }
     
     public JPopupMenu createRightClickMenu(int row) {
@@ -218,5 +256,12 @@ public class TreatmentPanel extends JPanel {
     
     public JFrame getParentFrame() {
         return parentFrame;
+    }
+    
+    public void addTreatments(ArrayList<Treatment> treatments) {
+        treatments.stream().forEach(
+                treatment -> dtm.addRow(
+                        new Object[]{treatment.getTreatmentID(), treatment.getTreatmentCode(), treatment.getBSN(), treatment.getPhysioTherapistLastName(), treatment.getStatus()}
+                ));
     }
 }

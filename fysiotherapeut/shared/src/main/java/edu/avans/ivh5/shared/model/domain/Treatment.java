@@ -6,6 +6,7 @@
 package edu.avans.ivh5.shared.model.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Treatment implements Serializable {
@@ -14,6 +15,7 @@ public class Treatment implements Serializable {
     private String BSN;
     private String PhysioTherapistLastName;
     private String Status;
+    private ArrayList<Session> sessions;
     
     public Treatment(int TreatmentID, String TreatmentCode, String BSN, String PhysioTherapistLastName, String Status)
     {
@@ -22,6 +24,7 @@ public class Treatment implements Serializable {
         this.BSN = BSN;
         this.PhysioTherapistLastName = PhysioTherapistLastName;
         this.Status = Status;
+        this.sessions = new ArrayList<Session>();
     }
 
     public int getTreatmentID() {
@@ -63,4 +66,12 @@ public class Treatment implements Serializable {
     public void setStatus(String Status) {
         this.Status = Status;
     }   
+    
+    public void addSession(Session session){
+        this.sessions.add(session);
+    }
+    
+    public ArrayList<Session> getSessions(){
+        return this.sessions;
+    }
 }

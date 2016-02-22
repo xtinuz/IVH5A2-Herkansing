@@ -23,12 +23,18 @@ public interface TreatmentAndSessionDAOIF {
     
     public Schedule getScheduleTableData(ArrayList dates, String lastname);
     
-    public boolean deleteTreatment(Treatment treatment) throws RemoteException;
+    public boolean deleteTreatment(Treatment treatment);
     
-    public boolean deleteTreatmentByTreatmentID(int treatment) throws RemoteException;
+    public boolean deleteTreatmentByTreatmentID(int treatment);
     
     public ArrayList<SharedTreatment> getAllFinishedTreatments();
     
+    public Treatment getTreatmentByTreatmentID(int treatmentID);
+    
     public int getMaxID();
+    
+    public ArrayList<Treatment> getTreatments();
+    
+    public boolean saveSession(Session session);
     
 }

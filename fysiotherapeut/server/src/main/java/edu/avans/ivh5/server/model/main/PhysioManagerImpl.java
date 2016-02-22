@@ -116,7 +116,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         System.out.println("Savinug treatmenrt: " + treatment.toString());
         TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
         System.out.println("DAO Save treatment");
-        return dao.saveTreatment(treatment);
+        if(dao.saveTreatment(treatment)){
+            for(Session session : treatment.getSessions()){
+                dao.saveSession(session);
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -134,8 +140,8 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     
     @Override
     public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException{
-        TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
-        System.out.println("dao alter Treatment");
+        System.out.println("DeleteTreatmentByTreatmentID In de impl");
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
         return dao.deleteTreatmentByTreatmentID(treatmentID);
     }
 
@@ -157,9 +163,9 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     //CLient
     @Override
-    public edu.avans.ivh5.shared.models.ClientDTO getClient() throws RemoteException {
-        edu.avans.ivh5.shared.models.ClientDTO client = insuranceServer.getClient("500005243");
-        System.out.println("Functionality getClient trough RMi");
+    public edu.avans.ivh5.shared.models.ClientDTO getClient(String needle) throws RemoteException {
+        edu.avans.ivh5.shared.models.ClientDTO client = insuranceServer.getClient(needle);
+        System.out.println("Functionality getClient trough RMI");
         System.out.println("Naam: " + client.getName() + " " + client.getLastName());
         return client;
     }
@@ -186,7 +192,9 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
 
     @Override
     public Treatment getTreatmentByID(int treatmentID) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+       Treatment treatment = dao.getTreatmentByTreatmentID(treatmentID);
+       return treatment;
     }
 
     //Company
@@ -226,8 +234,8 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     @Override
     public ArrayList<Employee> getTherapists() throws RemoteException {
        EmployeeDAOIF employeeDAO = daoFactory.getEmployeeDAO();
-       System.out.println("getTherapists in managerImpl");
-       System.out.println(employeeDAO.getEmployees());
+       //System.out.println("getTherapists in managerImpl");
+       //System.out.println(employeeDAO.getEmployees());
         return employeeDAO.getEmployees();  
     }   
     
@@ -238,5 +246,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
         System.out.println("got the dao in managerimp");
         return dao.getTreatmentTypes();
+    }
+    
+    @Override
+    public ArrayList<Treatment> getTreatments() throws RemoteException {
+        System.out.println("getting treatments in ManagerImpl");
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        System.out.println("Got dao in ManagerImpl");
+        return dao.getTreatments();
     }
 }

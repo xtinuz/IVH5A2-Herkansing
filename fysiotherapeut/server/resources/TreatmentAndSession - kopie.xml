@@ -26,7 +26,7 @@
 			<notes>no notes 3</notes>
 			<treatmentid>1</treatmentid>
 		</session>
-	</treatment>
+	<treatment><treatmentid>8</treatmentid><treatmentcode>1000 Zitting fysiotherapie</treatmentcode><BSN/><physiotherapist/><status>actief</status></treatment><treatment><treatmentid>9</treatmentid><treatmentcode>1000 Zitting fysiotherapie</treatmentcode><BSN>0187484337</BSN><physiotherapist>lastnametest</physiotherapist><status>actief</status></treatment></treatment>
 	<treatment>
 		<treatmentid>1001</treatmentid>
 		<treatmentcode>1000</treatmentcode>
@@ -119,35 +119,6 @@
 		</session>
 		<session>
 			<date>01-01-2016</date>
-			<starttime>13:00</starttime>
-			<endtime>13:30</endtime>
-			<notes>no notes 3</notes>
-			<treatmentid>1</treatmentid>
-		</session>
-	</treatment>
-	<treatment>
-		<treatmentid>4</treatmentid>
-		<treatmentcode>1400 Eenmalig fysiotherapeutisch onderzoek</treatmentcode>
-		<BSN>6153</BSN>
-		<physiotherapist>lastnametest</physiotherapist>
-		<status>actief</status>
-		<session>
-			<date>08-01-2016</date>
-			<starttime>13:00</starttime>
-			<endtime>15:30</endtime>
-			<notes>no notes 3</notes>
-			<treatmentid>1</treatmentid>
-		</session>
-
-		<session>
-			<date>20-01-2016</date>
-			<starttime>11:00</starttime>
-			<endtime>12:30</endtime>
-			<notes>no notes 3</notes>
-			<treatmentid>1</treatmentid>
-		</session>
-		<session>
-			<date>11-01-2016</date>
 			<starttime>13:00</starttime>
 			<endtime>13:30</endtime>
 			<notes>no notes 3</notes>

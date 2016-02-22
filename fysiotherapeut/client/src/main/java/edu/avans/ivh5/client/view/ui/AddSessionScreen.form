@@ -110,7 +110,7 @@
                                   <Component id="sessionLabel" min="-2" pref="90" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                                  <EmptySpace pref="73" max="32767" attributes="0"/>
                                   <Component id="jButton2" min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -292,14 +292,29 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="bsnTextField">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="firstnameTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="lastnameTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="telTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="mailTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="therapeutLabel">
           <Properties>
@@ -308,7 +323,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="klantLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zoek klant op BSN"/>
+            <Property name="text" type="java.lang.String" value="Zoek klant"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="treatmentcodeLabel">
@@ -375,6 +390,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -386,7 +404,8 @@
             <Component class="javax.swing.JTable" name="sessionsTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="7">
+                  <Table columnCount="4" rowCount="7">
+                    <Column editable="false" title="behandelcode" type="java.lang.Object"/>
                     <Column editable="true" title="Datum" type="java.lang.Object"/>
                     <Column editable="true" title="Begintijd" type="java.lang.Object"/>
                     <Column editable="true" title="eindtijd" type="java.lang.Object"/>
@@ -394,6 +413,11 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -422,6 +446,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Annuleren"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="saveButton">
           <Properties>

@@ -6,8 +6,15 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentAndSessionController;
+import edu.avans.ivh5.shared.model.domain.Employee;
+import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
+import edu.avans.ivh5.shared.models.ClientDTO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -16,21 +23,103 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class AddSessionScreen extends javax.swing.JFrame {
     private TreatmentAndSessionController controller;
+    private boolean newTreatment;
+    public int amountOfSessions;
+    private Employee therapist;
+    private Treatment treatment;
+    private ClientDTO client;
+
 
     /**
      * Creates new form AddTreatmentScreen2
      */
-    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController ) {
-        this.controller = treatmentAndSessionController;
+    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController, boolean newTreatment) {
+            this.controller = treatmentAndSessionController;
         
+            this.amountOfSessions = 0;
+            this.newTreatment = newTreatment;
             
-        initComponents();
+            initComponents();
            controller.setUIRef(this);
            fillTherapistComboBox();
            fillTreatmentCodeComboBox();
-           saveButton.setActionCommand("save treatment");
+           if(newTreatment){
+               saveButton.setActionCommand("saveTreatment");
+               this.therapist = null;
+               this.treatment = null;
+               this.client = null;
+           }
+           else{
+               saveButton.setActionCommand("alterTreatment");
+           }
+
            saveButton.addActionListener( controller );
+           clientSearchField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.getClient(clientSearchField.getText());
+            }
+           });
+           
+           if(!newTreatment){
+               clientSearchField.setEditable(false);
+           }
     }
+    
+     public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController, boolean newTreatment, Employee therapist, Treatment treatment, ClientDTO client) {
+            this.controller = treatmentAndSessionController;
+        
+            this.amountOfSessions = 0;
+            this.newTreatment = newTreatment;
+            
+            initComponents();
+           controller.setUIRef(this);
+           fillTherapistComboBox();
+           fillTreatmentCodeComboBox();
+           
+            this.therapist = therapist;
+            this.treatment = treatment;
+            this.client = client;
+            
+           if(newTreatment){
+               saveButton.setActionCommand("saveTreatment");
+           }
+           else{
+               saveButton.setActionCommand("alterTreatment");
+               this.amountOfSessions = treatment.getSessions().size();
+           }
+
+           saveButton.addActionListener( controller );
+           clientSearchField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.getClient(clientSearchField.getText());
+            }
+           });
+           
+           if(!newTreatment){
+               clientSearchField.setEditable(false);
+           }
+    }
+     
+     public void updateClient(ClientDTO client){
+         this.client = client;
+         this.setClientFields();
+     }
+     
+     public void syncTreatmentData(){
+         
+     }
+     
+     public void collectSessionData(){
+         for(int i = 0; i >= this.amountOfSessions; i++){
+             String treatmentCode = sessionsTable.getValueAt(i, 1).toString();
+             String date = sessionsTable.getValueAt(i, 2).toString();
+             String begin = sessionsTable.getValueAt(i, 3).toString();
+             String end = sessionsTable.getValueAt(i, 4).toString();
+             this.treatment.addSession(new Session(treatmentCode, date, begin, end, Integer.toString(treatment.getTreatmentID())));
+         }
+     }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,9 +192,19 @@ public class AddSessionScreen extends javax.swing.JFrame {
 
         mailLabel.setText("Mail");
 
+        bsnTextField.setEditable(false);
+
+        firstnameTextField2.setEditable(false);
+
+        lastnameTextField2.setEditable(false);
+
+        telTextField2.setEditable(false);
+
+        mailTextField2.setEditable(false);
+
         therapeutLabel.setText("Fysiotherapeut");
 
-        klantLabel.setText("Zoek klant op BSN");
+        klantLabel.setText("Zoek klant");
 
         treatmentcodeLabel.setText("Behandelcode:");
 
@@ -126,24 +225,42 @@ public class AddSessionScreen extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 204, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("+");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         sessionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Datum", "Begintijd", "eindtijd"
+                "behandelcode", "Datum", "Begintijd", "eindtijd"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(sessionsTable);
 
         cancelButton.setText("Annuleren");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Opslaan");
 
@@ -209,7 +326,7 @@ public class AddSessionScreen extends javax.swing.JFrame {
                                 .addComponent(sessionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(123, 123, 123)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -303,6 +420,73 @@ public class AddSessionScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        
+        String treatmentCode = String.valueOf(treatmentcodeComboBox.getSelectedItem());
+        
+        if(this.amountOfSessions == 0){
+            //set TreatmentcODE
+                sessionsTable.setValueAt(treatmentCode, 0, 0);
+             
+                //set date of tomorrow
+                Date now = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(now);
+                cal.add(Calendar.DAY_OF_YEAR, 1); // <--
+                Date tomorrow = cal.getTime();
+                sessionsTable.setValueAt(tomorrow, 0, 1);
+
+                
+                sessionsTable.setValueAt("12:00", 0, 2);
+                sessionsTable.setValueAt("12:00", 0, 3);
+        }
+        else{
+                //set TreatmentcODE
+                sessionsTable.setValueAt(treatmentCode, this.amountOfSessions, 0);
+             
+                //set date of tomorrow
+                Date now = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(now);
+                cal.add(Calendar.DAY_OF_YEAR, 1); // <--
+                Date tomorrow = cal.getTime();
+                sessionsTable.setValueAt(tomorrow, this.amountOfSessions, 1);
+
+                
+                sessionsTable.setValueAt("12:00", this.amountOfSessions, 2);
+                sessionsTable.setValueAt("12:00", this.amountOfSessions, 3);
+        }
+        this.amountOfSessions++;
+        /*
+        for (int rowIndex=0; rowIndex <= sessionsTable.getRowCount(); rowIndex++){
+            Object val = (Object)sessionsTable.getValueAt(rowIndex, 0);
+            System.out.println(sessionsTable.getRowCount());
+            if(  val != " " ) // just check the first val in JTable.
+            {
+                //set TreatmentcODE
+                sessionsTable.setValueAt(treatmentCode, rowIndex, 0);
+             
+                //set date of tomorrow
+                Date now = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(now);
+                cal.add(Calendar.DAY_OF_YEAR, 1); // <--
+                Date tomorrow = cal.getTime();
+                sessionsTable.setValueAt(tomorrow, rowIndex, 1);
+
+                
+                sessionsTable.setValueAt("12:00", rowIndex, 2);
+                sessionsTable.setValueAt("12:00", rowIndex, 3);
+                rowIndex = sessionsTable.getRowCount();
+            }
+        }*/
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bsnLabel;
     private javax.swing.JTextField bsnTextField;
@@ -367,6 +551,51 @@ public Treatment saveTreatment(){
         System.out.println("reached return");
         return newTreatment;
     }
+
+
+    public void fillFields(){
+        if(treatment != null){
+            idTextField.setText(Integer.toString(treatment.getTreatmentID()));
+        }else{
+            idTextField.setText("0");
+        }
+
+        if(therapist != null){
+            this.setTherapistFields();
+        }
+        if(client != null){
+            this.setClientFields();
+        }
+    }
+
+    public void setTherapistFields(){
+        firstnameTextField1.setText(therapist.getFirstname());
+        lastnameTextField1.setText(therapist.getLastname());
+        telTextField.setText(therapist.getPhoneNr());
+        mailTextField1.setText(therapist.getEmail());
+    }
+
+    public void setClientFields(){
+        firstnameTextField2.setText(client.getName());
+        lastnameTextField2.setText(client.getLastName());
+        telTextField2.setText(client.getPhoneNumber());
+        mailTextField2.setText(client.getEmailAdress());
+        bsnTextField.setText(client.getBSN());
+    }
+    
+    public ClientDTO getClient(){
+        return new ClientDTO(firstnameTextField2.getText(), lastnameTextField2.getText(), bsnTextField.getText(), mailTextField2.getText(), telTextField2.getText());
+    }
+    
+    public Employee getTherapist(){
+        return new Employee(
+                firstnameTextField1.getText(),
+                lastnameTextField1.getText(),
+                telTextField.getText(),
+                mailTextField1.getText()
+        );
+    }
+    
 
 /*
 public Treatment saveNewTreatment(){

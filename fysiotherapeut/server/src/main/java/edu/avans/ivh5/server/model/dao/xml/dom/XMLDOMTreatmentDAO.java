@@ -72,7 +72,7 @@ public class XMLDOMTreatmentDAO implements TreatmentDAOIF {
     public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException{
         System.out.println("XMLDOMTreatmentDAO is deleting the Treatment");
         if (document != null) {
-            NodeList list = document.getElementsByTagName("treatmentid");
+            NodeList list = document.getElementsByTagName("treatment");
 
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);

@@ -49,7 +49,7 @@ public interface PhysioManagerClientIF extends Remote {
     
     public boolean deleteSession(Session session) throws RemoteException;
     
-    public edu.avans.ivh5.shared.models.ClientDTO getClient() throws RemoteException;
+    public edu.avans.ivh5.shared.models.ClientDTO getClient(String needle) throws RemoteException;
     
     public ArrayList<Treatment> getTreatmentsByTherapistID(int therapistID) throws RemoteException;
     
@@ -72,4 +72,6 @@ public interface PhysioManagerClientIF extends Remote {
     //public ArrayList<Session> getsessionsByDate(Date date1, Date date2) throws RemoteException;
     
     public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException;
+    
+    public ArrayList<Treatment> getTreatments() throws RemoteException;
 }

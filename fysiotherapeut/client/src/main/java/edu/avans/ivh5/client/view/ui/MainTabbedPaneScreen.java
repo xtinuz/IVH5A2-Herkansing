@@ -44,7 +44,7 @@ public class MainTabbedPaneScreen extends JFrame {
         
         panes.add("Agenda", SchedulePanel);
         panes.add("Behandelingen", TreatmentsPanel);
-        panes.add("Overzichten", OverviewPanel);
+        //panes.add("Overzichten", OverviewPanel);
         panes.add("Fysiotherapeuten", EmployeePanel);
         panes.add("Praktijkgegevens", CompanyInfoPanel);
         
