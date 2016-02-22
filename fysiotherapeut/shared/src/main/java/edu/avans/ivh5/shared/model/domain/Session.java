@@ -10,13 +10,13 @@ import java.util.Date;
 
 
 public class Session implements Serializable {
-    private Date Date;
-    private Date StartTime;
-    private Date EndTime;
+    private String Date;
+    private String StartTime;
+    private String EndTime;
     private String Notes;
     private String TreatmentID;
     
-    public Session(Date Date, Date StartTime, Date EndTime, String Notes, String TreatmentID)
+    public Session(String Date, String StartTime, String EndTime, String Notes, String TreatmentID)
     {
         this.Date = Date;
         this.StartTime = StartTime;
@@ -25,27 +25,27 @@ public class Session implements Serializable {
         this.TreatmentID = TreatmentID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return Date;
     }
 
-    public void setDate(Date Date) {
+    public void setDate(String Date) {
         this.Date = Date;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return StartTime;
     }
 
-    public void setStartTime(Date StartTime) {
+    public void setStartTime(String StartTime) {
         this.StartTime = StartTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return EndTime;
     }
 
-    public void setEndTime(Date EndTime) {
+    public void setEndTime(String EndTime) {
         this.EndTime = EndTime;
     }
 

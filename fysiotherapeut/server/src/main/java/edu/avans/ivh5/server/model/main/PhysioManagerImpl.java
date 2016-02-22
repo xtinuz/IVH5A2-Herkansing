@@ -140,7 +140,10 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
     //Sessions
     @Override
     public boolean saveSession(Session session) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("save session in manager");
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        //dao.saveSession();
+        return true; //change later 
     }
 
     @Override
@@ -233,5 +236,13 @@ public class PhysioManagerImpl implements PhysioManagerClientIF {
         TreatmentDAOIF dao = daoFactory.getTreatmentDAO();
         System.out.println("got the dao in managerimp");
         return dao.getTreatmentTypes();
+    }
+    
+        @Override
+    public ArrayList<Treatment> getTreatments() throws RemoteException {
+        System.out.println("getting treatments in ManagerImpl");
+        TreatmentAndSessionDAOIF dao = daoFactory.getTreatmentAndSessionDAO();
+        System.out.println("Got dao in ManagerImpl");
+        return dao.getTreatments();
     }
 }

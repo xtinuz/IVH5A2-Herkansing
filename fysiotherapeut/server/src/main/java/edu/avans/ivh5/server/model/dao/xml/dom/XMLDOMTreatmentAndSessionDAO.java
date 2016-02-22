@@ -9,6 +9,7 @@ import edu.avans.ivh5.server.model.dao.api.TreatmentAndSessionDAOIF;
 import edu.avans.ivh5.server.model.dao.api.TreatmentDAOIF;
 import edu.avans.ivh5.shared.model.domain.Schedule;
 import edu.avans.ivh5.shared.model.domain.ScheduleItem;
+import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.SharedTreatment;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
@@ -112,6 +113,35 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
 
         return schedule;
     }   
+    
+    
+    public ArrayList<Treatment> getTreatments(){
+                System.out.println("XMLDOMTreatmentAndSessionDAO is getting all treatments");
+        ArrayList<Treatment> treatments = new ArrayList<>();
+        if (document != null) {
+            NodeList list = document.getElementsByTagName("treatment");
+
+            for (int i = 0; i < list.getLength(); i++) {
+                Node node = list.item(i);
+                if (node instanceof Element) {
+                    Element child = (Element) node;
+                    treatments.add(
+                            new Treatment(
+                                    Integer.parseInt( child.getElementsByTagName("treatmentid").item(0).getTextContent() ),
+                                    child.getElementsByTagName("treatmentcode").item(0).getTextContent(),
+                                    child.getElementsByTagName("BSN").item(0).getTextContent(),
+                                    child.getElementsByTagName("physiotherapist").item(0).getTextContent(),
+                                    child.getElementsByTagName("status").item(0).getTextContent()
+                            )
+                    );
+                }
+            }
+            return treatments;
+        }
+        System.out.println("XMLDOMTreatmentAndSessionDAO did not find any treatments due to a missing document");
+        return null;
+        }
+    
     
     @Override
     public boolean deleteTreatment(Treatment treatment) throws RemoteException{
@@ -243,4 +273,35 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
         domDocument.writeDocument();
         return true;
     }
+    
+    
+     @Override
+        public boolean saveSession(Session session){
+            System.out.println("XMLDOMTreatmentAndSessionDAO save ");
+            String id = session.getTreatmentID();
+            
+        NodeList list = document.getElementsByTagName("treatment");
+        for(int i = 0; i < list.getLength(); i++ ){
+            Node node = list.item(i);
+            NodeList treatmentChilds = node.getChildNodes();
+            
+            
+        }
+        
+//        
+//
+//        Element employee = document.createElement("employee");
+//        rootElement.appendChild(employee);
+//
+//        // voeg data toe
+//        Element id = document.createElement("id");
+//        id.appendChild(document.createTextNode(Integer.toString(getMaxID() + 1)));
+//        employee.appendChild(id);
+
+
+
+        domDocument.writeDocument();
+            
+            return true; // change later
+        }
 }

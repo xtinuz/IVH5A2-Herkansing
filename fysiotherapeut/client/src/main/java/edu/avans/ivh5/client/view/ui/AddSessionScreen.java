@@ -6,9 +6,11 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentAndSessionController;
+import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,11 +18,12 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class AddSessionScreen extends javax.swing.JFrame {
     private TreatmentAndSessionController controller;
+    private int treatmentID;
 
     /**
      * Creates new form AddTreatmentScreen2
      */
-    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController ) {
+    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController, int treatmentID ) {
         this.controller = treatmentAndSessionController;
         
             
@@ -367,6 +370,29 @@ public Treatment saveTreatment(){
         System.out.println("reached return");
         return newTreatment;
     }
+
+
+public void insertRow(){
+    DefaultTableModel model = (DefaultTableModel) sessionsTable.getModel();
+    int newRow = sessionsTable.getRowCount();
+    model.insertRow(newRow, new Object[]{"","",""});
+}
+
+public Session saveSession(){
+
+   System.out.println("saveSession in screen");
+    int newRow = sessionsTable.getRowCount()-1;
+    System.out.println("rowcount " + newRow);
+    String date = (String) sessionsTable.getValueAt(newRow, 0);
+    System.out.println("test date " + date);
+    String startTime = (String) sessionsTable.getValueAt(newRow, 1);
+    String endTime = (String) sessionsTable.getValueAt(newRow, 2);
+    String notes = commentsTextArea.getText();
+    String id = "" + treatmentID;
+    Session session = new Session(date, startTime, endTime, notes, id);
+    
+    return session;
+}
 
 /*
 public Treatment saveNewTreatment(){

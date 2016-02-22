@@ -31,4 +31,8 @@ public interface TreatmentAndSessionDAOIF {
     
     public int getMaxID();
     
+    public boolean saveSession(Session session);
+    
+    public ArrayList<Treatment> getTreatments();
+    
 }
