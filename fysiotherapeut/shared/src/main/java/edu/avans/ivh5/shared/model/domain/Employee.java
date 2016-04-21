@@ -23,6 +23,13 @@ public class Employee implements Serializable {
         this.phoneNr = phoneNr;
         this.email = email;
     }
+    
+     public Employee(String firstname, String lastname, String phoneNr, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phoneNr = phoneNr;
+        this.email = email;
+    }
 
     public String getID() {
         return ID;

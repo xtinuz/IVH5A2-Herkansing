@@ -15,9 +15,6 @@
   <packaging>jar</packaging>
   <name>Java RMI Physio Shared files</name>
 
-  <dependencies>
-  </dependencies>
-
   <build>
     <finalName>physio-shared</finalName>
 

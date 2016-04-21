@@ -144,6 +144,7 @@ public class OverviewPanel extends JPanel {
         panel.add(scrollPane);
 
         return panel;
+        
     }
 
     private JPanel createCumulatiefPanel() {

@@ -7,7 +7,6 @@ package edu.avans.ivh5.client.control;
 
 import edu.avans.ivh5.api.PhysioManagerClientIF;
 import edu.avans.ivh5.client.view.ui.AddSessionScreen;
-import edu.avans.ivh5.client.view.ui.AddTreatmentScreen;
 import edu.avans.ivh5.client.view.ui.LoginScreen;
 import edu.avans.ivh5.client.view.ui.SchedulePanel;
 import edu.avans.ivh5.client.view.ui.TreatmentPanel;
@@ -15,6 +14,7 @@ import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
+import edu.avans.ivh5.shared.models.ClientDTO;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,39 +24,33 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
-// *
+ * //
+ *
+ *
  * @author bernd_000
  */
 public class TreatmentAndSessionController implements ActionListener, KeyListener, MouseListener {
+
     //private AddTreatmentScreen parentScreen;
     private TreatmentPanel parentPanel;
     private PhysioManagerClientIF manager;
     private SchedulePanel scheduleScreen;
     private ArrayList<Employee> employees;
     private AddSessionScreen sessionScreen;
-    
-    public TreatmentAndSessionController(PhysioManagerClientIF manager){
-        this.manager = manager;
-        //getEmployees();
 
-        //getTableData();
+    public TreatmentAndSessionController(PhysioManagerClientIF manager) {
+        this.manager = manager;
+
     }
-    
-//    public void setUIRef(AddTreatmentScreen parentScreen) {
-//        this.parentScreen = parentScreen;
-//        System.out.println("SetUIRef AddTreatmentScreen");
-//    }
-        
+
     public void setUIRef(TreatmentPanel parentPanel) {
         this.parentPanel = parentPanel;
         System.out.println("SetUIRef TreatmentPanel");
     }
-    
+
     public void setUIRef(AddSessionScreen sessionScreen) {
         this.sessionScreen = sessionScreen;
         System.out.println("SetUIRef sessionScreen");
@@ -66,78 +60,74 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
         this.scheduleScreen = scheduleScreen;
         System.out.println("SetUIRef scheduleScreen");
     }
-    
+
+
     public void saveTreatment(Treatment treatment) {
-    treatment = sessionScreen.saveTreatment();
+        treatment = sessionScreen.saveTreatment();
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("TreatmentController, top of actionperformed");
+        System.out.println("TreatmentAndSessionController, top of actionperformed");
         switch (e.getActionCommand()) {
-            case "save treatment":
-                System.out.println("actioncommand savetreatment");
-                // if no treatment is selected
-                if(parentPanel.getTreatmentID() == 0){ 
-                Treatment treatment = sessionScreen.saveTreatment();
-                try{
-                  System.out.println("Savinug treatmenrt: " + treatment.toString());
-                   manager.saveTreatment(treatment);
-                   sessionScreen.dispose();
-                } catch (RemoteException ex) {
-                    ex.getMessage();
-                }       
-                }
-                else{ // a treatment is selected
-                    Session session = sessionScreen.saveSession();
-                    System.out.println("treatmentid = " + session.getTreatmentID() );
-                    //manager.
-                }
-              
-                        break;
-            case "newTreatment":
+            case "newTreatment": //Open the sessionsScreen for a new treatment
                 System.out.println("actioncommand newTreatment");
                 AddSessionScreen screen = new AddSessionScreen(this, 0);
                 screen.setVisible(true);
                 break;
-            case "alterTreatment":
+            case "saveTreatment": // Save the input as a new treatment including sessions.
+                boolean saveSuccess;
+                Treatment treatment = sessionScreen.saveTreatment();
+                ArrayList<Session> sessions = sessionScreen.getAllSessionsFromTable();
+                System.out.println("amount of sessions: " + sessions.size());
+                if (sessionScreen.getTreatmentID() == 0) { // a new Treatment is made
+                    System.out.println("actioncommand saveTreatment -> new treatment");
+                    try {
+                        saveSuccess = manager.saveTreatment(treatment, sessions);
+                    } catch (Exception ex) {
+                        System.out.println("controllererror: " + ex.getMessage());
+                    }
+                } else {
+                    System.out.println("ActionCommand SaveTreatment -> alter");
+                    try {
+                        if (manager.deleteTreatmentByTreatmentID(sessionScreen.getTreatmentID())) {
+                            manager.saveTreatment(treatment, sessions);
+                        } else {
+                            System.out.println("Deleting old data failed");
+                        }
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+                JOptionPane.showMessageDialog(parentPanel, "Succesvol opgeslagen");
+                sessionScreen.dispose();
+                break;
+            case "alterTreatment": // Open the sessionsScreen to alter the treatment.
                 System.out.println("actioncommand alterTreatment");
-                try{
-                    int id = parentPanel.getTreatmentID();
-                    AddSessionScreen screen2 = new AddSessionScreen(this, id);
-                    screen2.setVisible(true);
+                int currentTreatmentID = parentPanel.getTreatmentID();
+                String currentBsn = parentPanel.getBSNFromTable();
+
+                System.out.println("id is " + currentTreatmentID);
+                if (currentTreatmentID != 0) {
+                    System.out.println("ID for alter found");
+                    try {
+                        ArrayList currentSessions = manager.getAllSessionsByTreatmentID(currentTreatmentID);
+                        Employee currentTherapist = manager.getTherapist(parentPanel.getTherapistLastName());
+                        edu.avans.ivh5.shared.models.ClientDTO currentClient =  manager.getClient( currentBsn);
+
+                        AddSessionScreen screen2 = new AddSessionScreen(this, currentTreatmentID, currentSessions, currentTherapist, currentClient); 
+                        screen2.setVisible(true);
+                    } catch (Exception ex) {
+                        System.out.println("Error catched in controller: " + ex.getMessage());
+                    }
+                } else {
+                    // show message
+                    JOptionPane.showMessageDialog(parentPanel, "No treatment selected.");
                 }
-                catch(NullPointerException ex){
-                    System.out.println("no treatment selected");
-                }
-                   
- 
-//                try {
-//                    tempTreatment = manager.getTreatmentByID(parentPanel.getTreatmentID());
-//                } catch (RemoteException ex) {
-//                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                Employee therapist = null;
-//                try {
-//                    therapist = manager.getTherapistByTherapistID(Integer.parseInt(tempTreatment.getPhysioTherapistLastName()));
-//                } catch (RemoteException ex) {
-//                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                
-//                try {
-//                    new AddTreatmentScreen(
-//                            this,
-//                            "alterTreatment",
-//                            therapist,
-//                            tempTreatment
-//                    );
-//                } catch (NullPointerException ex) {
-//                    System.out.println("No employee selected");
-//                }
                 break;
             case "logout":
                 System.out.println("actioncommand logout");
-                
+
                 if (parentPanel != null) {
                     parentPanel.getParentFrame().dispose();
                 }
@@ -145,33 +135,54 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
                 break;
             case "deleteTreatment":
                 System.out.println("actioncommand delete");
-
-                try {
-                    manager.deleteTreatmentByTreatmentID(parentPanel.getTreatmentID());
-                } catch (RemoteException ex) {
-                    Logger.getLogger(TreatmentAndSessionController.class.getName()).log(Level.SEVERE, null, ex);
+                int selectedTreatmentID = parentPanel.getTreatmentID();
+                if (selectedTreatmentID != 0) {
+                    System.out.println("ID for delete found: " + selectedTreatmentID);
+                    try {
+                        manager.deleteTreatmentByTreatmentID(selectedTreatmentID);
+                        parentPanel.removeTreatmentByTreatmentIDDIRTY(selectedTreatmentID);
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                } else {
+                    // show message
+                    JOptionPane.showMessageDialog(parentPanel, "No treatment selected.");
                 }
                 break;
-//            case "confirmSave":
-//                System.out.println("actioncommand confirmsave");
-//                parentScreen.dispose();
-//                break;
-//            case "confirmAlter":
-//                System.out.println("actioncommand confirmAlter");
-//                
-//                parentScreen.dispose();
-//                break;
             case "cancel":
                 System.out.println("actioncommand cancel");
                 sessionScreen.dispose();
                 break;
-            case "new Session":
+            case "newSession":
                 System.out.println("action Command new session");
                 sessionScreen.insertRow();
                 break;
+            case "deleteSession":
+                System.out.println("action Command delete session");
+                sessionScreen.deleteSession();
+                break;
+            case "searchClient":
+                System.out.println("action command searcClient");
+                ClientDTO client = getClient();
+                System.out.println("cleint test " + client.getName());
+                sessionScreen.setClientFields(client);
+                break;
+            case "FillTherapist":
+                System.out.println("Actioncommand Filltherapist");
+                try {
+                    String name = sessionScreen.getTherapistName();
+                    int spacePos = name.indexOf(" ");
+                    String lastname = name.substring(spacePos + 1);
+                    System.out.println("substring =" + lastname);
+                    Employee currentTherapist = manager.getTherapist(lastname);
+                    sessionScreen.setTherapistFields(currentTherapist);
+                } catch (Exception ex) {
+                    System.out.println("Error controller case filltherapist: " + ex.getMessage());
+                }
+                break;
         }
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -220,51 +231,59 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    
-    
-    public ArrayList<Employee> getEmployees(){
-            ArrayList employees = new ArrayList();
-        try{
+
+    public ArrayList<Employee> getEmployees() {
+        ArrayList employees = new ArrayList();
+        try {
             ArrayList<Employee> therapists = manager.getTherapists();
-            for (Employee e: therapists){
+            for (Employee e : therapists) {
                 String therapistName = null;
                 therapistName = e.getFirstname() + " " + e.getLastname();
                 employees.add(therapistName);
-            }            
-        } 
-        catch(RemoteException ex){
+            }
+        } catch (RemoteException ex) {
             System.out.println("RemoteException at getEmployees");
             System.out.println(ex.getMessage());
         }
         return employees;
-        }
-    
-    public ArrayList<TreatmentType> getTreatmentTypes(){
-            ArrayList treatments = new ArrayList();
-        try{
+    }
+
+    public ArrayList<TreatmentType> getTreatmentTypes() {
+        ArrayList treatments = new ArrayList();
+        try {
             ArrayList<TreatmentType> treatment = manager.getTreatmentTypes();
             System.out.println("looping");
-            for (TreatmentType t: treatment){
+            for (TreatmentType t : treatment) {
                 String treatmentCode = null;
                 treatmentCode = t.getTreatmentCode() + " " + t.getTreatmentName();
-                treatments.add(treatmentCode);   
+                treatments.add(treatmentCode);
             }
+        } catch (RemoteException ex) {
+            System.out.println("RemoteException at getTreatments");
+            System.out.println(ex.getMessage());
         }
-        catch(RemoteException ex){
-                System.out.println("RemoteException at getTreatments");
-                        System.out.println(ex.getMessage());
-            }
         return treatments;
     }
-    
-       public void addTreatments() {
+
+    public void addTreatments() {
         try {
-            ArrayList<Treatment> treatments = manager.getTreatments();
-            System.out.println("test addtreatments after manager " + treatments.size());
-            parentPanel.addTreatments( treatments);
+            parentPanel.addTreatments(manager.getTreatments());
         } catch (RemoteException ex) {
-            System.out.println("RemoteException at AddEmployees()");
-            System.out.println(ex.getMessage()); 
+            System.out.println("RemoteException at AddTreatments in controller");
+            System.out.println(ex.getMessage());
         }
+    }
+
+    public ClientDTO getClient() {
+        String bsn = sessionScreen.getBSN();
+        ClientDTO client = null;
+        try {
+            client = manager.getClient(bsn);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return client;
+
     }
 }

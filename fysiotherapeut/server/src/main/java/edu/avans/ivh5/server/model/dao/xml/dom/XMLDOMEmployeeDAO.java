@@ -179,7 +179,7 @@ public class XMLDOMEmployeeDAO implements EmployeeDAOIF {
 
     @Override
     public ArrayList<Employee> getEmployees() {
-        System.out.println("XMLDOMEmployeeDAO is getting all employees");
+        //System.out.println("XMLDOMEmployeeDAO is getting all employees");
         ArrayList<Employee> employees = new ArrayList<>();
         if (document != null) {
             NodeList list = document.getElementsByTagName("employee");

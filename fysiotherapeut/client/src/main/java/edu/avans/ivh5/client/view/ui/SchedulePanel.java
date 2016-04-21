@@ -307,7 +307,7 @@ public class SchedulePanel extends javax.swing.JPanel {
   
 
     public void refreshComboBox() {
-        System.out.println("refresh combo in screen");
+        //System.out.println("refresh combo in screen");
         therapistComboBox.setModel(new DefaultComboBoxModel());
         for (Object item : controller.getEmployees())
         therapistComboBox.addItem(item);

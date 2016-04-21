@@ -30,13 +30,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-
 public class TreatmentPanel extends JPanel {
 
     private JButton logOutButton, newButton, changeButton, deleteButton;
     private JComboBox employeeBox;
     private JLabel overviewLabel;
-    private JTextField searchField;
+    //private JTextField searchField;
     private final TreatmentAndSessionController controller;
     private JFrame parentFrame;
     private JTable treatmentTable;
@@ -52,8 +51,8 @@ public class TreatmentPanel extends JPanel {
         setLayout(new BorderLayout());
         add(createNorthPanel(), BorderLayout.NORTH);
         add(createCenterPanel(), BorderLayout.CENTER);
-        
-        this.controller.addTreatments();
+
+        controller.addTreatments();
     }
 
     private JPanel createNorthPanel() {
@@ -83,12 +82,12 @@ public class TreatmentPanel extends JPanel {
         newButton.setActionCommand("newTreatment");
         newButton.addActionListener(controller);
         panel.add(newButton);
-        
+
         changeButton = new JButton("Wijzig");
         changeButton.setActionCommand("alterTreatment");
         changeButton.addActionListener(controller);
         panel.add(changeButton);
-        
+
         deleteButton = new JButton("Verwijder");
         deleteButton.setActionCommand("deleteTreatment");
         deleteButton.addActionListener(controller);
@@ -104,10 +103,10 @@ public class TreatmentPanel extends JPanel {
         panel.add(new JLabel(""));
         panel.add(new JLabel(""));
 
-        searchField = new JTextField();
-        panel.add(searchField);
+        /*
+         searchField = new JTextField();
+         panel.add(searchField); */
         // end row 3
-
         return panel;
     }
 
@@ -126,7 +125,7 @@ public class TreatmentPanel extends JPanel {
 
         JPanel centerPanel = new JPanel(new GridLayout(1, 1));
         centerPanel.setBorder(new EmptyBorder(15, 10, 0, 10));
-        
+
         dtm.addColumn("treatmentid");
         dtm.addColumn("Treatmentcode");
         dtm.addColumn("KlantBSN");
@@ -136,43 +135,40 @@ public class TreatmentPanel extends JPanel {
         treatmentTable.setFillsViewportHeight(true);
         treatmentTable.getTableHeader().setBackground(Color.CYAN);
         treatmentTable.addMouseListener(controller);
-        
+
 //        treatmentTable = new JTable(rowData, columnNames);
 //        treatmentTable.setFillsViewportHeight(true);
 //        treatmentTable.getTableHeader().setBackground(Color.CYAN);
 //        treatmentTable.addMouseListener(new MouseListener() {
+        /*            @Override
+         public void mouseClicked(MouseEvent e) {
+         }
 
-            
-/*            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
+         @Override
+         public void mousePressed(MouseEvent e) {
+         }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
+         @Override
+         public void mouseReleased(MouseEvent e) {
+         if (e.getButton() == MouseEvent.BUTTON3) {
+         int row = treatmentTable.rowAtPoint(new Point(e.getX(), e.getY()));
+         // if the row is empty it will return -1
+         // you will not be able to right click on an empty row
+         if (row != -1) {
+         createRightClickMenu(row).show(treatmentTable, e.getX(), e.getY());
+         }
+         }
+         }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON3) {
-                    int row = treatmentTable.rowAtPoint(new Point(e.getX(), e.getY()));
-                    // if the row is empty it will return -1
-                    // you will not be able to right click on an empty row
-                    if (row != -1) {
-                        createRightClickMenu(row).show(treatmentTable, e.getX(), e.getY());
-                    }
-                }
-            }
+         @Override
+         public void mouseEntered(MouseEvent e) {
+         }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+         @Override
+         public void mouseExited(MouseEvent e) {
+         }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-
-        });*/
-
+         });*/
         // Make the table vertically scrollable
         JScrollPane scrollPane = new JScrollPane(treatmentTable);
 
@@ -180,21 +176,47 @@ public class TreatmentPanel extends JPanel {
 
         panel.add(northPanel, BorderLayout.NORTH);
         panel.add(centerPanel, BorderLayout.CENTER);
-        
+
         return panel;
+    }
+
+    public void removeTreatmentByTreatmentIDDIRTY(int treatmentID) {
+        for (int i = 0; i < dtm.getRowCount(); i++) {//For each row
+            if (dtm.getValueAt(i, 0).equals(treatmentID)) {
+                dtm.removeRow(i);
+            }
+        }
     }
 
     public int getTreatmentID() {
         System.out.println("getTreatmentID in panel");
         int id = 0;
-        if (treatmentTable.getSelectedRow() != -1){
-            int value = (int) treatmentTable.getValueAt( treatmentTable.getSelectedRow(), 0);
+        if (treatmentTable.getSelectedRow() != -1) {
+            int value = (int) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 0);
             id = value;
         }
         System.out.println("ID " + id);
         return id;
     }
-    
+
+    public String getTherapistLastName() {
+        String lastname = "";
+        if (treatmentTable.getSelectedRow() != -1) {
+            String value = (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 3);
+            lastname = value;
+        }
+        return lastname;
+    }
+
+    public String getBSNFromTable() {
+        String bsn = "";
+        if (treatmentTable.getSelectedRow() != -1) {
+            String value = (String) treatmentTable.getValueAt(treatmentTable.getSelectedRow(), 2);
+            bsn = value;
+        }
+        return bsn;
+    }
+
     public JPopupMenu createRightClickMenu(int row) {
         JPopupMenu menu = new JPopupMenu();
 
@@ -207,33 +229,21 @@ public class TreatmentPanel extends JPanel {
 
         alter = new JMenuItem("Wijzig behandeling " + id);
         alter.setName("" + row);
-        alter.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // alterEmployee();
-            }
-
-        });
+        alter.setActionCommand("alterTreatment");
+        alter.addActionListener(controller);
 
         delete = new JMenuItem("Verwijder behandeling " + id);
         delete.setName("" + row);
-        delete.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // deleteEmployee();
-            }
-
-        });
+        delete.setActionCommand("deleteTreatment");
+        delete.addActionListener(controller);
 
         menu.add(alter);
         menu.add(delete);
 
         return menu;
     }
-    
-     public int getRowAtPoint(Point point) {
+
+    public int getRowAtPoint(Point point) {
         return treatmentTable.rowAtPoint(point);
     }
 
@@ -248,18 +258,18 @@ public class TreatmentPanel extends JPanel {
     public void removeRow(int row) {
         dtm.removeRow(row);
     }
-    
+
     public JFrame getParentFrame() {
         return parentFrame;
     }
-   
+
     public void addTreatments(ArrayList<Treatment> treatments) {
         treatments.stream().forEach(
                 treatment -> dtm.addRow(
                         new Object[]{treatment.getTreatmentID(), treatment.getTreatmentCode(), treatment.getBSN(), treatment.getPhysioTherapistLastName(), treatment.getStatus()}
                 ));
     }
-    
+
     public void addEmployee(Treatment treatment, int treatmentID) {
         dtm.addRow(
                 new Object[]{Integer.toString(treatmentID), treatment.getTreatmentCode(), treatment.getBSN(), treatment.getPhysioTherapistLastName(), treatment.getStatus()}

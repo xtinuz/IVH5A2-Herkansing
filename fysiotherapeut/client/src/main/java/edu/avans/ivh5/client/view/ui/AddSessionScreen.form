@@ -109,9 +109,9 @@
                               <Group type="102" attributes="0">
                                   <Component id="sessionLabel" min="-2" pref="90" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <EmptySpace pref="61" max="32767" attributes="0"/>
-                                  <Component id="jButton2" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="deleteSessionButton" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace pref="73" max="32767" attributes="0"/>
+                                  <Component id="addSessionButton" min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -202,8 +202,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="sessionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteSessionButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addSessionButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="154" max="-2" attributes="0"/>
@@ -292,14 +292,29 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="bsnTextField">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="firstnameTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="lastnameTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="telTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="mailTextField2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="therapeutLabel">
           <Properties>
@@ -308,7 +323,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="klantLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zoek klant op BSN"/>
+            <Property name="text" type="java.lang.String" value="Zoek klant"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="treatmentcodeLabel">
@@ -354,7 +369,7 @@
             <Property name="text" type="java.lang.String" value="Sessies"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="deleteSessionButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="ff" type="rgb"/>
@@ -365,7 +380,7 @@
             <Property name="text" type="java.lang.String" value="-"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="addSessionButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="cc" red="0" type="rgb"/>
@@ -386,7 +401,7 @@
             <Component class="javax.swing.JTable" name="sessionsTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="7">
+                  <Table columnCount="3" rowCount="0">
                     <Column editable="true" title="Datum" type="java.lang.Object"/>
                     <Column editable="true" title="Begintijd" type="java.lang.Object"/>
                     <Column editable="true" title="eindtijd" type="java.lang.Object"/>

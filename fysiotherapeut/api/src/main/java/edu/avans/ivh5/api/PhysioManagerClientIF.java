@@ -21,6 +21,8 @@ import java.util.Date;
 public interface PhysioManagerClientIF extends Remote {
     public boolean checkPassword(String username, char[] password) throws RemoteException;
     
+    //Employee
+    
     public boolean saveEmployee(Employee employee) throws RemoteException;
     
     public void alterEmployee(Employee employee) throws RemoteException;
@@ -35,7 +37,9 @@ public interface PhysioManagerClientIF extends Remote {
     
     public Employee getTherapistByTherapistID(int therapistID) throws RemoteException;
     
-    public boolean saveTreatment(Treatment treatment) throws RemoteException;
+    //Treatment
+    
+    public boolean saveTreatment(Treatment treatment, ArrayList<Session> sessions) throws RemoteException;
     
     public boolean alterTreatment(Treatment treatment) throws RemoteException;
     
@@ -49,7 +53,7 @@ public interface PhysioManagerClientIF extends Remote {
     
     public boolean deleteSession(Session session) throws RemoteException;
     
-    public ClientDTO getClient() throws RemoteException;
+    public edu.avans.ivh5.shared.models.ClientDTO getClient(String needle) throws RemoteException;
     
     public ArrayList<Treatment> getTreatmentsByTherapistID(int therapistID) throws RemoteException;
     
@@ -74,4 +78,6 @@ public interface PhysioManagerClientIF extends Remote {
     public ArrayList<TreatmentType> getTreatmentTypes() throws RemoteException;
     
     public ArrayList<Treatment> getTreatments() throws RemoteException;
+    
+    public ArrayList getAllSessionsByTreatmentID(int treatmentID) throws RemoteException;
 }

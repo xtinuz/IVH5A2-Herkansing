@@ -6,9 +6,16 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.TreatmentAndSessionController;
+import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
+import edu.avans.ivh5.shared.models.ClientDTO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,24 +24,83 @@ import javax.swing.table.DefaultTableModel;
  * @author ferdinand
  */
 public class AddSessionScreen extends javax.swing.JFrame {
+
     private TreatmentAndSessionController controller;
+    private boolean newTreatment;
+    public int amountOfSessions;
+    private Employee therapist;
+    private Treatment treatment;
+    private ClientDTO currentClient;
     private int treatmentID;
+    private ArrayList sessions;
+    private Employee currentTherapist;
 
     /**
      * Creates new form AddTreatmentScreen2
      */
-    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController, int treatmentID ) {
+    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController, int treatmentID) {
         this.controller = treatmentAndSessionController;
-        
-            
+        this.treatmentID = treatmentID;
+
         initComponents();
-           controller.setUIRef(this);
-           fillTherapistComboBox();
-           fillTreatmentCodeComboBox();
-           saveButton.setActionCommand("save treatment");
-           saveButton.addActionListener( controller );
+        controller.setUIRef(this);
+        fillTherapistComboBox();
+        fillTreatmentCodeComboBox();
+        saveButton.setActionCommand("saveTreatment");
+        saveButton.addActionListener(controller);
+        cancelButton.setActionCommand("cancel");
+        cancelButton.addActionListener(controller);
+        addSessionButton.setActionCommand("newSession");
+        addSessionButton.addActionListener(controller);
+        clientSearchField.setActionCommand("searchClient");
+        clientSearchField.addActionListener(controller);
+        therapistComboBox.setActionCommand("FillTherapist");
+        therapistComboBox.addActionListener(controller);
+        deleteSessionButton.setActionCommand("deleteSession");
+        deleteSessionButton.addActionListener(controller);
     }
-    
+
+    public AddSessionScreen(TreatmentAndSessionController treatmentAndSessionController, int treatmentID, ArrayList sessions, Employee currentTherapist, ClientDTO currentClient) {
+        this.controller = treatmentAndSessionController;
+        this.treatmentID = treatmentID;
+        this.sessions = sessions;
+        this.currentTherapist = currentTherapist;
+        this.currentClient = currentClient;
+
+        initComponents();
+        controller.setUIRef(this);
+        fillTherapistComboBox();
+        fillTreatmentCodeComboBox();
+        saveButton.setActionCommand("saveTreatment");
+        saveButton.addActionListener(controller);
+        cancelButton.setActionCommand("cancel");
+        cancelButton.addActionListener(controller);
+        addSessionButton.setActionCommand("newSession");
+        addSessionButton.addActionListener(controller);
+        clientSearchField.setActionCommand("searchClient");
+        clientSearchField.addActionListener(controller);
+        therapistComboBox.setActionCommand("FillTherapist");
+        therapistComboBox.addActionListener(controller);
+        deleteSessionButton.setActionCommand("deleteSession");
+        deleteSessionButton.addActionListener(controller);
+
+        setSessionsTable(sessions);
+        setTherapistFields(currentTherapist);
+        setNotes(sessions);
+        setClientFields(currentClient);
+        
+    }
+
+    public void collectSessionData() {
+        for (int i = 0; i >= this.amountOfSessions; i++) {
+            String treatmentCode = sessionsTable.getValueAt(i, 1).toString();
+            String date = sessionsTable.getValueAt(i, 2).toString();
+            String begin = sessionsTable.getValueAt(i, 3).toString();
+            String end = sessionsTable.getValueAt(i, 4).toString();
+            this.treatment.addSession(new Session(treatmentCode, date, begin, end, Integer.toString(treatment.getTreatmentID())));
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,8 +139,8 @@ public class AddSessionScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         commentsTextArea = new javax.swing.JTextArea();
         sessionLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        deleteSessionButton = new javax.swing.JButton();
+        addSessionButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         sessionsTable = new javax.swing.JTable();
         cancelButton = new javax.swing.JButton();
@@ -106,9 +172,19 @@ public class AddSessionScreen extends javax.swing.JFrame {
 
         mailLabel.setText("Mail");
 
+        bsnTextField.setEditable(false);
+
+        firstnameTextField2.setEditable(false);
+
+        lastnameTextField2.setEditable(false);
+
+        telTextField2.setEditable(false);
+
+        mailTextField2.setEditable(false);
+
         therapeutLabel.setText("Fysiotherapeut");
 
-        klantLabel.setText("Zoek klant op BSN");
+        klantLabel.setText("Zoek klant");
 
         treatmentcodeLabel.setText("Behandelcode:");
 
@@ -122,23 +198,17 @@ public class AddSessionScreen extends javax.swing.JFrame {
 
         sessionLabel.setText("Sessies");
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("-");
+        deleteSessionButton.setBackground(new java.awt.Color(255, 0, 0));
+        deleteSessionButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deleteSessionButton.setText("-");
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("+");
+        addSessionButton.setBackground(new java.awt.Color(0, 204, 0));
+        addSessionButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addSessionButton.setText("+");
 
         sessionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Datum", "Begintijd", "eindtijd"
@@ -211,9 +281,9 @@ public class AddSessionScreen extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(sessionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(123, 123, 123)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(deleteSessionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                                .addComponent(addSessionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -281,8 +351,8 @@ public class AddSessionScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sessionLabel)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(deleteSessionButton)
+                    .addComponent(addSessionButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -307,19 +377,19 @@ public class AddSessionScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addSessionButton;
     private javax.swing.JLabel bsnLabel;
     private javax.swing.JTextField bsnTextField;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField clientSearchField;
     private javax.swing.JTextArea commentsTextArea;
+    private javax.swing.JButton deleteSessionButton;
     private javax.swing.JLabel firstnameLabel1;
     private javax.swing.JLabel firstnameLabel2;
     private javax.swing.JTextField firstnameTextField1;
     private javax.swing.JTextField firstnameTextField2;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -345,68 +415,129 @@ public class AddSessionScreen extends javax.swing.JFrame {
     private javax.swing.JLabel treatmentcodeLabel;
     // End of variables declaration//GEN-END:variables
 
-public void fillTherapistComboBox(){
-            therapistComboBox.setModel(new DefaultComboBoxModel());
-            for (Object item : controller.getEmployees())
-                therapistComboBox.addItem(item); 
-}
-
-public void fillTreatmentCodeComboBox(){
-    treatmentcodeComboBox.setModel(new DefaultComboBoxModel());
-    for (Object item: controller.getTreatmentTypes()){
-        
-        treatmentcodeComboBox.addItem(item);
+    public void fillTherapistComboBox() {
+        therapistComboBox.setModel(new DefaultComboBoxModel());
+        for (Object item : controller.getEmployees()) {
+            therapistComboBox.addItem(item);
+        }
     }
-}
 
-public Treatment saveTreatment(){
+    public void fillTreatmentCodeComboBox() {
+        treatmentcodeComboBox.setModel(new DefaultComboBoxModel());
+        for (Object item : controller.getTreatmentTypes()) {
+
+            treatmentcodeComboBox.addItem(item);
+        }
+    }
+
+    public Treatment saveTreatment() {
         int treatmentID = 0;
         String treatmentCode = (String) treatmentcodeComboBox.getSelectedItem();
         String BSN = bsnTextField.getText();
-        String PhysioTherapistLastName = lastnameTextField1.getText();
+        String PhysioTherapistLastName = (String) therapistComboBox.getSelectedItem();
         String Status = "actief";
-        
+
         Treatment newTreatment = new Treatment(treatmentID, treatmentCode, BSN, PhysioTherapistLastName, Status);
-        System.out.println("reached return");
         return newTreatment;
     }
 
+    public ArrayList<Session> getAllSessionsFromTable() {
+        ArrayList sessions = new ArrayList();
 
-public void insertRow(){
-    DefaultTableModel model = (DefaultTableModel) sessionsTable.getModel();
-    int newRow = sessionsTable.getRowCount();
-    model.insertRow(newRow, new Object[]{"","",""});
-}
+        for (int i = 0; i < sessionsTable.getRowCount(); i++) {
+            Session session = new Session((String) sessionsTable.getValueAt(i, 0), (String) sessionsTable.getValueAt(i, 1),
+                    (String) sessionsTable.getValueAt(i, 2), commentsTextArea.getText(), "" + treatmentID);
+            sessions.add(session);
+        }
+        return sessions;
+    }
 
-public Session saveSession(){
+    public void insertRow() {
+        DefaultTableModel model = (DefaultTableModel) sessionsTable.getModel();
+        int newRow = sessionsTable.getRowCount();
+        model.insertRow(newRow, new Object[]{"", "", ""});
+    }
 
-   System.out.println("saveSession in screen");
-    int newRow = sessionsTable.getRowCount()-1;
-    System.out.println("rowcount " + newRow);
-    String date = (String) sessionsTable.getValueAt(newRow, 0);
-    System.out.println("test date " + date);
-    String startTime = (String) sessionsTable.getValueAt(newRow, 1);
-    String endTime = (String) sessionsTable.getValueAt(newRow, 2);
-    String notes = commentsTextArea.getText();
-    String id = "" + treatmentID;
-    Session session = new Session(date, startTime, endTime, notes, id);
+    public Session saveSession() {
+
+        System.out.println("saveSession in screen");
+        int newRow = sessionsTable.getRowCount() - 1;
+        System.out.println("rowcount " + newRow);
+        String date = (String) sessionsTable.getValueAt(newRow, 0);
+        System.out.println("test date " + date);
+        String startTime = (String) sessionsTable.getValueAt(newRow, 1);
+        String endTime = (String) sessionsTable.getValueAt(newRow, 2);
+        String notes = commentsTextArea.getText();
+        String id = "" + treatmentID;
+        Session session = new Session(date, startTime, endTime, notes, id);
+
+        return session;
+    }
+
+    public void setTherapistFields(Employee currentEmployee) {
+        idTextField.setText(currentEmployee.getID());
+        firstnameTextField1.setText(currentEmployee.getFirstname());
+        lastnameTextField1.setText(currentEmployee.getLastname());
+        telTextField.setText(currentEmployee.getPhoneNr());
+        mailTextField1.setText(currentEmployee.getEmail());
+    }
     
-    return session;
-}
-
-/*
-public Treatment saveNewTreatment(){
-        int treatmentID = 0;
-        String treatmentCode = (String) treatmentcodeComboBox.getSelectedItem();
-        String BSN = bsnTextField.getText();
-        String PhysioTherapistLastName = lastnameTextField1.getText();
-        String Status = "actief";
+    public void setNotes(ArrayList<Session> sessions){
         
-        Treatment newTreatment = new Treatment(treatmentID, treatmentCode, BSN, PhysioTherapistLastName, Status);
-        System.out.println("reached return");
-        return newTreatment;
+        StringBuilder notes = new StringBuilder();
+        for(Session s : sessions){
+            notes.append(s.getNotes());
+            notes.append(System.getProperty("line.separator"));
+        }
+        commentsTextArea.setText(notes.toString());
     }
-*/
+
+    public void setClientFields(ClientDTO client) {
+        firstnameTextField2.setText(client.getName());
+        lastnameTextField2.setText(client.getLastName());
+        telTextField2.setText(client.getPhoneNumber());
+        mailTextField2.setText(client.getEmailAdress());
+        bsnTextField.setText(client.getBSN());
+    }
+
+    public void setSessionsTable(ArrayList<Session> sessions) {
+        for (int i = 0; i < sessions.size(); i++) {
+            insertRow();
+            sessionsTable.setValueAt(sessions.get(i).getDate(), i, 0);
+            sessionsTable.setValueAt(sessions.get(i).getStartTime(), i, 1);
+            sessionsTable.setValueAt(sessions.get(i).getEndTime(), i, 2);
+        }
+    }
+
+    public ClientDTO getClient() {
+        return new ClientDTO(firstnameTextField2.getText(), lastnameTextField2.getText(), bsnTextField.getText(), mailTextField2.getText(), telTextField2.getText());
+    }
+
+    public Employee getTherapist() {
+        return new Employee(
+                firstnameTextField1.getText(),
+                lastnameTextField1.getText(),
+                telTextField.getText(),
+                mailTextField1.getText()
+        );
+    }
+
+    public String getBSN() {
+        return clientSearchField.getText();
+    }
+
+    public String getTherapistName() {
+        return (String) therapistComboBox.getSelectedItem();
+    }
+
+    public int getTreatmentID() {
+        return treatmentID;
+    }
+
+    public void deleteSession() {
+        int rowNr = sessionsTable.getSelectedRow();
+        //sessionsTable.repaint();
+        ((DefaultTableModel)sessionsTable.getModel()).removeRow(rowNr);
+    }
+
 }
-
-

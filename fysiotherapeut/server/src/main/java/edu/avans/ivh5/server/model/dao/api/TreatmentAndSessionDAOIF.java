@@ -8,7 +8,7 @@ import edu.avans.ivh5.shared.model.domain.Session;
 import edu.avans.ivh5.shared.model.domain.TreatmentType;
 import edu.avans.ivh5.shared.model.domain.Employee;
 import edu.avans.ivh5.shared.model.domain.Schedule;
-import edu.avans.ivh5.shared.model.domain.SharedTreatment;
+import edu.avans.ivh5.shared.models.*;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -23,16 +23,20 @@ public interface TreatmentAndSessionDAOIF {
     
     public Schedule getScheduleTableData(ArrayList dates, String lastname);
     
-    public boolean deleteTreatment(Treatment treatment) throws RemoteException;
+    public boolean deleteTreatment(Treatment treatment);
     
-    public boolean deleteTreatmentByTreatmentID(int treatment) throws RemoteException;
+    public boolean deleteTreatmentByTreatmentID(int treatment);
     
     public ArrayList<SharedTreatment> getAllFinishedTreatments();
+    
+    public Treatment getTreatmentByTreatmentID(int treatmentID);
     
     public int getMaxID();
     
     public boolean saveSession(Session session);
     
     public ArrayList<Treatment> getTreatments();
+    
+    public ArrayList getSessionsByTreatmentID(int treatmentID);
     
 }

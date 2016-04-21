@@ -72,7 +72,7 @@ public class XMLDOMTreatmentDAO implements TreatmentDAOIF {
     public boolean deleteTreatmentByTreatmentID(int treatmentID) throws RemoteException{
         System.out.println("XMLDOMTreatmentDAO is deleting the Treatment");
         if (document != null) {
-            NodeList list = document.getElementsByTagName("treatmentid");
+            NodeList list = document.getElementsByTagName("treatment");
 
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);
@@ -118,6 +118,27 @@ public class XMLDOMTreatmentDAO implements TreatmentDAOIF {
             return treatments;
         }
         System.out.println("XMLDOMEmployeeDAO did not find any employees due to a missing document");
+        return null;
+    }
+    
+    @Override
+    public edu.avans.ivh5.shared.model.domain.TreatmentType getTreatmentTypeByTreatmentCode(String Treatmentcode){
+        System.out.println("XMLDOMTreatmentDAO getTreatmentTypeByTreatmentCode");
+        if (document2 != null) {
+            NodeList list = document.getElementsByTagName("treatmentcode");
+
+            for (int i = 0; i < list.getLength(); i++) {
+                Node node = list.item(i);
+                if (node instanceof Element) {
+                    Element child = (Element) node;
+                    if (child.getElementsByTagName("treatmentid").item(0).getTextContent().equals(Treatmentcode)) {
+                        child.getParentNode().removeChild(node);
+                    }
+                }
+            }
+        } else {
+            System.out.println("XMLDOMEmployeeDAO could not get the treatment due to a missing document");
+        }
         return null;
     }
 }

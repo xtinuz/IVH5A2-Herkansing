@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 
 public interface PhysioManagerServerIF extends Remote {
-    ArrayList<SharedTreatment> getAllFinishedTreatments() throws RemoteException;
+    //ArrayList<SharedTreatment> getAllFinishedTreatments() throws RemoteException;
+    
+    public ArrayList<edu.avans.ivh5.shared.model.domain.SharedTreatment> getAllFinishedTreatments() throws RemoteException;
     
 }

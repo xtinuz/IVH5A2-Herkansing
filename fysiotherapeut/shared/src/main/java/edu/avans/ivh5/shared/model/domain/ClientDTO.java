@@ -13,17 +13,13 @@ public class ClientDTO implements Serializable {
     public String Name;
     public String LastName;
     public String BSN;
-    public Date BirthDate;
-    public String Gender;
     public String EmailAdress;
     public String PhoneNumber;
     
-    public ClientDTO(String Name,String LastName, String BSN, Date BirthDate, String Gender, String EmailAdress, String PhoneNumber  ){
+    public ClientDTO(String Name, String LastName, String BSN, String EmailAdress, String PhoneNumber  ){
         this.Name = Name;
         this.LastName = LastName;
         this.BSN = BSN;
-        this.BirthDate = BirthDate;
-        this.Gender = Gender;
         this.EmailAdress = EmailAdress;
         this.PhoneNumber = PhoneNumber;
     }
@@ -50,22 +46,6 @@ public class ClientDTO implements Serializable {
 
     public void setBSN(String BSN) {
         this.BSN = BSN;
-    }
-
-    public Date getBirthDate() {
-        return BirthDate;
-    }
-
-    public void setBirthDate(Date BirthDate) {
-        this.BirthDate = BirthDate;
-    }
-
-    public String getGender() {
-        return Gender;
-    }
-
-    public void setGender(String Gender) {
-        this.Gender = Gender;
     }
 
     public String getEmailAdress() {
