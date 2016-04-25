@@ -6,11 +6,20 @@
 package edu.avans.ivh5.client.view.ui;
 
 import edu.avans.ivh5.client.control.ReportingController;
+import edu.avans.ivh5.client.control.TreatmentAndSessionController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,23 +30,28 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 
 public class OverviewPanel extends JPanel {
 
-    private JButton logoutButton, planningButton, cumulatiefButton, financeButton, printButton,
-            setDaylyButton, setWeeklyButton, setMonthlyButton;
+    private JButton logoutButton, planningButton, cumulatiefButton, financeButton, printButton, searchButton;
+            /*setDaylyButton, setWeeklyButton, setMonthlyButton*/
     // private JDatePicker?
     private JLabel beginDateLabel, endDateLabel;
-    private JComboBox employeeBox, treatmentBox;
+    private JComboBox employeeBox, treatmentBox, monthComboBox1, dayComboBox1, yearComboBox1, monthComboBox2, dayComboBox2, yearComboBox2;
     private final JPanel planningPanel, cumulatiefPanel, financePanel;
     private JTable planningTable, cumulatiefTable, financeTable, financeTotalsTable;
     private final JFrame parentFrame;
     private final ReportingController controller;
+    private final TreatmentAndSessionController controller2;
 
-    public OverviewPanel(JFrame parentFrame, ReportingController controller) {
+    public OverviewPanel(JFrame parentFrame, ReportingController controller, TreatmentAndSessionController controller2) {
         this.parentFrame = parentFrame;
         this.controller = controller;
+        this.controller2 = controller2;
         System.out.println("setting ui reference OverviewPanel");
         controller.setUIRef(this);
         setLayout(new BorderLayout());
@@ -68,20 +82,22 @@ public class OverviewPanel extends JPanel {
         // end row 1
 
         // row 2
-        employeeBox = new JComboBox();
-        panel.add(employeeBox);
+        panel.add(new JLabel(""));
+//        employeeBox = new JComboBox();
+//        panel.add(employeeBox);
 
-        beginDateLabel = new JLabel("Begindatum: ");
+        beginDateLabel = new JLabel("");
         panel.add(beginDateLabel);
 
-        endDateLabel = new JLabel("Einddatum: ");
+        endDateLabel = new JLabel("");
         panel.add(endDateLabel);
 
         planningButton = new JButton("Planning");
         planningButton.setEnabled(false);
         planningButton.setActionCommand("planningButton");
         planningButton.addActionListener(controller);
-        panel.add(planningButton);
+        //panel.add(planningButton);
+        panel.add(new JLabel(""));
 
         cumulatiefButton = new JButton("Cumulatief");
         cumulatiefButton.setActionCommand("cumulatiefButton");
@@ -93,8 +109,8 @@ public class OverviewPanel extends JPanel {
         panel.add(new JLabel(""));
 //        panel.add(new JDateChooser());
 //        panel.add(new JDateChooser());
-        panel.add(new JLabel("JDateChooser"));
-        panel.add(new JLabel("JDateChooser"));
+        panel.add(new JLabel(""));
+        panel.add(new JLabel(""));
         panel.add(new JLabel(""));
 
         financeButton = new JButton("Financieel");
@@ -132,7 +148,7 @@ public class OverviewPanel extends JPanel {
 
         Object rowData[][] = {{"1000", "Row1-Column2", "Row1-Column3", "Row1-Column4", "Row1-Column5", "Row1-Column6"},
         {"1001", "Row2-Column2", "Row2-Column3", "Row2-Column4", "Row2-Column5", "Row2-Column6"}};
-        Object columnNames[] = {"Datum", "Begintijd", "Eindtijd", "Fysiotherapeut", "Cliënt", "Behandelcode"};
+        Object columnNames[] = {"Datum", "Begintijd", "Eindtijd", "Fysiotherapeut", "CliÃ«nt", "Behandelcode"};
         planningTable = new JTable(rowData, columnNames);
         planningTable.setEnabled(false);
         planningTable.setFillsViewportHeight(true);
@@ -157,14 +173,48 @@ public class OverviewPanel extends JPanel {
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new GridLayout(1, 3));
 
-        setDaylyButton = new JButton("Dag");
-        northPanel.add(setDaylyButton);
+//        setDaylyButton = new JButton("Dag");
+//        northPanel.add(setDaylyButton);
+//
+//        setWeeklyButton = new JButton("Week");
+//        northPanel.add(setWeeklyButton);
+//
+//        setMonthlyButton = new JButton("Maand");
+//        northPanel.add(setMonthlyButton);
+        northPanel.add(new JLabel("Begindatum:"));
+        monthComboBox1 = new JComboBox();
+        northPanel.add(monthComboBox1);
+        dayComboBox1 = new javax.swing.JComboBox();
+        northPanel.add(dayComboBox1);
+        yearComboBox1 = new javax.swing.JComboBox();
+        
+        monthComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
-        setWeeklyButton = new JButton("Week");
-        northPanel.add(setWeeklyButton);
+        dayComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        setMonthlyButton = new JButton("Maand");
-        northPanel.add(setMonthlyButton);
+        yearComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2016", "2015" }));
+        
+        northPanel.add(yearComboBox1);
+        northPanel.add(new JLabel(""));
+        northPanel.add(new JLabel(""));
+        
+        northPanel.add(new JLabel("Einddatum:"));
+        monthComboBox2 = new JComboBox();
+        northPanel.add(monthComboBox2);
+        dayComboBox2 = new javax.swing.JComboBox();
+        northPanel.add(dayComboBox2);
+        yearComboBox2 = new javax.swing.JComboBox();
+        northPanel.add(yearComboBox2);
+        
+        monthComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+
+        dayComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        yearComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2016", "2015" }));
+        
+
+        searchButton = new javax.swing.JButton("Zoek");
+        northPanel.add(searchButton);
         // end of northpanel
 
         // the centerpanel contains a jtable with the information
@@ -311,4 +361,59 @@ public class OverviewPanel extends JPanel {
                 break;
         }
     }
+        public Date getDate1(){
+        Date date1 = null;
+        try{
+        String day = (String) dayComboBox1.getSelectedItem();
+        String month = (String) monthComboBox1.getSelectedItem();
+        String year = (String) yearComboBox1.getSelectedItem();
+        
+        String stringDate = day + month + year;
+        Date formattedDate = new SimpleDateFormat("ddMMMMyyyy", Locale.US).parse(stringDate);
+        date1 = formattedDate;
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        return date1;
+    }
+        
+    public Date getDate2(){
+        Date date2 = null;
+        try{
+        String day = (String) dayComboBox2.getSelectedItem();
+        String month = (String) monthComboBox2.getSelectedItem();
+        String year = (String) yearComboBox2.getSelectedItem();
+        
+        String stringDate = day + month + year;
+        Date formattedDate = new SimpleDateFormat("ddMMMMyyyy", Locale.US).parse(stringDate);
+        date2 = formattedDate;
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        return date2;
+    }
+    
+//        public void setTableHeaderDates(Date date1, Date date2){
+//        ArrayList datesOfSessions;
+//        //String[] days = {"Zondag" ,"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag","Zaterdag"};
+//        try {
+//            ArrayList datesOfSession = controller2.getSessionDates(date1, date2);
+//            JTableHeader th = cumulatiefTable.getTableHeader();
+//            TableColumnModel tcm = th.getColumnModel();
+//            for(int x = 1, y = tcm.getColumnCount()-1; x <= y; x++)
+//            {
+//                TableColumn tc = tcm.getColumn(x);
+//                //tc.setHeaderValue("" + days[x-1] + " " + datesOfWeek.get(x-1) );
+//                                
+//            }
+//            th.repaint();            
+//            
+//        } catch (ParseException ex) {
+//            Logger.getLogger(SchedulePanel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

@@ -15,6 +15,7 @@ import edu.avans.ivh5.shared.models.*;
 import edu.avans.ivh5.shared.model.domain.Treatment;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -430,6 +431,7 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
         return saveSuccess;
     }
 
+    @Override
     public ArrayList getSessionsByTreatmentID(int treatmentID) {
         System.out.println("XMLDOMTreatmentAndSession is getting the sessions by treatmentID " + treatmentID);
         ArrayList<Session> sessions = new ArrayList<Session>();
@@ -458,4 +460,34 @@ public class XMLDOMTreatmentAndSessionDAO implements TreatmentAndSessionDAOIF {
         }
         return sessions;
     }
+
+    @Override
+    public ArrayList getAllSessionsByDate(String firstDate, String secondDate) {
+                System.out.println("XMLDOMTreatmentAndSession is getting the sessions by date" + firstDate + "till" + secondDate);
+        ArrayList<Session> sessionsByDate = new ArrayList<>();
+        if (document != null) {
+            NodeList list = document.getElementsByTagName("session");
+            for (int i = 0; i < list.getLength(); i++) { // for every session; not the best way if xml is huge, but for this project sufficient.
+                Node node = list.item(i);
+                if (node instanceof Element) {
+                    Element child = (Element) node;
+                    if(Integer.parseInt(child.getElementsByTagName("date").item(0).getTextContent()) >= Integer.parseInt(firstDate) && Integer.parseInt(child.getElementsByTagName("date").item(0).getTextContent()) <= Integer.parseInt(secondDate) )
+                    //if (child.getElementsByTagName("date").item(0).getTextContent().equalsIgnoreCase(String.valueOf(firstDate))){
+                        System.out.println("test");
+                        Session s = new Session(
+                                child.getElementsByTagName("date").item(0).getTextContent(),
+                                child.getElementsByTagName("starttime").item(0).getTextContent(),
+                                child.getElementsByTagName("endtime").item(0).getTextContent(),
+                                child.getElementsByTagName("notes").item(0).getTextContent(),
+                                child.getElementsByTagName("treatmentid").item(0).getTextContent());
+                        sessionsByDate.add(s);
+                    }
+                }
+        } else {
+            System.out.println("XMLDOMTreatment&SessionDAO could not find the document");
+        }
+        return sessionsByDate;
+    }
+
+
 }

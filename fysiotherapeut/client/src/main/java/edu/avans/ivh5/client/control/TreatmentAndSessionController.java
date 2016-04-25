@@ -23,7 +23,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -285,5 +289,42 @@ public class TreatmentAndSessionController implements ActionListener, KeyListene
 
         return client;
 
+    }
+    
+    public ArrayList<String> getSessionDates(Date dateFromPanel1, Date DateFromPanel2)throws ParseException{
+        Date date1 = null;
+        Date date2 = null;
+        ArrayList sessionDates = new ArrayList();
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(dateFromPanel1);
+            //date2.setTime(dateFromPanel2);
+            
+            System.out.println("date1 = " + date1 + " date2 " + date2);
+
+            c.setTime(dateFromPanel1);
+            Date firstDate = c.getTime();
+            c.setTime(DateFromPanel2);
+            Date secondDate = c.getTime();
+            Calendar loopCalendar = Calendar.getInstance();
+            loopCalendar.setTime(firstDate);
+            SimpleDateFormat dtf = new SimpleDateFormat("dd-MM-yyyy");
+
+            for (Date i = firstDate; i.before(secondDate);) {
+                c.setTime(i);
+                String strDate = dtf.format(c.getTime());
+                sessionDates.add(strDate);
+                loopCalendar.add(Calendar.DATE, 1);
+                i = loopCalendar.getTime();
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Exception at getsessiondata");
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("sessionDates in controller " + sessionDates);
+        return sessionDates;
     }
 }

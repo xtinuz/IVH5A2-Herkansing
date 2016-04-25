@@ -39,4 +39,6 @@ public interface TreatmentAndSessionDAOIF {
     
     public ArrayList getSessionsByTreatmentID(int treatmentID);
     
+    public ArrayList getAllSessionsByDate(String firstDate, String secondDate);
+    
 }
